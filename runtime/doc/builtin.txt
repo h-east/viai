@@ -13877,6 +13877,9 @@ vcon			Win32: Virtual console support is working, can use
 			'termguicolors'. Also see |+vtp|.
 vertsplit		Compiled with vertically split windows |:vsplit|.
 			(always true)
+viai			ViAI, see |viai-feature|.
+viai-1.0.3		ViAI version 1.0 with patch 3 or later, see
+			|viai-feature|.
 vim_starting		True while initial source'ing takes place. |startup|
 			*vim_starting*
 vim9script		Compiled with |Vim9| script support

@@ -7548,6 +7548,8 @@ A jump table for the options with a short description can be found at |Q_op|.
 	And any other file searched for with the |:runtime| command.
 
 	For $XDG_CONFIG_HOME see |xdg-base-dir|.
+	ViAI uses its own directories when its own user configuration exists,
+	see |viai-config|.
 
 	The defaults for most systems are setup to search five locations:
 	1. In your $MYVIMDIR directory, for your personal preferences.
@@ -10082,6 +10084,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 			feature}
 	Name of the directory where to store files for |:mkview|.
 	For $XDG_CONFIG_HOME see |xdg-base-dir|.
+	For ViAI's own user configuration see |viai-config|.
 	Environment variables are expanded |:set_env|.
 	This option cannot be set from a |modeline| or in the |sandbox|, for
 	security reasons.
@@ -10243,6 +10246,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 			{not available when compiled without the |+viminfo|
 			feature}
 	When non-empty, overrides the file name used for viminfo.
+	For the default file name see |viminfo-file-name|.
 	When equal to "NONE" no viminfo file will be read or written.
 	This option can be set with the |-i| command line flag.  The |--clean|
 	command line flag sets it to "NONE".

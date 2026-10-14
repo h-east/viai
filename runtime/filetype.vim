@@ -1245,6 +1245,7 @@ au BufNewFile,BufRead *.v			call dist#ft#FTv()
 
 " Vim script
 au BufNewFile,BufRead *.vim,.exrc,_exrc,.netrwhist	setf vim
+au BufNewFile,BufRead .viairc,_viairc,.gviairc,_gviairc	setf vim
 
 " Virata Config Script File or Drupal module
 au BufNewFile,BufRead *.hw,*.module,*.pkg

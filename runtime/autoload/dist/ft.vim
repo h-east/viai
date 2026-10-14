@@ -3516,6 +3516,8 @@ const ft_from_name = {
   # Viminfo file
   ".viminfo": "viminfo",
   "_viminfo": "viminfo",
+  ".viaiinfo": "viminfo",
+  "_viaiinfo": "viminfo",
   # Vgrindefs file
   "vgrindefs": "vgrindefs",
   # Wget config

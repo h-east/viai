@@ -386,6 +386,59 @@ set_init_clean_rtp(void)
 }
 #endif
 
+#ifdef VIAI_RUNTIMEPATH
+/*
+ * Set "viai_user_config" when ViAI's own user configuration exists, and then
+ * use ViAI's directory for 'runtimepath', 'packpath' and 'viewdir'.
+ */
+    static void
+set_init_viai_config(void)
+{
+    int		opt_idx;
+    char_u	*rc;
+    char_u	*dir;
+# ifdef VIAI_XDG_DIR
+    char_u	*xdg_dir;
+# endif
+
+    // initialize chartab, so we can expand $HOME
+    (void)init_chartab();
+    rc = expand_env_save((char_u *)VIAI_RC_FILE);
+    dir = expand_env_save((char_u *)VIAI_DIR);
+    viai_user_config = (rc != NULL && file_is_readable(rc))
+					      || (dir != NULL && mch_isdir(dir));
+    vim_free(rc);
+    vim_free(dir);
+# ifdef VIAI_XDG_DIR
+    xdg_dir = expand_env_save((char_u *)VIAI_XDG_DIR);
+    if (xdg_dir != NULL && mch_isdir(xdg_dir))
+	viai_user_config = true;
+    vim_free(xdg_dir);
+# endif
+
+    if (viai_user_config)
+    {
+	if ((opt_idx = findoption((char_u *)"runtimepath")) >= 0)
+	{
+	    options[opt_idx].def_val[VI_DEFAULT] = (char_u *)VIAI_RUNTIMEPATH;
+	    p_rtp = (char_u *)VIAI_RUNTIMEPATH;
+	}
+	if ((opt_idx = findoption((char_u *)"packpath")) >= 0)
+	{
+	    options[opt_idx].def_val[VI_DEFAULT] = (char_u *)VIAI_RUNTIMEPATH;
+	    p_pp = (char_u *)VIAI_RUNTIMEPATH;
+	}
+# ifdef FEAT_SESSION
+	if ((opt_idx = findoption((char_u *)"viewdir")) >= 0)
+	{
+	    options[opt_idx].def_val[VI_DEFAULT] = (char_u *)VIAI_VDIR;
+	    p_vdir = (char_u *)VIAI_VDIR;
+	}
+# endif
+    }
+}
+#endif
+
 #ifdef UNIX
 /*
  * Change 'runtimepath' and 'packdir' to '$XDG_CONFIG_HOME/vim' if the only
@@ -418,15 +471,23 @@ set_init_xdg_rtp(void)
 	should_free_xdg_dir = TRUE;
 	has_xdg_env = FALSE;
     }
-    concat_fnames(xdg_dir, STRLEN(xdg_dir),
-	(char_u *)"vim/vimrc", STRLEN_LITERAL("vim/vimrc"), TRUE, &vimrc_xdg);
+    if (viai_user_config)
+	concat_fnames(xdg_dir, STRLEN(xdg_dir), (char_u *)"viai/vimrc",
+			    STRLEN_LITERAL("viai/vimrc"), TRUE, &vimrc_xdg);
+    else
+	concat_fnames(xdg_dir, STRLEN(xdg_dir), (char_u *)"vim/vimrc",
+			     STRLEN_LITERAL("vim/vimrc"), TRUE, &vimrc_xdg);
 
     if (file_is_readable(vimrc1) || file_is_readable(vimrc2) ||
 	    !file_is_readable(vimrc_xdg.string))
 	goto theend;
 
-    xdg_rtp = has_xdg_env ? (char_u *)XDG_RUNTIMEPATH
-	: (char_u *)XDG_RUNTIMEPATH_FB;
+    if (viai_user_config)
+	xdg_rtp = has_xdg_env ? (char_u *)VIAI_XDG_RUNTIMEPATH
+	    : (char_u *)VIAI_XDG_RUNTIMEPATH_FB;
+    else
+	xdg_rtp = has_xdg_env ? (char_u *)XDG_RUNTIMEPATH
+	    : (char_u *)XDG_RUNTIMEPATH_FB;
 
     if ((opt_idx = findoption((char_u *)"runtimepath")) < 0)
 	goto theend;
@@ -444,8 +505,16 @@ set_init_xdg_rtp(void)
     if ((opt_idx = findoption((char_u *)"viewdir")) < 0)
 	goto theend;
 
-    options[opt_idx].def_val[VI_DEFAULT] = (char_u *)XDG_VDIR;
-    p_vdir = (char_u *)XDG_VDIR;
+    if (viai_user_config)
+    {
+	options[opt_idx].def_val[VI_DEFAULT] = (char_u *)VIAI_XDG_VDIR;
+	p_vdir = (char_u *)VIAI_XDG_VDIR;
+    }
+    else
+    {
+	options[opt_idx].def_val[VI_DEFAULT] = (char_u *)XDG_VDIR;
+	p_vdir = (char_u *)XDG_VDIR;
+    }
 # endif
 
 theend:
@@ -734,6 +803,9 @@ set_init_1(int clean_arg)
      */
     set_options_default(0);
 
+#ifdef VIAI_RUNTIMEPATH
+    set_init_viai_config();
+#endif
 #ifdef UNIX
     set_init_xdg_rtp();
     set_init_restricted_mode();

@@ -1174,6 +1174,11 @@ EXTERN int	secure INIT(= FALSE);
 				// non-zero when only "safe" commands are
 				// allowed, e.g. when sourcing .exrc or .vimrc
 				// in current directory
+#ifdef VIAI_RUNTIMEPATH
+EXTERN bool	viai_user_config INIT(= false);
+				// true when ViAI's own user configuration
+				// exists
+#endif
 
 EXTERN int	textlock INIT(= 0);
 				// non-zero when changing text and jumping to

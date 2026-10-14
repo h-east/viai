@@ -357,6 +357,7 @@ NEW_TESTS = \
 	test_utf8_comparisons \
 	test_vartabs \
 	test_version \
+	test_viai_config \
 	$(TEST_VIM9) \
 	test_viminfo \
 	test_vimscript \
@@ -624,6 +625,7 @@ NEW_TESTS_RES = \
 	test_user_func.res \
 	test_usercommands.res \
 	test_vartabs.res \
+	test_viai_config.res \
 	$(TEST_VIM9_RES) \
 	test_viminfo.res \
 	test_vimscript.res \

@@ -904,6 +904,8 @@ accordingly.  Vim proceeds in this order:
 		Note: For Win32, "$HOME" is checked first.  If no "_vimrc" or
 		".vimrc" is found there, "$VIM" is tried.  See |$VIM| for when
 		$VIM is not set.
+		Note: ViAI uses its own user vimrc files when its own user
+		configuration exists, see |viai-config|.
 	III The environment variable EXINIT.
 	    The value of $EXINIT is used as an Ex command line.
 	IV  The user exrc file(s).  Same as for the user vimrc file, but with
@@ -1709,6 +1711,8 @@ VIMINFO FILE NAME					*viminfo-file-name*
   "s:.viminfo" for Amiga, "$HOME\_viminfo" for Win32.  For Win32, when $HOME
   is not set, "$VIM\_viminfo" is used.  When $VIM is also not set,
   "c:\_viminfo" is used.
+- ViAI uses "$HOME/.viaiinfo" for Unix and "$HOME\_viaiinfo" for Win32
+  instead, see |viai-viminfo|.
 - The 'n' flag in the 'viminfo' option can be used to specify another viminfo
   file name 'viminfo'.
 - The "-i" Vim argument can be used to set another file name, |-i|.  When the

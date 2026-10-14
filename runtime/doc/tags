@@ -8398,7 +8398,6 @@ help-buffer-options	helphelp.txt	/*help-buffer-options*
 help-context	help.txt	/*help-context*
 help-notation	helphelp.txt	/*help-notation*
 help-summary	usr_02.txt	/*help-summary*
-help-tags	tags	1
 help-toc-install	helphelp.txt	/*help-toc-install*
 help-translated	helphelp.txt	/*help-translated*
 help-writing	helphelp.txt	/*help-writing*
@@ -11675,6 +11674,14 @@ vi-differences	vi_diff.txt	/*vi-differences*
 vi-features	vi_diff.txt	/*vi-features*
 vi:	options.txt	/*vi:*
 vi_diff.txt	vi_diff.txt	/*vi_diff.txt*
+viai	viai.txt	/*viai*
+viai-config	viai.txt	/*viai-config*
+viai-feature	viai.txt	/*viai-feature*
+viai-license	viai.txt	/*viai-license*
+viai-programs	viai.txt	/*viai-programs*
+viai-version	viai.txt	/*viai-version*
+viai-viminfo	viai.txt	/*viai-viminfo*
+viai.txt	viai.txt	/*viai.txt*
 vib	motion.txt	/*vib*
 vietnamese	vietnamese.txt	/*vietnamese*
 vietnamese-ime_diff	vietnamese.txt	/*vietnamese-ime_diff*

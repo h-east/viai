@@ -17,10 +17,12 @@
 # define SYS_VIMRC_FILE		"$VIM\\vimrc"
 #endif
 #ifndef USR_VIMRC_FILE
-# define USR_VIMRC_FILE		"$HOME\\_vimrc"
+# define USR_VIMRC_FILE \
+	(viai_user_config ? "$HOME\\_viairc" : "$HOME\\_vimrc")
 #endif
 #ifndef USR_VIMRC_FILE2
-# define USR_VIMRC_FILE2	"$HOME\\vimfiles\\vimrc"
+# define USR_VIMRC_FILE2 (viai_user_config \
+	? "$HOME\\viaifiles\\vimrc" : "$HOME\\vimfiles\\vimrc")
 #endif
 #ifndef USR_VIMRC_FILE3
 # define USR_VIMRC_FILE3	"$VIM\\_vimrc"
@@ -44,10 +46,12 @@
 #  define SYS_GVIMRC_FILE	"$VIM\\gvimrc"
 # endif
 # ifndef USR_GVIMRC_FILE
-#  define USR_GVIMRC_FILE	"$HOME\\_gvimrc"
+#  define USR_GVIMRC_FILE \
+	(viai_user_config ? "$HOME\\_gviairc" : "$HOME\\_gvimrc")
 # endif
 # ifndef USR_GVIMRC_FILE2
-#  define USR_GVIMRC_FILE2	"$HOME\\vimfiles\\gvimrc"
+#  define USR_GVIMRC_FILE2 (viai_user_config \
+	? "$HOME\\viaifiles\\gvimrc" : "$HOME\\vimfiles\\gvimrc")
 # endif
 # ifndef USR_GVIMRC_FILE3
 #  define USR_GVIMRC_FILE3	"$VIM\\_gvimrc"
@@ -63,7 +67,9 @@
 
 #ifdef FEAT_VIMINFO
 # ifndef VIMINFO_FILE
-#  define VIMINFO_FILE		"$HOME\\_viminfo"
+#  define VIMINFO_FILE		"$HOME\\_viaiinfo"
+// Read when VIMINFO_FILE does not exist yet.
+#  define VIM_VIMINFO_FILE	"$HOME\\_viminfo"
 # endif
 # ifndef VIMINFO_FILE2
 #  define VIMINFO_FILE2		"$VIM\\_viminfo"
@@ -107,6 +113,13 @@
 #define DFLT_ERRORFILE		"errors.err"
 #define DFLT_RUNTIMEPATH	"$HOME/vimfiles,$VIM/vimfiles,$VIMRUNTIME,$HOME/vimfiles/after,$VIM/vimfiles/after"
 #define CLEAN_RUNTIMEPATH	"$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after"
+
+// ViAI's own user configuration, used when VIAI_RC_FILE or VIAI_DIR exists.
+#define VIAI_RC_FILE		"$HOME\\_viairc"
+#define VIAI_DIR		"$HOME\\viaifiles"
+#define VIAI_RUNTIMEPATH \
+	"$HOME/viaifiles,$VIM/vimfiles,$VIMRUNTIME,$HOME/viaifiles/after,$VIM/vimfiles/after"
+#define VIAI_VDIR		"$HOME/viaifiles/view"
 
 #define CASE_INSENSITIVE_FILENAME   // ignore case when comparing file names
 #define BACKSLASH_IN_FILENAME

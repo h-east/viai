@@ -221,7 +221,7 @@ typedef struct dsc$descriptor   DESC;
 # ifdef VMS
 #  define USR_VIMRC_FILE  "sys$login:.vimrc"
 # else
-#  define USR_VIMRC_FILE "$HOME/.vimrc"
+#  define USR_VIMRC_FILE (viai_user_config ? "$HOME/.viairc" : "$HOME/.vimrc")
 # endif
 #endif
 
@@ -230,14 +230,15 @@ typedef struct dsc$descriptor   DESC;
 # ifdef VMS
 #  define USR_VIMRC_FILE2	"sys$login:vimfiles/vimrc"
 # else
-#  define USR_VIMRC_FILE2	"~/.vim/vimrc"
+#  define USR_VIMRC_FILE2 (viai_user_config ? "~/.viai/vimrc" : "~/.vim/vimrc")
 # endif
 #endif
 
 #ifndef XDG_VIMRC_FILE
 # define XDG_VIMRC_FILE (mch_getenv((char_u *)"XDG_CONFIG_HOME") \
-	? "$XDG_CONFIG_HOME/vim/vimrc" \
-	: "~/.config/vim/vimrc")
+	? (viai_user_config ? "$XDG_CONFIG_HOME/viai/vimrc" \
+					    : "$XDG_CONFIG_HOME/vim/vimrc") \
+	: (viai_user_config ? "~/.config/viai/vimrc" : "~/.config/vim/vimrc"))
 #endif
 
 #if !defined(USR_VIMRC_FILE3) && defined(VMS)
@@ -248,7 +249,8 @@ typedef struct dsc$descriptor   DESC;
 # ifdef VMS
 #  define USR_GVIMRC_FILE "sys$login:.gvimrc"
 # else
-#  define USR_GVIMRC_FILE "$HOME/.gvimrc"
+#  define USR_GVIMRC_FILE \
+	(viai_user_config ? "$HOME/.gviairc" : "$HOME/.gvimrc")
 # endif
 #endif
 
@@ -256,7 +258,8 @@ typedef struct dsc$descriptor   DESC;
 # ifdef VMS
 #  define USR_GVIMRC_FILE2	"sys$login:vimfiles/gvimrc"
 # else
-#  define USR_GVIMRC_FILE2	"~/.vim/gvimrc"
+#  define USR_GVIMRC_FILE2 \
+	(viai_user_config ? "~/.viai/gvimrc" : "~/.vim/gvimrc")
 # endif
 #endif
 
@@ -267,8 +270,9 @@ typedef struct dsc$descriptor   DESC;
 #else
 # ifndef USR_GVIMRC_FILE3
 #  define USR_GVIMRC_FILE3 (mch_getenv("XDG_CONFIG_HOME") \
-	? "$XDG_CONFIG_HOME/vim/gvimrc" \
-	: "~/.config/vim/gvimrc")
+	? (viai_user_config ? "$XDG_CONFIG_HOME/viai/gvimrc" \
+					    : "$XDG_CONFIG_HOME/vim/gvimrc") \
+	: (viai_user_config ? "~/.config/viai/gvimrc" : "~/.config/vim/gvimrc"))
 # endif
 #endif
 
@@ -285,7 +289,9 @@ typedef struct dsc$descriptor   DESC;
 #  ifdef VMS
 #   define VIMINFO_FILE  "sys$login:.viminfo"
 #  else
-#   define VIMINFO_FILE "$HOME/.viminfo"
+#   define VIMINFO_FILE "$HOME/.viaiinfo"
+// Read when VIMINFO_FILE does not exist yet.
+#   define VIM_VIMINFO_FILE "$HOME/.viminfo"
 #  endif
 # endif
 # if !defined(VIMINFO_FILE2) && defined(VMS)
@@ -365,6 +371,34 @@ typedef struct dsc$descriptor   DESC;
 #  endif
 # endif
 
+#endif
+
+// ViAI's own user configuration, used when any of VIAI_RC_FILE, VIAI_DIR
+// and VIAI_XDG_DIR exists.
+#ifndef VMS
+# define VIAI_RC_FILE		"$HOME/.viairc"
+# define VIAI_DIR		"~/.viai"
+# define VIAI_XDG_DIR		(mch_getenv((char_u *)"XDG_CONFIG_HOME") \
+	? "$XDG_CONFIG_HOME/viai" : "~/.config/viai")
+# ifdef RUNTIME_GLOBAL
+#  ifdef RUNTIME_GLOBAL_AFTER
+#   define VIAI_RTP_GLOBAL \
+	"," RUNTIME_GLOBAL ",$VIMRUNTIME," RUNTIME_GLOBAL_AFTER ","
+#  else
+#   define VIAI_RTP_GLOBAL \
+	"," RUNTIME_GLOBAL ",$VIMRUNTIME," RUNTIME_GLOBAL "/after,"
+#  endif
+# else
+#  define VIAI_RTP_GLOBAL	",$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,"
+# endif
+# define VIAI_RUNTIMEPATH	"~/.viai" VIAI_RTP_GLOBAL "~/.viai/after"
+# define VIAI_XDG_RUNTIMEPATH \
+	"$XDG_CONFIG_HOME/viai" VIAI_RTP_GLOBAL "$XDG_CONFIG_HOME/viai/after"
+# define VIAI_XDG_RUNTIMEPATH_FB \
+	"~/.config/viai" VIAI_RTP_GLOBAL "~/.config/viai/after"
+# define VIAI_VDIR		"$HOME/.viai/view"
+# define VIAI_XDG_VDIR		(mch_getenv("XDG_CONFIG_HOME") ? \
+	"$XDG_CONFIG_HOME/viai/view" : "~/.config/viai/view")
 #endif
 
 #ifdef VMS
