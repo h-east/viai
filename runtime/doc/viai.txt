@@ -41,6 +41,9 @@ the DLL support they use "viai32.dll" or "viai64.dll".
 On Unix "xxd" and "vimtutor" are not installed either.  Use the xxd program
 of Vim and the |:Tutor| command.
 
+The default client-server name is "GVIAI" instead of "GVIM", see
+|client-server-name| and |{server}|.
+
 The runtime files are installed in "/usr/local/share/viai/viai10" instead of
 "/usr/local/share/vim/vim92" (when using the default prefix).  This is
 $VIMRUNTIME, and $VIM is "/usr/local/share/viai".

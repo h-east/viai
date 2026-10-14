@@ -141,7 +141,7 @@ servers on the standard output (stdout) and exit.  If a socket server is being
 used, there are caveats, see |socketserver-differences|.
 							*{server}*
 The {server} argument is used by several functions.  When this is an empty
-string then on Unix the default server name is used, which is "GVIM".  On
+string then on Unix the default server name is used, which is "GVIAI".  On
 MS-Windows an empty string does not work.
 
 Win32 Note: Making the Vim server go to the foreground doesn't always work,

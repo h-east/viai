@@ -788,6 +788,31 @@ func Test_clientserver_serverlist_without_x11()
   endtry
 endfunc
 
+" An empty server name means "GVIAI" for the x11 backend.
+func Test_clientserver_x11_default_name()
+  let g:test_is_flaky = 1
+  CheckFeature x11
+  if $VIM_CLIENTSERVER != '' && $VIM_CLIENTSERVER !=? 'x11'
+    throw 'Skipped: the clientserver backend is not x11'
+  endif
+  call Check_X11_Connection()
+  if serverlist() =~? '\<GVIAI\>'
+    throw 'Skipped: a GVIAI server is already running'
+  endif
+  let cmd = GetVimCommand()
+  if cmd == ''
+    throw 'GetVimCommand() failed'
+  endif
+
+  let job = job_start(cmd .. ' --servername GVIAI',
+        \ {'stoponexit': 'kill', 'out_io': 'null'})
+  call WaitForAssert({-> assert_match('\cGVIAI', serverlist())})
+  call assert_equal('4', remote_expr('', '2 + 2', '', 2))
+
+  call remote_send('GVIAI', ":qa!\<CR>")
+  call WaitForAssert({-> assert_equal("dead", job_status(job))})
+endfunc
+
 " Uncomment this line to get a debugging log
 " call ch_logfile('channellog', 'w')
 

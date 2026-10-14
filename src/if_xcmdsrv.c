@@ -390,7 +390,7 @@ serverSendToVim(
     if (result != NULL)
 	*result = NULL;
     if (name == NULL || *name == NUL)
-	name = (char_u *)"GVIM";    // use a default name
+	name = (char_u *)"GVIAI";   // use a default name
 
     if (commProperty == None && dpy != NULL && SendInit(dpy) < 0)
 	return -1;
