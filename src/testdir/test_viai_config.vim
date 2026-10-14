@@ -1,4 +1,4 @@
-" Tests for ViAI's own user configuration and viminfo file.
+" Tests for ViAI's own user configuration, viminfo file and environment.
 
 " Run ViAI with "lines" as a script, reading the user vimrc, and return the
 " errors it reported.
@@ -155,6 +155,48 @@ func Test_viai_config_viminfo()
     call assert_notmatch('from_vim_later', execute('history :'))
   END
   call assert_equal([], s:RunWithVimrc(lines))
+endfunc
+
+" $VIM and $VIMRUNTIME are not passed to a program in a terminal window.
+func Test_viai_terminal_vim_env()
+  CheckFeature terminal
+  CheckUnix
+  call assert_notequal('', $VIM)
+  call assert_notequal('', $VIMRUNTIME)
+
+  let cmd = ['sh', '-c',
+        \ 'echo "VIM=${VIM-unset} VIMRUNTIME=${VIMRUNTIME-unset}"']
+  let buf = term_start(cmd)
+  call WaitForAssert({-> assert_equal('VIM=unset VIMRUNTIME=unset',
+        \ term_getline(buf, 1))})
+  exe buf .. 'bwipe!'
+
+  " Values given with the "env" option are passed.
+  let buf = term_start(cmd, #{env: #{VIMRUNTIME: 'given'}})
+  call WaitForAssert({-> assert_equal('VIM=unset VIMRUNTIME=given',
+        \ term_getline(buf, 1))})
+  exe buf .. 'bwipe!'
+
+  " Other child processes still get them.
+  call assert_equal($VIMRUNTIME, trim(system('echo "$VIMRUNTIME"')))
+endfunc
+
+func Test_viai_terminal_vim_env_mswin()
+  CheckFeature terminal
+  CheckMSWindows
+  call assert_notequal('', $VIMRUNTIME)
+
+  " cmd.exe leaves the name of an unset variable as it is.
+  let cmd = 'cmd /c echo VIM=%VIM% VIMRUNTIME=%VIMRUNTIME%'
+  let buf = term_start(cmd)
+  call WaitForAssert({-> assert_match('VIM=%VIM% VIMRUNTIME=%VIMRUNTIME%',
+        \ term_getline(buf, 1))})
+  exe buf .. 'bwipe!'
+
+  let buf = term_start(cmd, #{env: #{VIMRUNTIME: 'given'}})
+  call WaitForAssert({-> assert_match('VIM=%VIM% VIMRUNTIME=given',
+        \ term_getline(buf, 1))})
+  exe buf .. 'bwipe!'
 endfunc
 
 " vim: shiftwidth=2 sts=2 expandtab

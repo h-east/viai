@@ -5986,14 +5986,23 @@ win32_build_env(dict_T *env, garray_T *gap, int is_terminal)
 	if (ga_grow(gap, 1) == FAIL)
 	    return;
 
-	while (*p != 0 || *(p + 1) != 0)
+	while (*p != 0)
 	{
-	    if (ga_grow(gap, 1) == OK)
-		*((WCHAR*)gap->ga_data + gap->ga_len++) = *p;
-	    p++;
+	    size_t	len = wcslen(p);
+
+	    // The program in a terminal window may be Vim, which must not use
+	    // the runtime files of ViAI.
+	    if (!(is_terminal && (_wcsnicmp(p, L"VIM=", 4) == 0
+				|| _wcsnicmp(p, L"VIMRUNTIME=", 11) == 0))
+		    && ga_grow(gap, (int)(len + 1)) == OK)
+	    {
+		mch_memmove((WCHAR*)gap->ga_data + gap->ga_len, p,
+						       (len + 1) * sizeof(WCHAR));
+		gap->ga_len += (int)(len + 1);
+	    }
+	    p += len + 1;
 	}
 	FreeEnvironmentStringsW(base);
-	*((WCHAR*)gap->ga_data + gap->ga_len++) = L'\0';
     }
 
 # if defined(FEAT_CLIENTSERVER) || defined(FEAT_TERMINAL)

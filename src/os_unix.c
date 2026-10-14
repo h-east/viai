@@ -4635,6 +4635,15 @@ set_child_environment(
     putenv(envbuf_Servername);
 #  endif
 # endif
+# ifdef FEAT_TERMINAL
+    // The program in a terminal window may be Vim, which must not use the
+    // runtime files of ViAI.
+    if (is_terminal)
+    {
+	vim_unsetenv((char_u *)"VIM");
+	vim_unsetenv((char_u *)"VIMRUNTIME");
+    }
+# endif
 }
 
     static void

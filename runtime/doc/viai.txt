@@ -14,7 +14,8 @@ describes Vim and applies to ViAI as well, except for what is written here.
 2. Version			|viai-version|
 3. User configuration		|viai-config|
 4. The viminfo file		|viai-viminfo|
-5. License			|viai-license|
+5. $VIM and $VIMRUNTIME		|viai-vimruntime|
+6. License			|viai-license|
 
 ==============================================================================
 1. Programs					*viai-programs*
@@ -124,7 +125,23 @@ This only applies when the viminfo file name is not set with 'viminfofile'
 or the "n" flag of 'viminfo'.
 
 ==============================================================================
-5. License					*viai-license*
+5. $VIM and $VIMRUNTIME				*viai-vimruntime*
+
+ViAI uses |$VIM| and |$VIMRUNTIME| like Vim does, so that plugins written for
+Vim that use $VIMRUNTIME keep working.
+
+When $VIM or $VIMRUNTIME is set in the environment, ViAI uses it.  Thus when
+you set $VIMRUNTIME for Vim, e.g. in a shell startup file, ViAI also uses the
+runtime files of Vim.  Set it only where Vim is started.
+
+ViAI does not pass $VIM and $VIMRUNTIME to a program running in a terminal
+window, so that Vim started there uses its own runtime files.  When they are
+given with the "env" argument of |term_start()| they are passed.  Other
+child processes, e.g. started with |:!|, |system()| and |job_start()|, do get
+them.
+
+==============================================================================
+6. License					*viai-license*
 
 Changes made in ViAI after the initial import are licensed under the Apache
 License 2.0.  Code imported from Vim is licensed under the Vim license, see
