@@ -1,20 +1,23 @@
 # AGENTS.md
 
-Guidance for AI coding agents working in the Vim repository.
+Guidance for AI coding agents working in the ViAI repository.
 
 ## Project
 
-Vim is a text editor written in C. The canonical repository is
-https://github.com/vim/vim. The code is old and has grown organically over
-the past 30+ years. Some files are vendored from upstream projects
-(`src/xdiff`, `src/libvterm`); parts of the runtime are occasionally shared
-with forks like Neovim.
+ViAI (Vim Advanced Integrated) is a text editor written in C, based on Vim
+(https://github.com/vim/vim).  It started from Vim 9.2.1186 and keeps
+importing the patches of Vim.  The differences from Vim are described in
+`runtime/doc/viai.txt` (`:help viai`).
 
-Vim strives to be portable across several different operating systems and
-aims to be a stable, robust editor gradually developing new features while
-remaining backwards compatible as much as possible.
+The code is old and has grown organically over the past 30+ years. Some
+files are vendored from upstream projects (`src/xdiff`, `src/libvterm`);
+parts of the runtime are occasionally shared with forks like Neovim.
 
-At the same time, Vim can be compiled with different feature sets, from the
+ViAI, like Vim, strives to be portable across several different operating
+systems and aims to be a stable, robust editor gradually developing new
+features while remaining backwards compatible as much as possible.
+
+At the same time, ViAI can be compiled with different feature sets, from the
 POSIX compatible minimal vi to a full-fledged GUI editor which includes
 additional scripting interfaces.
 
@@ -36,8 +39,11 @@ See `runtime/doc/develop.txt` for the high level design goals.
 
 Output is in testdir/messages and testdir/test.log
 
+The program is built as `src/viai` (`viai.exe` and `gviai.exe` on
+MS-Windows).
+
 Builds on Windows depend on the Environment, see `src/INSTALLpc.txt`
-for Cygwin/MSYS and MSVC ways to build Vim
+for Cygwin/MSYS and MSVC ways to build ViAI
 
 Before submitting any patch, at minimum:
 1. The build succeeds without new warnings.
@@ -56,22 +62,39 @@ Before submitting any patch, at minimum:
 - `src/libvterm` - for the libvterm library
 - `src/testdir/` - tests. Vim-script files named `test_*.vim`.
   Screendump expected output lives in `src/testdir/dumps/`.
-- `runtime/doc/` - user-facing documentation in Vim help format, when updating,
-  also update the Last Change header
+- `runtime/doc/` - user-facing documentation in Vim help format
 - `runtime/syntax/generator` - Syntax script for Vim Script, automatically generated
   from Vims source
-- `runtime/`  - runtime files shipped with Vim, when updating, also update the
-  Last Change header and a short description if this file has no maintainer
-  If the file has a maintainer, changes should go via them (so make a merge
-  request against the upstream repo instead)
-- `src/version.c` - contains the `included_patches[]` list. Every
-  patch touching anything below `src/` (with the exception of `src/po`) needs a
-  new entry at the top, will be updated only when merging into
-  the master tree.
+- `runtime/`  - runtime files shipped with ViAI.  A file that has a
+  maintainer may still be changed in ViAI when needed.  Do not update the
+  Last Change header of files imported from Vim: it would conflict with Vim
+  patches.
+- `src/version.c` - contains the `viai_included_patches[]` list for ViAI
+  patches and the `included_patches[]` list for Vim patches.  Every patch
+  touching anything below `src/` (with the exception of `src/po`) needs a new
+  entry at the top of its list, will be updated only when merging into the
+  master tree.
+
+## Relationship with Vim
+
+- **Vim patches are imported as separate commits.**  The subject is
+  `vim-patch:9.2.NNNN: ` followed by the subject of the Vim patch.  Never
+  mix a Vim patch with ViAI changes in one commit.
+- **License**: ViAI's own changes are licensed under the Apache License 2.0,
+  code imported from Vim (the initial import and every `vim-patch:` commit)
+  under the Vim license.
+- **Keep the diff against Vim small**, so that Vim patches keep applying.
+  Change existing Vim code only where needed.  Put ViAI-specific tests in
+  their own files (e.g. `src/testdir/test_viai_config.vim`) and describe
+  ViAI-specific behavior in `runtime/doc/viai.txt` rather than rewriting
+  Vim's help files.
+- **ViAI has its own version** (`VIAI_VERSION_MAJOR` and
+  `VIAI_VERSION_MINOR` in `src/version.h`) and patch numbers (1.0.0001, ...).
+  `v:version` and `has('patch-...')` keep reporting the Vim version.
 
 ## Commit format
 
-Vim uses a strict commit message format. The subject line is a
+ViAI uses Vim's strict commit message format. The subject line is a
 one-sentence **problem statement**, not a description of the fix:
 
     short description of the problem
@@ -79,7 +102,7 @@ one-sentence **problem statement**, not a description of the fix:
     Problem:  Restatement of the problem as a full sentence, possibly
               with a reporter attribution in parentheses.
     Solution: Short description of the fix, ending with the author's
-              name in parentheses.
+              name in parentheses when it is not the maintainer.
 
     optional longer description of the problem and solution goes here in prose.
     Do not use bullet points.
@@ -99,7 +122,7 @@ Rules:
 - **Problem line is a full sentence with a trailing period.** It mirrors
   the subject.
 - **Solution line ends with `(Author Name)`** — parentheses, period
-  after them.
+  after them — unless the author is the maintainer (Hirohito Higashi).
 - **Longer prose**, if any, goes after the Problem/Solution header
 - **`fixes:` references the issue** the patch fixes.
   **`closes:` references the PR** that introduces the fix.
@@ -111,6 +134,8 @@ Rules:
   acknowledge human assistance transparently. Human coauthors should usually
   also have their own Signed-off-by.
 - **`Assisted-by:` is required** when AI was used.
+- **A numbered ViAI patch** has the subject `patch 1.0.NNNN: ` followed by
+  the problem statement.  The number is added when merging.
 
 ## C code conventions
 
@@ -235,8 +260,8 @@ Further rules, not spelled out here, live in `runtime/doc/develop.txt`:
 
 - User-facing option or feature changes require a `runtime/doc/*.txt`
   update in the same patch.
-- When editing an existing help file, bump the `Last change:` header
-  at the top.
+- Bump the `Last change:` header only of ViAI's own help files, such as
+  `viai.txt`.
 
 ### Help file style
 
@@ -274,21 +299,6 @@ reference. Key conventions:
   auto-highlighted; do not try to fake the highlighting by other means.
 - **Language**: gender-neutral language is preferred for new or updated
   text; existing wording does not need to be rewritten for this alone.
-
-## Release policy
-
-Vim alternates between development cycles and stability periods — see
-`runtime/doc/develop.txt` `*design-policy*`.
-
-- **During a stability period** only clear bug fixes, security fixes,
-  documentation updates, translations, and runtime file updates are
-  accepted. No new features, no backwards-incompatible changes.
-- **Once released in a minor version**, C-core features must stay
-  backwards-compatible. Runtime files have a bit more flexibility so
-  their maintainers can correct old behavior.
-- **Deprecated features** stay reachable via config (do not hard-error),
-  are documented as deprecated, can be disabled at compile time, and
-  may be removed in a later cycle.
 
 ## Security
 
