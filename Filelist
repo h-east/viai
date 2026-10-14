@@ -772,7 +772,6 @@ SRC_EXTRA =	\
 RT_ALL =	\
 		README.txt \
 		README.md \
-		README_VIM9.md \
 		LICENSE \
 		LICENSE-APACHE \
 		CONTRIBUTING.md \
