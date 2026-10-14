@@ -1,6 +1,7 @@
 # Unix: object and executable files.
 *.o
 src/vim
+src/viai
 src/xxd/xxd
 src/objects/.dirstamp
 src/objects

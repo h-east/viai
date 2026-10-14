@@ -11,7 +11,7 @@ include Make_all.mak
 
 PACKAGE = vim
 SHELL = /bin/sh
-VIMPROG = ../vim
+VIMPROG = ../viai
 
 # MacOS sed is locale aware, set $LANG to avoid problems.
 SED = LANG=C sed

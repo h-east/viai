@@ -396,7 +396,7 @@ fi
 AC_MSG_CHECKING(--with-vim-name argument)
 AC_ARG_WITH(vim-name, [  --with-vim-name=NAME    what to call the Vim executable],
 	VIMNAME="$withval"; AC_MSG_RESULT($VIMNAME),
-	VIMNAME="vim"; AC_MSG_RESULT(Defaulting to $VIMNAME))
+	VIMNAME="viai"; AC_MSG_RESULT(Defaulting to $VIMNAME))
 AC_SUBST(VIMNAME)
 AC_MSG_CHECKING(--with-ex-name argument)
 AC_ARG_WITH(ex-name, [  --with-ex-name=NAME     what to call the Ex executable],

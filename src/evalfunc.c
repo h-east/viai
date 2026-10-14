@@ -8747,6 +8747,7 @@ f_has(typval_T *argvars, typval_T *rettv)
 #endif
 		},
 	{"vertsplit", 1},
+	{"viai", 1},
 	{"viminfo",
 #ifdef FEAT_VIMINFO
 		1
@@ -8919,6 +8920,30 @@ f_has(typval_T *argvars, typval_T *rettv)
 	}
 	else if (SAFE_isdigit(name[5]))
 	    n = has_patch(atoi((char *)name + 5));
+    }
+    else if (STRNICMP(name, "viai-", 5) == 0)
+    {
+	x = TRUE;
+	if (vim_isdigit(name[5]))
+	{
+	    char	*end;
+	    int		major, minor;
+
+	    // Accepts "viai-1.0" and "viai-1.0.3".
+	    major = (int)strtol((char *)name + 5, &end, 10);
+	    if (*end == '.' && vim_isdigit(end[1]))
+	    {
+		minor = (int)strtol(end + 1, &end, 10);
+		if (major != VIAI_VERSION_MAJOR)
+		    n = major < VIAI_VERSION_MAJOR;
+		else if (minor != VIAI_VERSION_MINOR)
+		    n = minor < VIAI_VERSION_MINOR;
+		else if (*end == NUL)
+		    n = TRUE;
+		else if (*end == '.' && vim_isdigit(end[1]))
+		    n = has_viai_patch(atoi(end + 1));
+	    }
+	}
     }
     else if (STRICMP(name, "vim_starting") == 0)
     {

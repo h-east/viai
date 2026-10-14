@@ -5323,7 +5323,7 @@ then :
   withval=$with_vim_name; VIMNAME="$withval"; { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $VIMNAME" >&5
 printf "%s\n" "$VIMNAME" >&6; }
 else case e in #(
-  e) VIMNAME="vim"; { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: Defaulting to $VIMNAME" >&5
+  e) VIMNAME="viai"; { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: Defaulting to $VIMNAME" >&5
 printf "%s\n" "Defaulting to $VIMNAME" >&6; } ;;
 esac
 fi

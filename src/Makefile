@@ -131,10 +131,9 @@
 #		make installmanlinks	only installs the Vim manpage links
 #		make installmacros	only installs the Vim macros
 #		make installpack	only installs the packages
-#		make installtutorbin	only installs the Vim tutor program
 #		make installtutor	only installs the Vim tutor files
 #		make installspell	only installs the spell files
-#		make installtools	only installs xxd
+#		make installtools	only installs the runtime tools
 #	If you install Vim, not to install for real but to prepare a package
 #	or RPM, set DESTDIR to the root of the tree.
 #
@@ -271,7 +270,7 @@ CC=
 
 # Defaults used when auto/config.mk does not exist.
 srcdir = .
-VIMNAME = vim
+VIMNAME = viai
 EXNAME = ex
 VIEWNAME = view
 
@@ -992,10 +991,14 @@ MAN1DIR = /man1
 VIMMAJOR = 9
 VIMMINOR = 2
 
+### ViAI version, used for the runtime directory name
+VIAIMAJOR = 1
+VIAIMINOR = 0
+
 ### Location of Vim files (should not need to be changed, and  {{{1
 ### some things might not work when they are changed!)
-VIMDIR = /vim
-VIMRTDIR = /vim$(VIMMAJOR)$(VIMMINOR)
+VIMDIR = /viai
+VIMRTDIR = /viai$(VIAIMAJOR)$(VIAIMINOR)
 HELPSUBDIR = /doc
 COLSUBDIR = /colors
 SYNSUBDIR = /syntax
@@ -2364,9 +2367,9 @@ install: $(GUI_INSTALL)
 
 install_normal: installvim installtools $(INSTALL_LANGS) install-icons
 
-install_gui_extra: installgtutorbin
+install_gui_extra:
 
-installvim: installvimbin installtutorbin \
+installvim: installvimbin \
 		installruntime installlinks installmanlinks
 
 #
@@ -2535,14 +2538,6 @@ installpack: $(DEST_VIM) $(DEST_RT) $(DEST_PACK)
 	chmod $(FILEMOD) `find $(DEST_PACK) -type f -print`
 
 # install the tutor files
-installtutorbin: $(DEST_BIN)
-	$(INSTALL_DATA) vimtutor $(DEST_BIN)/$(VIMNAME)tutor
-	chmod $(SCRIPTMOD) $(DEST_BIN)/$(VIMNAME)tutor
-
-installgtutorbin: $(DEST_BIN)
-	$(INSTALL_DATA) gvimtutor $(DEST_BIN)/$(GVIMNAME)tutor
-	chmod $(SCRIPTMOD) $(DEST_BIN)/$(GVIMNAME)tutor
-
 installtutor: $(DEST_RT) $(DEST_TUTOR)/en $(DEST_TUTOR)/it $(DEST_TUTOR)/sr $(DEST_TUTOR)/sv $(DEST_TUTOR)/ru
 	-$(INSTALL_DATA) $(TUTORSOURCE)/README* $(TUTORSOURCE)/tutor* $(DEST_TUTOR)
 	-$(INSTALL_DATA) $(TUTORSOURCE)/en/* $(DEST_TUTOR)/en/
@@ -2566,20 +2561,8 @@ installspell: $(DEST_VIM) $(DEST_RT) $(DEST_SPELL)
 	  chmod $(HELPMOD) $(DEST_SPELL)/*.spl $(DEST_SPELL)/*.sug $(DEST_SPELL)/*.vim; \
 	fi
 
-# install helper program xxd
-installtools: $(TOOLS) $(DESTDIR)$(exec_prefix) $(DEST_BIN) \
-		$(TOOLSSOURCE) $(DEST_VIM) $(DEST_RT) $(DEST_TOOLS) \
-		$(INSTALL_TOOL_LANGS)
-	if test -f $(DEST_BIN)/xxd$(EXEEXT); then \
-	  mv -f $(DEST_BIN)/xxd$(EXEEXT) $(DEST_BIN)/xxd.rm; \
-	  rm -f $(DEST_BIN)/xxd.rm; \
-	fi
-	$(INSTALL_PROG) xxd/xxd$(EXEEXT) $(DEST_BIN)
-	$(STRIP) $(DEST_BIN)/xxd$(EXEEXT)
-	chmod $(BINMOD) $(DEST_BIN)/xxd$(EXEEXT)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN) "" $(INSTALLMANARGS)
-
-# install the runtime tools
+# install the runtime tools; xxd is built but not installed
+installtools: $(TOOLS) $(TOOLSSOURCE) $(DEST_VIM) $(DEST_RT) $(DEST_TOOLS)
 	$(INSTALL_DATA_R) $(TOOLSSOURCE)/* $(DEST_TOOLS)
 # When using CVS some CVS directories might have been copied.
 	cvs=`find $(DEST_TOOLS) \( -name CVS -o -name AAPDIR \) -print`; \
@@ -2593,33 +2576,6 @@ installtools: $(TOOLS) $(DESTDIR)$(exec_prefix) $(DEST_BIN) \
 		awkpath=`./which.sh gawk` && sed -e "s+/usr/bin/nawk+$$awkpath+" $(TOOLSSOURCE)/mve.awk >$(DEST_TOOLS)/mve.awk; if test -z "$$awkpath"; then \
 		awkpath=`./which.sh awk` && sed -e "s+/usr/bin/nawk+$$awkpath+" $(TOOLSSOURCE)/mve.awk >$(DEST_TOOLS)/mve.awk; fi; fi
 	-chmod $(SCRIPTMOD) `grep -l "^#!" $(DEST_TOOLS)/*`
-
-# install the language specific files for tools, if they were unpacked
-install-tool-languages:
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_DA) "-da" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_DA_I) "-da" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_DA_U) "-da.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_DE) "-de" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_DE_I) "-de" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_DE_U) "-de.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_FR) "-fr" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_FR_I) "-fr" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_FR_U) "-fr.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_IT) "-it" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_IT_I) "-it" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_IT_U) "-it.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_JA_U) "-ja.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_PL) "-pl" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_PL_I) "-pl" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_PL_U) "-pl.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_RU) "-ru" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_RU_U) "-ru.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_SV) "-sv" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_SV_I) "-sv" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_SV_U) "-sv.UTF-8" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_TR) "-tr" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_TR_I) "-tr" $(INSTALLMANARGS)
-	-$(SHELL) ./installman.sh xxd $(DEST_MAN_TR_U) "-tr.UTF-8" $(INSTALLMANARGS)
 
 
 # install the language specific files, if they were unpacked
@@ -2747,8 +2703,8 @@ install-icons:
 	fi
 
 	if test -d $(ICON48PATH) -a -w $(ICON48PATH) \
-		-a ! -f $(ICON48PATH)/gvim.png; then \
-	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim48x48.png $(ICON48PATH)/gvim.png; \
+		-a ! -f $(ICON48PATH)/$(GVIMNAME).png; then \
+	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim48x48.png $(ICON48PATH)/$(GVIMNAME).png; \
 	   if test -z "$(DESTDIR)" -a -x "$(GTK_UPDATE_ICON_CACHE)" \
 		   -a -w $(ICONTHEMEPATH) \
 		   -a -f $(ICONTHEMEPATH)/index.theme; then \
@@ -2756,21 +2712,24 @@ install-icons:
 	   fi \
 	fi
 	if test -d $(ICON32PATH) -a -w $(ICON32PATH) \
-		-a ! -f $(ICON32PATH)/gvim.png; then \
-	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim32x32.png $(ICON32PATH)/gvim.png; \
+		-a ! -f $(ICON32PATH)/$(GVIMNAME).png; then \
+	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim32x32.png $(ICON32PATH)/$(GVIMNAME).png; \
 	fi
 	if test -d $(ICON16PATH) -a -w $(ICON16PATH) \
-		-a ! -f $(ICON16PATH)/gvim.png; then \
-	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim16x16.png $(ICON16PATH)/gvim.png; \
+		-a ! -f $(ICON16PATH)/$(GVIMNAME).png; then \
+	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim16x16.png $(ICON16PATH)/$(GVIMNAME).png; \
 	fi
 	if test -d $(DESKTOPPATH) -a -w $(DESKTOPPATH); then \
 	   if test -f po/vim.desktop -a -f po/gvim.desktop; then \
-		$(INSTALL_DATA) po/vim.desktop po/gvim.desktop \
-			$(DESKTOPPATH); \
+		$(INSTALL_DATA) po/vim.desktop \
+			$(DESKTOPPATH)/$(VIMNAME).desktop; \
+		$(INSTALL_DATA) po/gvim.desktop \
+			$(DESKTOPPATH)/$(GVIMNAME).desktop; \
 	   else \
 		$(INSTALL_DATA) $(SCRIPTSOURCE)/vim.desktop \
-			$(SCRIPTSOURCE)/gvim.desktop \
-			$(DESKTOPPATH); \
+			$(DESKTOPPATH)/$(VIMNAME).desktop; \
+		$(INSTALL_DATA) $(SCRIPTSOURCE)/gvim.desktop \
+			$(DESKTOPPATH)/$(GVIMNAME).desktop; \
 	   fi; \
 	   if test -z "$(DESTDIR)" -a -x "$(UPDATE_DESKTOP_DATABASE)"; then \
 	      $(UPDATE_DESKTOP_DATABASE) -q $(DESKTOPPATH); \
@@ -2801,46 +2760,25 @@ $(DESTDIR)$(exec_prefix) $(DEST_BIN) \
 # Create links from various names to vim.  This is only done when the links
 # (or executables with the same name) don't exist yet.
 installlinks: $(GUI_TARGETS) \
-			$(DEST_BIN)/$(EXTARGET) \
-			$(DEST_BIN)/$(VIEWTARGET) \
 			$(DEST_BIN)/$(RVIMTARGET) \
-			$(DEST_BIN)/$(RVIEWTARGET) \
 			$(INSTALLVIMDIFF)
 
 installglinks: $(DEST_BIN)/$(GVIMTARGET) \
-			$(DEST_BIN)/$(GVIEWTARGET) \
 			$(DEST_BIN)/$(RGVIMTARGET) \
-			$(DEST_BIN)/$(RGVIEWTARGET) \
 			$(DEST_BIN)/$(EVIMTARGET) \
-			$(DEST_BIN)/$(EVIEWTARGET) \
 			$(INSTALLGVIMDIFF)
 
 installvimdiff: $(DEST_BIN)/$(VIMDIFFTARGET)
 installgvimdiff: $(DEST_BIN)/$(GVIMDIFFTARGET)
 
-$(DEST_BIN)/$(EXTARGET): $(DEST_BIN)
-	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(EXTARGET)
-
-$(DEST_BIN)/$(VIEWTARGET): $(DEST_BIN)
-	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(VIEWTARGET)
-
 $(DEST_BIN)/$(GVIMTARGET): $(DEST_BIN)
 	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(GVIMTARGET)
-
-$(DEST_BIN)/$(GVIEWTARGET): $(DEST_BIN)
-	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(GVIEWTARGET)
 
 $(DEST_BIN)/$(RVIMTARGET): $(DEST_BIN)
 	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(RVIMTARGET)
 
-$(DEST_BIN)/$(RVIEWTARGET): $(DEST_BIN)
-	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(RVIEWTARGET)
-
 $(DEST_BIN)/$(RGVIMTARGET): $(DEST_BIN)
 	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(RGVIMTARGET)
-
-$(DEST_BIN)/$(RGVIEWTARGET): $(DEST_BIN)
-	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(RGVIEWTARGET)
 
 $(DEST_BIN)/$(VIMDIFFTARGET): $(DEST_BIN)
 	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(VIMDIFFTARGET)
@@ -2851,16 +2789,12 @@ $(DEST_BIN)/$(GVIMDIFFTARGET): $(DEST_BIN)
 $(DEST_BIN)/$(EVIMTARGET): $(DEST_BIN)
 	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(EVIMTARGET)
 
-$(DEST_BIN)/$(EVIEWTARGET): $(DEST_BIN)
-	cd $(DEST_BIN); ln -sf $(VIMTARGET) $(EVIEWTARGET)
-
 # Create links for the manual pages with various names to vim.	This is only
 # done when the links (or manpages with the same name) don't exist yet.
 
 INSTALLMLARGS = $(VIMNAME) $(VIMDIFFNAME) $(EVIMNAME) \
-		$(EXNAME) $(VIEWNAME) $(RVIMNAME) $(RVIEWNAME) \
-		$(GVIMNAME) $(GVIEWNAME) $(RGVIMNAME) $(RGVIEWNAME) \
-		$(GVIMDIFFNAME) $(EVIEWNAME)
+		$(RVIMNAME) $(GVIMNAME) $(RGVIMNAME) \
+		$(GVIMDIFFNAME)
 
 installmanlinks:
 	-$(SHELL) ./installml.sh install "$(GUI_MAN_TARGETS)" \
@@ -2868,15 +2802,10 @@ installmanlinks:
 
 uninstall: uninstall_runtime
 	-rm -f $(DEST_BIN)/$(VIMTARGET)
-	-rm -f $(DEST_BIN)/vimtutor
-	-rm -f $(DEST_BIN)/gvimtutor
-	-rm -f $(DEST_BIN)/$(EXTARGET) $(DEST_BIN)/$(VIEWTARGET)
-	-rm -f $(DEST_BIN)/$(GVIMTARGET) $(DEST_BIN)/$(GVIEWTARGET)
-	-rm -f $(DEST_BIN)/$(RVIMTARGET) $(DEST_BIN)/$(RVIEWTARGET)
-	-rm -f $(DEST_BIN)/$(RGVIMTARGET) $(DEST_BIN)/$(RGVIEWTARGET)
+	-rm -f $(DEST_BIN)/$(GVIMTARGET) $(DEST_BIN)/$(RVIMTARGET)
+	-rm -f $(DEST_BIN)/$(RGVIMTARGET)
 	-rm -f $(DEST_BIN)/$(VIMDIFFTARGET) $(DEST_BIN)/$(GVIMDIFFTARGET)
-	-rm -f $(DEST_BIN)/$(EVIMTARGET) $(DEST_BIN)/$(EVIEWTARGET)
-	-rm -f $(DEST_BIN)/xxd$(EXEEXT)
+	-rm -f $(DEST_BIN)/$(EVIMTARGET)
 
 # Note: the "rmdir" will fail if any files were added after "make install"
 uninstall_runtime:
@@ -2955,15 +2884,6 @@ uninstall_runtime:
 		$(DEST_MAN_TR_I) $(INSTALLMLARGS)
 	-$(SHELL) ./installml.sh uninstall "$(GUI_MAN_TARGETS)" \
 		$(DEST_MAN_TR_U) $(INSTALLMLARGS)
-	-rm -f $(DEST_MAN)/xxd.1
-	-rm -f $(DEST_MAN_DA)/xxd.1 $(DEST_MAN_DA_I)/xxd.1 $(DEST_MAN_DA_U)/xxd.1
-	-rm -f $(DEST_MAN_DE)/xxd.1 $(DEST_MAN_DE_I)/xxd.1 $(DEST_MAN_DE_U)/xxd.1
-	-rm -f $(DEST_MAN_FR)/xxd.1 $(DEST_MAN_FR_I)/xxd.1 $(DEST_MAN_FR_U)/xxd.1
-	-rm -f $(DEST_MAN_IT)/xxd.1 $(DEST_MAN_IT_I)/xxd.1 $(DEST_MAN_IT_U)/xxd.1
-	-rm -f $(DEST_MAN_JA_U)/xxd.1
-	-rm -f $(DEST_MAN_PL)/xxd.1 $(DEST_MAN_PL_I)/xxd.1 $(DEST_MAN_PL_U)/xxd.1
-	-rm -f $(DEST_MAN_RU)/xxd.1 $(DEST_MAN_RU_U)/xxd.1
-	-rm -f $(DEST_MAN_SV)/xxd.1 $(DEST_MAN_SV_I)/xxd.1 $(DEST_MAN_SV_U)/xxd.1
 	-rm -f $(DEST_HELP)/*.txt $(DEST_HELP)/tags $(DEST_HELP)/*.pl
 	-rm -f $(DEST_HELP)/*.??x $(DEST_HELP)/tags-??
 	-rm -f $(SYS_MENU_FILE) $(SYS_SYNMENU_FILE) $(SYS_DELMENU_FILE)
@@ -2975,8 +2895,9 @@ uninstall_runtime:
 	-rm -f $(SYS_OPTWIN_FILE)
 	-rm -f $(DEST_COL)/*.vim $(DEST_COL)/README.txt
 	-rm -rf $(DEST_COL)/tools
-	-rm -f $(DESKTOPPATH)/vim.desktop $(DESKTOPPATH)/gvim.desktop
-	-rm -f $(ICON16PATH)/gvim.png $(ICON32PATH)/gvim.png $(ICON48PATH)/gvim.png
+	-rm -f $(DESKTOPPATH)/$(VIMNAME).desktop $(DESKTOPPATH)/$(GVIMNAME).desktop
+	-rm -f $(ICON16PATH)/$(GVIMNAME).png $(ICON32PATH)/$(GVIMNAME).png
+	-rm -f $(ICON48PATH)/$(GVIMNAME).png
 	-rm -rf $(DEST_COL)/lists
 	-rm -f $(DEST_SYN)/shared/*.vim $(DEST_SYN)/shared/README.txt
 	-rm -f $(DEST_SYN)/modula2/opt/*.vim
@@ -3110,8 +3031,8 @@ pixmaps:
 
 # Update the synmenu.vim file with the latest Syntax menu.
 # This is only needed when runtime/makemenu.vim was changed.
-menu: ./vim ../runtime/makemenu.vim
-	./vim --clean -X --not-a-term -S ../runtime/makemenu.vim
+menu: ./$(VIMTARGET) ../runtime/makemenu.vim
+	./$(VIMTARGET) --clean -X --not-a-term -S ../runtime/makemenu.vim
 
 # Start configure from scratch
 scrub scratch:
@@ -3851,10 +3772,8 @@ install_haiku_extra: $(DEST_BIN)/$(VIMTARGET) objects/os_haiku.rsrc
 # This solves the problem of them from Tracker.
 #
 HAIKU_GLINKS = 	$(DEST_BIN)/$(GVIMTARGET) \
-				$(DEST_BIN)/$(GVIEWTARGET) \
 				$(DEST_BIN)/$(GVIMDIFFTARGET) \
-				$(DEST_BIN)/$(RGVIMTARGET) \
-				$(DEST_BIN)/$(RGVIEWTARGET)
+				$(DEST_BIN)/$(RGVIMTARGET)
 
 # This rule:
 #		- Replace gvim link with copy of vim binary.
@@ -3875,10 +3794,8 @@ installglinks_haiku: $(HAIKU_GLINKS) install_haiku_extra
 					$(STRIP) $(VIMTARGET).con ; \
 					mv $(VIMTARGET).con $(DEST_BIN)/$(VIMTARGET) ; \
 				fi ;; \
-			$(DEST_BIN)/$(GVIEWTARGET))    printf "%s -R %c%c" $(GVIMTARGET) '$$' '*' >> $$i;; \
 			$(DEST_BIN)/$(GVIMDIFFTARGET)) printf "%s -d %c%c" $(GVIMTARGET) '$$' '*' >> $$i;; \
 			$(DEST_BIN)/$(RGVIMTARGET))    printf "%s -Z %c%c" $(GVIMTARGET) '$$' '*' >> $$i;; \
-			$(DEST_BIN)/$(RGVIEWTARGET))   printf "%s -Z -R %c%c" $(GVIMTARGET) '$$' '*' >> $$i;; \
 			*) printf "%s %c%c" $(GVIMTARGET) '$$' '*' >> $$i;; \
 		esac ; \
 		chmod $(BINMOD) $$i ; \

@@ -54,7 +54,7 @@ all install uninstall tools config configure reconfig proto depend lint types te
 	fi
 
 # Executable used for running the indent tests.
-VIM_FOR_INDENTTEST = ../../src/vim
+VIM_FOR_INDENTTEST = ../../src/viai
 
 indenttest:
 	cd runtime/indent && \
@@ -62,7 +62,7 @@ indenttest:
 		$(MAKE) test VIMPROG="$(VIM_FOR_INDENTTEST)"
 
 # Executable used for running the syntax tests.
-VIM_FOR_SYNTAXTEST = ../../src/vim
+VIM_FOR_SYNTAXTEST = ../../src/viai
 
 # (For local testing only with GNU Make.)
 VIM_SYNTAX_TEST_FILTER =

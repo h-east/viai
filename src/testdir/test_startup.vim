@@ -138,7 +138,7 @@ func Test_help_arg()
   if RunVim([], [], '--help >Xtestout')
     let lines = readfile('Xtestout')
     call assert_true(len(lines) > 20)
-    call assert_match('Vi IMproved', lines[0])
+    call assert_match('Vim Advanced Integrated', lines[0])
 
     " check if  couple of lines are there
     let found = []
@@ -163,7 +163,7 @@ func Test_version_arg()
   if RunVim([], [], '--version >Xtestout')
     let lines = readfile('Xtestout')
     call assert_true(len(lines) > 10)
-    call assert_match('Vi IMproved', lines[0])
+    call assert_match('Vim Advanced Integrated', lines[0])
 
     let idx = indexof(lines, 'v:val =~# "Features included.*:"')
     call assert_true(idx >= 0)
@@ -611,7 +611,7 @@ func Test_invalid_args()
   for opt in ['-K', '--does-not-exist']
     let out = split(system(GetVimCommand() .. ' ' .. opt), "\n")
     call assert_equal(1, v:shell_error)
-    call assert_match('^VIM - Vi IMproved .* (.*)$',              out[0])
+    call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',              out[0])
     call assert_equal('Unknown option argument: "' .. opt .. '"', out[1])
     call assert_equal('More info with: "vim -h"',                 out[2])
   endfor
@@ -619,7 +619,7 @@ func Test_invalid_args()
   for opt in ['-c', '-i', '-s', '-t', '-T', '-u', '-U', '-w', '-W', '--cmd', '--startuptime']
     let out = split(system(GetVimCommand() .. ' '  .. opt), "\n")
     call assert_equal(1, v:shell_error)
-    call assert_match('^VIM - Vi IMproved .* (.*)$',             out[0])
+    call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',             out[0])
     call assert_equal('Argument missing after: "' .. opt .. '"', out[1])
     call assert_equal('More info with: "vim -h"',                out[2])
   endfor
@@ -633,7 +633,7 @@ func Test_invalid_args()
           \    ]
       let out = split(system(GetVimCommand() .. ' '  .. opt), "\n")
       call assert_equal(1, v:shell_error)
-      call assert_match('^VIM - Vi IMproved .* (.*)$',             out[0])
+      call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',             out[0])
       call assert_equal('Argument missing after: "' .. opt .. '"', out[1])
       call assert_equal('More info with: "vim -h"',                out[2])
     endfor
@@ -642,7 +642,7 @@ func Test_invalid_args()
   if has('gui_gtk') && has("xterm_clipboard")
     let out = split(system(GetVimCommand() .. ' --display'), "\n")
     call assert_equal(1, v:shell_error)
-    call assert_match('^VIM - Vi IMproved .* (.*)$',         out[0])
+    call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',         out[0])
     call assert_equal('Argument missing after: "--display"', out[1])
     call assert_equal('More info with: "vim -h"',            out[2])
   endif
@@ -650,20 +650,20 @@ func Test_invalid_args()
   if has('xterm_clipboard')
     let out = split(system(GetVimCommand() .. ' -display'), "\n")
     call assert_equal(1, v:shell_error)
-    call assert_match('^VIM - Vi IMproved .* (.*)$',         out[0])
+    call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',         out[0])
     call assert_equal('Argument missing after: "-display"', out[1])
     call assert_equal('More info with: "vim -h"',            out[2])
   endif
 
   let out = split(system(GetVimCommand() .. ' -ix'), "\n")
   call assert_equal(1, v:shell_error)
-  call assert_match('^VIM - Vi IMproved .* (.*)$',          out[0])
+  call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',          out[0])
   call assert_equal('Garbage after option argument: "-ix"', out[1])
   call assert_equal('More info with: "vim -h"',             out[2])
 
   let out = split(system(GetVimCommand() .. ' - xxx'), "\n")
   call assert_equal(1, v:shell_error)
-  call assert_match('^VIM - Vi IMproved .* (.*)$',    out[0])
+  call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',    out[0])
   call assert_equal('Too many edit arguments: "xxx"', out[1])
   call assert_equal('More info with: "vim -h"',       out[2])
 
@@ -672,7 +672,7 @@ func Test_invalid_args()
     for opt in ['-t', '-q']
       let out = split(system(GetVimCommand() .. repeat(' ' .. opt .. ' foo', 2)), "\n")
       call assert_equal(1, v:shell_error)
-      call assert_match('^VIM - Vi IMproved .* (.*)$',              out[0])
+      call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',              out[0])
       call assert_equal('Too many edit arguments: "' .. opt .. '"', out[1])
       call assert_equal('More info with: "vim -h"',                 out[2])
     endfor
@@ -683,7 +683,7 @@ func Test_invalid_args()
     call assert_equal(1, v:shell_error)
     " FIXME: The error message given by Vim is not ideal in case of repeated
     " -S foo since it does not mention -S.
-    call assert_match('^VIM - Vi IMproved .* (.*)$',                                    out[0])
+    call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',                                    out[0])
     call assert_equal('Too many "+command", "-c command" or "--cmd command" arguments', out[1])
     call assert_equal('More info with: "vim -h"',                                       out[2])
   endfor
@@ -691,14 +691,14 @@ func Test_invalid_args()
   if has('gui_gtk')
     let out = split(system(GetVimCommand() .. ' --socketid'), "\n")
     call assert_equal(1, v:shell_error)
-    call assert_match('^VIM - Vi IMproved .* (.*)$',          out[0])
+    call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',          out[0])
     call assert_equal('Argument missing after: "--socketid"', out[1])
     call assert_equal('More info with: "vim -h"',             out[2])
 
     for opt in ['--socketid x', '--socketid 0xg']
       let out = split(system(GetVimCommand() .. ' ' .. opt), "\n")
       call assert_equal(1, v:shell_error)
-      call assert_match('^VIM - Vi IMproved .* (.*)$',        out[0])
+      call assert_match('^ViAI - Vim Advanced Integrated .* (.*)$',        out[0])
       call assert_equal('Invalid argument for: "--socketid"', out[1])
       call assert_equal('More info with: "vim -h"',           out[2])
     endfor
@@ -817,7 +817,7 @@ func Test_read_stdin()
 endfunc
 
 func Test_progpath()
-  " Tests normally run with "./vim" or "../vim", these must have been expanded
+  " Tests normally run with "./viai" or "../viai", these must have been expanded
   " to a full path.
   if has('unix')
     call assert_equal('/', v:progpath[0])
@@ -826,8 +826,8 @@ func Test_progpath()
     call assert_match('[/\\]', v:progpath[2])
   endif
 
-  " Only expect "vim" to appear in v:progname.
-  call assert_match('vim\c', v:progname)
+  " Only expect "viai" to appear in v:progname.
+  call assert_match('viai\c', v:progname)
 endfunc
 
 func Test_stdin_no_newline()
@@ -846,7 +846,7 @@ func Test_stdin_no_newline()
   call term_sendkeys(buf, "echo hello > temp.txt\<CR>")
   call TermWait(buf, 200)
 
-  call term_sendkeys(buf, "bash -c '../vim --not-a-term -u NONE -c \":q!\" -' < temp.txt\<CR>")
+  call term_sendkeys(buf, "bash -c '../viai --not-a-term -u NONE -c \":q!\" -' < temp.txt\<CR>")
   call TermWait(buf, 200)
 
   " Capture terminal output
@@ -858,7 +858,7 @@ func Test_stdin_no_newline()
   " Find the command line in output
   let cmd_line = -1
   for i in range(len(lines))
-    if lines[i] =~ '.*vim.*--not-a-term.*'
+    if lines[i] =~ '.*viai.*--not-a-term.*'
       let cmd_line = i
       break
     endif
@@ -979,7 +979,7 @@ func Test_v_argv()
 
   let out = system(GetVimCommand() . ' -es -V1 -X arg1 --cmd "echo v:argv" --cmd q')
   let list = out->split("', '")
-  call assert_match('vim', list[0])
+  call assert_match('viai', list[0])
   let idx = index(list, 'arg1')
   call assert_true(idx > 2)
   call assert_equal(['arg1', '--cmd', 'echo v:argv', '--cmd', 'q'']'], list[idx:])
@@ -1336,9 +1336,9 @@ func Test_h_arg()
   " Can't catch the output of gvim.
   CheckNotGui
   let l = systemlist(GetVimProg() .. ' -h')
-  call assert_match('^VIM - Vi IMproved', l[0])
+  call assert_match('^ViAI - Vim Advanced Integrated', l[0])
   let l = systemlist(GetVimProg() .. ' -?')
-  call assert_match('^VIM - Vi IMproved', l[0])
+  call assert_match('^ViAI - Vim Advanced Integrated', l[0])
 endfunc
 
 " Test for the "-F" (farsi) argument
@@ -1419,14 +1419,23 @@ func Test_progname()
   \ 'rview':    ['n',  '0', '0', '1', '10000', 'line    1: E145: Shell commands and some functionality not allowed in rvim'],
   \ 'rgview':   ['n',  '0', '0', '1', '10000', 'line    1: E145: Shell commands and some functionality not allowed in rvim'],
   \ 'vimdiff':  ['n',  '0', '1', '0',   '200', ''],
-  \ 'gvimdiff': ['n',  '0', '1', '0',   '200', '']}
+  \ 'gvimdiff': ['n',  '0', '1', '0',   '200', ''],
+  \ 'viai':     ['n',  '0', '0', '0',   '200', ''],
+  \ 'gviai':    ['n',  '0', '0', '0',   '200', ''],
+  \ 'eviai':    ['n',  '1', '0', '0',   '200', ''],
+  \ 'rviai':    ['n',  '0', '0', '0',   '200', 'line    1: E145: Shell commands and some functionality not allowed in rvim'],
+  \ 'rgviai':   ['n',  '0', '0', '0',   '200', 'line    1: E145: Shell commands and some functionality not allowed in rvim'],
+  \ 'viaidiff': ['n',  '0', '1', '0',   '200', ''],
+  \ 'gviaidiff': ['n', '0', '1', '0',   '200', '']}
 
   let prognames = ['vim', 'gvim', 'ex', 'exim', 'view', 'gview',
   \                'evim', 'eview', 'rvim', 'rgvim', 'rview', 'rgview',
-  \                'vimdiff', 'gvimdiff']
+  \                'vimdiff', 'gvimdiff',
+  \                'viai', 'gviai', 'eviai', 'rviai', 'rgviai',
+  \                'viaidiff', 'gviaidiff']
 
   for progname in prognames
-    let run_with_gui = (progname =~# 'g') || (has('gui') && (progname ==# 'evim' || progname ==# 'eview'))
+    let run_with_gui = (progname =~# 'g') || (has('gui') && (progname ==# 'evim' || progname ==# 'eview' || progname ==# 'eviai'))
 
     if empty($DISPLAY) && run_with_gui
       " Can't run gvim, gview  (etc.) if $DISPLAY is not setup.

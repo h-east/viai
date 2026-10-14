@@ -6,7 +6,7 @@ func Test_version()
   let v2 = execute('version')
   call assert_equal(v1, v2)
 
-  call assert_match("^\n\nVIM - Vi IMproved .*", v1)
+  call assert_match("^\n\nViAI - Vim Advanced Integrated .*", v1)
 endfunc
 
 func Test_version_redirect()
@@ -45,6 +45,25 @@ func Test_features_sorted()
 
   call assert_true(len(names) > 100)
   call assert_equal(sort(copy(names), 'i'), names)
+endfunc
+
+func Test_version_viai()
+  let v = execute('version')
+  call assert_match("\nViAI is a modified version of Vim \\d\\+\\.\\d\\+\n", v)
+  call assert_match("\nIncluded Vim patches: 1-", v)
+endfunc
+
+func Test_has_viai()
+  call assert_true(has('viai'))
+  call assert_true(has('viai-1.0'))
+  call assert_true(has('viai-1.0.0'))
+  call assert_true(has('viai-0.9'))
+  call assert_true(has('viai-0.9.9999'))
+  call assert_false(has('viai-1.0.9999'))
+  call assert_false(has('viai-1.1'))
+  call assert_false(has('viai-2.0'))
+  call assert_false(has('viai-1'))
+  call assert_false(has('viai-'))
 endfunc
 
 " vim: shiftwidth=2 sts=2 expandtab

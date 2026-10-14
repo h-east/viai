@@ -2,7 +2,7 @@
 # installman.sh --- install or uninstall manpages for Vim
 #
 # arguments:
-# 1  what: "install", "uninstall" or "xxd"
+# 1  what: "install" or "uninstall"
 # 2  target directory			   e.g., "/usr/local/man/it/man1"
 # 3  language addition			   e.g., "" or "-it"
 # 4  vim location as used in manual pages  e.g., "/usr/local/share/vim"
@@ -36,7 +36,7 @@ printsubloc=$scriptloc/print
 synsubloc=$scriptloc/syntax
 tutorsubloc=$scriptloc/tutor
 
-if test $what = "install" -o $what = "xxd"; then
+if test $what = "install"; then
    if test ! -d $destdir; then
       echo creating $destdir
       /bin/sh install-sh -c -d $destdir
@@ -69,16 +69,6 @@ if test $what = "install"; then
       chmod $manmod $destdir/$exename.1
    fi
 
-   # vimtutor.1
-   if test -r $helpsource/vimtutor$langadd.1; then
-      echo installing $destdir/$exename""tutor.1
-      LC_ALL=C sed -e s+/usr/local/lib/vim+$vimloc+ \
-	      -e s+'/usr/local/share/vim/vim??'+$vimloc+ \
-	      -e s+$vimloc/tutor+$tutorsubloc+ \
-	      $helpsource/vimtutor$langadd.1 > $destdir/$exename""tutor.1
-      chmod $manmod $destdir/$exename""tutor.1
-   fi
-
    # vimdiff.1
    if test -r $helpsource/vimdiff$langadd.1; then
       echo installing $destdir/$vimdiffname.1
@@ -103,10 +93,6 @@ if test $what = "uninstall"; then
       echo deleting $destdir/$exename.1
       rm -f $destdir/$exename.1
    fi
-   if test -r $destdir/$exename""tutor.1; then
-      echo deleting $destdir/$exename""tutor.1
-      rm -f $destdir/$exename""tutor.1
-   fi
    if test -r $destdir/$vimdiffname.1; then
       echo deleting $destdir/$vimdiffname.1
       rm -f $destdir/$vimdiffname.1
@@ -115,12 +101,6 @@ if test $what = "uninstall"; then
       echo deleting $destdir/$evimname.1
       rm -f $destdir/$evimname.1
    fi
-fi
-
-if test $what = "xxd" -a -r "$helpsource/xxd${langadd}.1"; then
-   echo installing $destdir/xxd.1
-   cp $helpsource/xxd$langadd.1 $destdir/xxd.1
-   chmod $manmod $destdir/xxd.1
 fi
 
 exit $errstatus

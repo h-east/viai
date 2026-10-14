@@ -68,7 +68,7 @@ init_longVersion(void)
     char *msg = _("%s (%s, compiled %s)");
     size_t len = strlen(msg)
 	+ STRLEN_LITERAL(VIM_VERSION_LONG_ONLY)
-	+ STRLEN_LITERAL(VIM_VERSION_DATE_ONLY)
+	+ STRLEN_LITERAL(VIAI_VERSION_DATE_ONLY)
 	+ strlen(date_time);
 
     longVersion = alloc(len);
@@ -76,7 +76,7 @@ init_longVersion(void)
 	longVersion = VIM_VERSION_LONG;
     else
 	vim_snprintf(longVersion, len, msg,
-		VIM_VERSION_LONG_ONLY, VIM_VERSION_DATE_ONLY, date_time);
+		VIM_VERSION_LONG_ONLY, VIAI_VERSION_DATE_ONLY, date_time);
 }
 # endif
 #else
@@ -739,6 +739,13 @@ static char *(features[]) =
 	"-xterm_save",
 #endif
 	NULL
+};
+
+// Patches made for ViAI itself.  The list below contains the Vim patches.
+static int viai_included_patches[] =
+{   /* Add new patch number below this line */
+/**/
+    0
 };
 
 static int included_patches[] =
@@ -3139,31 +3146,58 @@ highest_patch(void)
     return included_patches[0];
 }
 
+    int
+highest_viai_patch(void)
+{
+    return viai_included_patches[0];
+}
+
 #if defined(FEAT_EVAL)
 /*
- * Return TRUE if patch "n" has been included.
+ * Return TRUE if patch "n" is in "patches", which has "len" entries sorted
+ * from high to low.
  */
-    int
-has_patch(int n)
+    static int
+patch_in_list(int *patches, int len, int n)
 {
     int		h, m, l;
 
     // Perform a binary search.
     l = 0;
-    h = (int)ARRAY_LENGTH(included_patches) - 1;
+    h = len - 1;
     for (;;)
     {
 	m = (l + h) / 2;
-	if (included_patches[m] == n)
+	if (patches[m] == n)
 	    return TRUE;
 	if (l == h)
 	    break;
-	if (included_patches[m] < n)
+	if (patches[m] < n)
 	    h = m;
 	else
 	    l = m + 1;
     }
     return FALSE;
+}
+
+/*
+ * Return TRUE if Vim patch "n" has been included.
+ */
+    int
+has_patch(int n)
+{
+    return patch_in_list(included_patches,
+				    (int)ARRAY_LENGTH(included_patches), n);
+}
+
+/*
+ * Return TRUE if ViAI patch "n" has been included.
+ */
+    int
+has_viai_patch(int n)
+{
+    return patch_in_list(viai_included_patches,
+			       (int)ARRAY_LENGTH(viai_included_patches), n);
 }
 #endif
 
@@ -3309,11 +3343,46 @@ list_in_columns(char_u **items, int size, int current)
     }
 }
 
+/*
+ * Print "title" and the patch numbers in "patches", which has "len" entries
+ * sorted from high to low and ends in zero.
+ * Print a range when patches are consecutive: "1-10, 12, 15-40, 42-45"
+ */
+    static void
+list_patches(char *title, int *patches, int len)
+{
+    int		i;
+    int		first = -1;
+    char	*s = "";
+
+    if (patches[0] != 0)
+    {
+	msg_puts(title);
+	i = len - 1;
+	while (--i >= 0)
+	{
+	    if (first < 0)
+		first = patches[i];
+	    if (i == 0 || patches[i - 1] != patches[i] + 1)
+	    {
+		msg_puts(s);
+		s = ", ";
+		msg_outnum((long)first);
+		if (first != patches[i])
+		{
+		    msg_puts("-");
+		    msg_outnum((long)patches[i]);
+		}
+		first = -1;
+	    }
+	}
+    }
+}
+
     void
 list_version(void)
 {
     int		i;
-    int		first;
     char	*s = "";
 
     /*
@@ -3322,7 +3391,8 @@ list_version(void)
      */
     init_longVersion();
     msg(longVersion);
-    msg_puts(_("\nViAI is a modified version of Vim"));
+    msg_puts(_("\nViAI is a modified version of Vim "));
+    msg_puts(VIM_VERSION_SHORT);
 #ifdef MSWIN
 # ifdef FEAT_GUI_MSWIN
 #  ifdef VIMDLL
@@ -3392,31 +3462,10 @@ list_version(void)
 
 #endif
 
-    // Print the list of patch numbers if there is at least one.
-    // Print a range when patches are consecutive: "1-10, 12, 15-40, 42-45"
-    if (included_patches[0] != 0)
-    {
-	msg_puts(_("\nIncluded patches: "));
-	first = -1;
-	i = (int)ARRAY_LENGTH(included_patches) - 1;
-	while (--i >= 0)
-	{
-	    if (first < 0)
-		first = included_patches[i];
-	    if (i == 0 || included_patches[i - 1] != included_patches[i] + 1)
-	    {
-		msg_puts(s);
-		s = ", ";
-		msg_outnum((long)first);
-		if (first != included_patches[i])
-		{
-		    msg_puts("-");
-		    msg_outnum((long)included_patches[i]);
-		}
-		first = -1;
-	    }
-	}
-    }
+    list_patches(_("\nIncluded patches: "), viai_included_patches,
+			       (int)ARRAY_LENGTH(viai_included_patches));
+    list_patches(_("\nIncluded Vim patches: "), included_patches,
+				    (int)ARRAY_LENGTH(included_patches));
 
     // Print the list of extra patch descriptions if there is at least one.
     if (extra_patches[0] != NULL)
@@ -3622,17 +3671,18 @@ intro_message(
     int		blanklines;
     int		sponsor;
     char	*p;
+    char_u	modvers[200];
     static char	*(lines[]) =
     {
-	N_("VIM - Vi IMproved"),
+	N_("ViAI - Vim Advanced Integrated"),
 	"",
 	N_("version "),
-	N_("by Bram Moolenaar et al."),
-	N_("ViAI is a modified version of Vim"),
+	// "%s" is the Vim version.
+	N_("a modified version of Vim %s"),
 #ifdef MODIFIED_BY
 	" ",
 #endif
-	N_("Vim is open source and freely distributable"),
+	N_("ViAI is open source and freely distributable"),
 	"",
 	N_("Help poor children in Uganda!"),
 	N_("type  :help Kuwasha<Enter>    for information "),
@@ -3649,7 +3699,6 @@ intro_message(
 #ifdef FEAT_GUI
     static char	*(gui_lines[]) =
     {
-	NULL,
 	NULL,
 	NULL,
 	NULL,
@@ -3714,7 +3763,13 @@ intro_message(
 		else if (strstr(p, "Orphans") != NULL)
 		    p = N_("menu  Help->Sponsor           for information    ");
 	    }
-	    if (*p != NUL)
+	    if (i == 3)
+	    {
+		vim_snprintf((char *)modvers, sizeof(modvers), _(p),
+								mediumVersion);
+		do_intro_line(row, modvers, FALSE, 0);
+	    }
+	    else if (*p != NUL)
 		do_intro_line(row, (char_u *)_(p), i == 2, 0);
 	    ++row;
 	}
@@ -3754,20 +3809,12 @@ do_intro_line(
     col = vim_strsize(mesg);
     if (add_version)
     {
-	STRCPY(vers, mediumVersion);
-	if (highest_patch())
-	{
-	    // Check for 9.9x or 9.9xx, alpha/beta version
-	    if (SAFE_isalpha((int)vers[3]))
-	    {
-		int len = (SAFE_isalpha((int)vers[4])) ? 5 : 4;
-		sprintf((char *)vers + len, ".%d%s", highest_patch(),
-							 mediumVersion + len);
-	    }
-	    else
-		sprintf((char *)vers + 3, ".%d", highest_patch());
-	}
-	col += (int)STRLEN(vers);
+	if (highest_viai_patch())
+	    col += (int)vim_snprintf_safelen((char *)vers, sizeof(vers),
+		    "%s.%04d", VIAI_VERSION_SHORT, highest_viai_patch());
+	else
+	    col += (int)vim_snprintf_safelen((char *)vers, sizeof(vers),
+		    "%s", VIAI_VERSION_SHORT);
     }
     col = (topframe->fr_width - col) / 2;
     if (col < 0)

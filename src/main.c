@@ -2047,12 +2047,13 @@ get_number_arg(
 }
 
 /*
- * Check for: [r][e][g][vi|vim|view][diff][ex[im]]  (sort of)
+ * Check for: [r][e][g][vi|vim|viai|view][diff][ex[im]]  (sort of)
  * If the executable name starts with "r" we disable shell commands.
  * If the next character is "e" we run in Easy mode.
  * If the next character is "g" we run the GUI version.
  * If the next characters are "view" we start in readonly mode.
- * If the next characters are "diff" or "vimdiff" we start in diff mode.
+ * If the next characters are "diff", "vimdiff" or "viaidiff" we start in diff
+ * mode.
  * If the next characters are "ex" we start in Ex mode.  If it's followed
  * by "im" use improved Ex mode.
  */
@@ -2114,10 +2115,12 @@ parse_command_name(mparm_T *parmp)
 	p_uc = 10000;			// don't update very often
 	initstr += 4;
     }
+    else if (STRNICMP(initstr, "viai", 4) == 0)
+	initstr += 4;
     else if (STRNICMP(initstr, "vim", 3) == 0)
 	initstr += 3;
 
-    // Catch "[r][g]vimdiff" and "[r][g]viewdiff".
+    // Catch "[r][g]vimdiff", "[r][g]viaidiff" and "[r][g]viewdiff".
     if (STRICMP(initstr, "diff") == 0)
     {
 # ifdef FEAT_DIFF

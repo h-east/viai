@@ -5,7 +5,7 @@
 
 # Override this if needed, the default assumes Vim was built in the src dir.
 #VIMPROG = vim
-VIMPROG = ../../src/vim
+VIMPROG = ../../src/viai
 
 # "runtime" relative to "runtime/syntax/testdir"
 VIMRUNTIME = ../..

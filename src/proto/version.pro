@@ -1,7 +1,9 @@
 // version.c
 void init_longVersion(void);
 int highest_patch(void);
+int highest_viai_patch(void);
 int has_patch(int n);
+int has_viai_patch(int n);
 void ex_version(exarg_T *eap);
 void list_in_columns(char_u **items, int size, int current);
 void list_version(void);

@@ -2,24 +2,7 @@
 # Edit the src/po/gvim.desktop.in file instead.
 [Desktop Entry]
 # Translators: This is the Application Name used in the GVim desktop file
-Name[ca]=GVim
-Name[de]=GVim
-Name[eo]=GVim
-Name[es]=GVim
-Name[fi]=GVim
-Name[fr]=GVim
-Name[ga]=GVim
-Name[hy]=ԳՎիմ
-Name[it]=GVim
-Name[ja]=GVim
-Name[ru]=gVim
-Name[sr]=GVim
-Name[sv]=GVim
-Name[ta]=சிவிம்
-Name[tr]=GVim
-Name[uk]=GVim
-Name[zh_CN]=GVim
-Name=GVim
+Name=GViAI
 # Translators: This is the Generic Application Name used in the Vim desktop file
 GenericName[ca]=Editor de text
 GenericName[de]=Texteditor
@@ -115,8 +98,8 @@ Comment[tk]=Metin faýllary editle
 Comment[vi]=Soạn thảo tập tin văn bản
 Comment[wa]=Asspougnî des fitcs tecses
 Comment[zh_TW]=編輯文字檔
-TryExec=gvim
-Exec=gvim -f %F
+TryExec=gviai
+Exec=gviai -f %F
 Terminal=false
 Type=Application
 # Translators: Search terms to find this application. Do NOT change the semicolons! The list MUST also end with a semicolon!
@@ -139,7 +122,7 @@ Keywords[uk]=текст;редактор;
 Keywords[zh_CN]=Text;editor;文本;编辑器;
 Keywords=Text;editor;
 # Translators: This is the Icon file name. Do NOT translate
-Icon=gvim
+Icon=gviai
 Categories=Utility;TextEditor;
 StartupNotify=true
 MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
