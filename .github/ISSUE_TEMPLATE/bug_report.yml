@@ -1,34 +1,30 @@
 ---
 name: Bug report
-description: Create a report to help us improve Vim.
+description: Create a report to help us improve ViAI.
 labels: [bug]
 
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting issues of Vim!
+        Thanks for reporting issues of ViAI!
 
-        If you want to report a security issue, instead of reporting it here publicly,
-        please disclose it privately via mail to vim-security@googlegroups.com.
-        (It's a private list read only by the maintainers,
-        but anybody can post, after moderation.)
+        If you want to report a security issue, do not report it here publicly,
+        see SECURITY.md.
 
-        If you find a problem with syntax, indent and other runtime files, **please
-        first try to contact the maintainer directly**.
-        Look in the header of the file for the name, email address, github handle and/or
-        upstream repository. You may also check the MAINTAINERS file.
-        If the maintainer **does not respond**, open an issue here.
+        Problems with syntax, indent and other runtime files can be reported here.
+        When ViAI has not changed the file, you may be asked to report the problem
+        to its maintainer or to Vim.
 
         To make it easier for us to help you please enter detailed information below.
   - type: textarea
     attributes:
       label: Steps to reproduce
       placeholder: |
-        1. 
-        2. 
-        3. 
-        4. 
+        1.
+        2.
+        3.
+        4.
     validations:
       required: true
   - type: textarea
@@ -39,9 +35,22 @@ body:
       required: true
   - type: input
     attributes:
-      label: Version of Vim
+      label: Version of ViAI
       description: >
-        Including patch level, use ":version" to see it [e.g. 8.2.1234]
+        Including the patch levels of ViAI and Vim, use ":version" to see them
+        [e.g. 1.0.0003, Vim 9.2.1186]
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Does it also happen in Vim?
+      description: >
+        If it does, please report it to Vim as well:
+        https://github.com/vim/vim/issues
+      options:
+        - "Yes"
+        - "No"
+        - "Not checked"
     validations:
       required: true
   - type: textarea

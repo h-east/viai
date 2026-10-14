@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an enhancement for Vim
+about: Suggest an enhancement for ViAI
 title: ''
 labels: enhancement
 
@@ -10,7 +10,7 @@ _Instructions: Replace the template text and remove irrelevant text (including t
 
 **Is your feature request about something that is currently impossible or hard to do? Please describe the problem.**
 A clear and concise description of what is hard to do. Ex. It is difficult to [...] when [...]
-(If it is related to runtime files, please check their header for where to discuss enhancements.)
+(If it is related to a runtime file that ViAI has not changed, you may be asked to discuss it with its maintainer or with Vim.)
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.

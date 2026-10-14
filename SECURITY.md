@@ -2,12 +2,13 @@
 
 ## Reporting a vulnerability
 
-If you want to report a security issue, please privately disclose the issue either via:
-- The vim-security mailing list: vim-security@googlegroups.com  
-  This is a private list, read only by the maintainers, but anybody can post.
-- [GitHub Security Advisories](https://github.com/vim/vim/security/advisories/new)
+If you want to report a security issue, please privately disclose it with
+"Report a vulnerability" on the Security tab of this repository.
 
 **Please don't publicly disclose the issue until it has been addressed by us.**
+
+If the issue also exists in Vim, please report it to Vim as well, see
+[Vim's security policy](https://github.com/vim/vim/blob/master/SECURITY.md).
 
 ## Guidelines for reporting
 - Clearly explain **why** the behaviour is a security issue, not just that a bug exists.
