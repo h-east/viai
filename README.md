@@ -104,11 +104,14 @@ encouraged to make a donation to help orphans in Uganda.  Please read the file
 [`runtime/doc/uganda.txt`](./runtime/doc/uganda.txt)
 for details (do `:help uganda` inside Vim).
 
-Summary of the license: There are no restrictions on using or distributing an
-unmodified copy of Vim.  Parts of Vim may also be distributed, but the license
-text must always be included.  For modified versions, a few restrictions apply.
-The license is GPL compatible, you may compile Vim with GPL libraries and
-distribute it.
+ViAI is based on [Vim](https://github.com/vim/vim).
+
+Changes made in ViAI after the initial import are licensed under the Apache
+License 2.0, see [`LICENSE-APACHE`](./LICENSE-APACHE).
+
+Code imported from Vim is licensed under the Vim license, see
+[`LICENSE`](./LICENSE).  This applies to the initial import commit and to
+every commit whose subject starts with `vim-patch:`.
 
 ## Sponsoring
 

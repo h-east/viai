@@ -774,6 +774,7 @@ RT_ALL =	\
 		README.md \
 		README_VIM9.md \
 		LICENSE \
+		LICENSE-APACHE \
 		CONTRIBUTING.md \
 		runtime/bugreport.vim \
 		runtime/doc/*.awk \

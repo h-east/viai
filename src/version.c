@@ -3322,6 +3322,7 @@ list_version(void)
      */
     init_longVersion();
     msg(longVersion);
+    msg_puts(_("\nViAI is a modified version of Vim"));
 #ifdef MSWIN
 # ifdef FEAT_GUI_MSWIN
 #  ifdef VIMDLL
@@ -3627,6 +3628,7 @@ intro_message(
 	"",
 	N_("version "),
 	N_("by Bram Moolenaar et al."),
+	N_("ViAI is a modified version of Vim"),
 #ifdef MODIFIED_BY
 	" ",
 #endif
@@ -3647,6 +3649,7 @@ intro_message(
 #ifdef FEAT_GUI
     static char	*(gui_lines[]) =
     {
+	NULL,
 	NULL,
 	NULL,
 	NULL,
