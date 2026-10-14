@@ -157,33 +157,51 @@ func Test_viai_config_viminfo()
   call assert_equal([], s:RunWithVimrc(lines))
 endfunc
 
-" $VIM and $VIMRUNTIME are not passed to a program in a terminal window.
+" $VIM and $VIMRUNTIME set by ViAI itself are not passed to a program in a
+" terminal window.
 func Test_viai_terminal_vim_env()
   CheckFeature terminal
   CheckUnix
+  " After ":unlet $VIM" ViAI sets $VIM itself.  $VIMRUNTIME comes from the
+  " environment, see RUN_VIMTEST in the Makefile.
+  let save_vim = $VIM
+  unlet $VIM
   call assert_notequal('', $VIM)
   call assert_notequal('', $VIMRUNTIME)
 
   let cmd = ['sh', '-c',
         \ 'echo "VIM=${VIM-unset} VIMRUNTIME=${VIMRUNTIME-unset}"']
   let buf = term_start(cmd)
-  call WaitForAssert({-> assert_equal('VIM=unset VIMRUNTIME=unset',
+  call WaitForAssert({-> assert_equal('VIM=unset VIMRUNTIME=' .. $VIMRUNTIME,
         \ term_getline(buf, 1))})
   exe buf .. 'bwipe!'
 
   " Values given with the "env" option are passed.
-  let buf = term_start(cmd, #{env: #{VIMRUNTIME: 'given'}})
-  call WaitForAssert({-> assert_equal('VIM=unset VIMRUNTIME=given',
+  let buf = term_start(cmd, #{env: #{VIM: 'given'}})
+  call WaitForAssert({-> assert_equal('VIM=given VIMRUNTIME=' .. $VIMRUNTIME,
         \ term_getline(buf, 1))})
   exe buf .. 'bwipe!'
 
-  " Other child processes still get them.
-  call assert_equal($VIMRUNTIME, trim(system('echo "$VIMRUNTIME"')))
+  " Other child processes get $VIM.
+  call assert_equal($VIM, trim(system('echo "$VIM"')))
+
+  " A value set with :let is passed.
+  let $VIM = 'let'
+  let buf = term_start(cmd)
+  call WaitForAssert({-> assert_equal('VIM=let VIMRUNTIME=' .. $VIMRUNTIME,
+        \ term_getline(buf, 1))})
+  exe buf .. 'bwipe!'
+  let $VIM = save_vim
 endfunc
 
 func Test_viai_terminal_vim_env_mswin()
   CheckFeature terminal
   CheckMSWindows
+  " After ":unlet" ViAI sets $VIM and $VIMRUNTIME itself.
+  let save_vim = $VIM
+  let save_vimruntime = $VIMRUNTIME
+  unlet $VIM $VIMRUNTIME
+  call assert_notequal('', $VIM)
   call assert_notequal('', $VIMRUNTIME)
 
   " cmd.exe leaves the name of an unset variable as it is.
@@ -197,6 +215,14 @@ func Test_viai_terminal_vim_env_mswin()
   call WaitForAssert({-> assert_match('VIM=%VIM% VIMRUNTIME=given',
         \ term_getline(buf, 1))})
   exe buf .. 'bwipe!'
+
+  let $VIM = 'let'
+  let buf = term_start(cmd)
+  call WaitForAssert({-> assert_match('VIM=let VIMRUNTIME=%VIMRUNTIME%',
+        \ term_getline(buf, 1))})
+  exe buf .. 'bwipe!'
+  let $VIM = save_vim
+  let $VIMRUNTIME = save_vimruntime
 endfunc
 
 " vim: shiftwidth=2 sts=2 expandtab

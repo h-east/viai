@@ -5624,11 +5624,11 @@ gui_mch_do_spawn(char_u *arg)
     p = wcsrchr(name, L'\\');
     if (p == NULL)
 	goto error;
-    // Replace the executable name from vim(d).exe to gvim(d).exe.
+    // Replace the executable name from viai(d).exe to gviai(d).exe.
 # ifdef DEBUG
-    wcscpy(p + 1, L"gvimd.exe");
+    wcscpy(p + 1, L"gviaid.exe");
 # else
-    wcscpy(p + 1, L"gvim.exe");
+    wcscpy(p + 1, L"gviai.exe");
 # endif
 
 # if defined(FEAT_SESSION) && defined(EXPERIMENTAL_GUI_CMD)

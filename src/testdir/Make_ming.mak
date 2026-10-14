@@ -15,7 +15,7 @@ MV = move /y
 CP = copy /y
 CAT = type
 
-VIMPROG = ..\\vim
+VIMPROG = ..\\viai
 
 default: nongui
 

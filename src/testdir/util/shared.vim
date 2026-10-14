@@ -296,13 +296,13 @@ endfunc
 " directory.
 func s:GetJustBuildVimExe()
   if has("win32")
-    if !filereadable('..\vim.exe') && filereadable('..\vimd.exe')
+    if !filereadable('..\viai.exe') && filereadable('..\viaid.exe')
       " looks like the debug executable was intentionally build, so use it
-      return '..\vimd.exe'
+      return '..\viaid.exe'
     endif
-    return '..\vim.exe'
+    return '..\viai.exe'
   endif
-  return '../vim'
+  return '../viai'
 endfunc
 
 " Get $VIMPROG to run the Vim executable.

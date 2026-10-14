@@ -29,6 +29,8 @@ src/types.vim
 *.RES
 vim*.dll
 vim*.lib
+viai*.dll
+viai*.lib
 src/dobj*/pathdef.c
 src/gobj*/pathdef.c
 src/obj*/pathdef.c
@@ -36,6 +38,7 @@ src/Obj*/pathdef.c
 gvimext.dll
 gvimext.lib
 gvim.lib
+gviai.lib
 runtime/doc/uganda.nsis.txt
 nsis/icons/*
 /vim90/

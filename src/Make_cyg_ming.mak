@@ -11,7 +11,7 @@
 # Tested on Win32 NT 4 and Win95.
 #
 # To make everything, just 'make -f Make_ming.mak'.
-# To make just e.g. gvim.exe, 'make -f Make_ming.mak gvim.exe'.
+# To make just e.g. gviai.exe, 'make -f Make_ming.mak gviai.exe'.
 # After a run, you can 'make -f Make_ming.mak clean' to clean up.
 #
 # NOTE: Sometimes 'GNU Make' will stop after building vimrun.exe -- I think
@@ -59,11 +59,11 @@ COVERAGE=no
 # Set to SIZE for size, SPEED for speed, MAXSPEED for maximum optimization.
 OPTIMIZE=MAXSPEED
 
-# Set to yes to make gvim, no for vim.
+# Set to yes to make gviai, no for viai.
 GUI=yes
 
 # Set to yes to enable the DLL support (EXPERIMENTAL).
-# Creates vim{32,64}.dll, and stub gvim.exe and vim.exe.
+# Creates viai{32,64}.dll, and stub gviai.exe and viai.exe.
 # "GUI" should be also set to "yes".
 #VIMDLL=yes
 
@@ -1047,12 +1047,12 @@ endif
 LFLAGS += -municode
 
 ifeq ($(VIMDLL),yes)
-VIMEXE := vim$(DEBUG_SUFFIX).exe
-GVIMEXE := gvim$(DEBUG_SUFFIX).exe
+VIMEXE := viai$(DEBUG_SUFFIX).exe
+GVIMEXE := gviai$(DEBUG_SUFFIX).exe
  ifeq ($(ARCH),x86-64)
-VIMDLLBASE := vim64$(DEBUG_SUFFIX)
+VIMDLLBASE := viai64$(DEBUG_SUFFIX)
  else
-VIMDLLBASE := vim32$(DEBUG_SUFFIX)
+VIMDLLBASE := viai32$(DEBUG_SUFFIX)
  endif
 TARGET = $(VIMDLLBASE).dll
 LFLAGS += -shared
@@ -1071,7 +1071,7 @@ OBJ += $(GUIOBJ) $(CUIOBJ)
 OUTDIR = dobj$(DEBUG_SUFFIX)$(MZSCHEME_SUFFIX)$(ARCH)
 MAIN_TARGET = $(GVIMEXE) $(VIMEXE) $(VIMDLLBASE).dll
 else ifeq ($(GUI),yes)
-TARGET := gvim$(DEBUG_SUFFIX).exe
+TARGET := gviai$(DEBUG_SUFFIX).exe
 DEFINES += $(DEF_GUI)
 OBJ += $(GUIOBJ)
 LFLAGS += -mwindows
@@ -1079,7 +1079,7 @@ OUTDIR = gobj$(DEBUG_SUFFIX)$(MZSCHEME_SUFFIX)$(ARCH)
 MAIN_TARGET = $(TARGET)
 else
 OBJ += $(CUIOBJ)
-TARGET := vim$(DEBUG_SUFFIX).exe
+TARGET := viai$(DEBUG_SUFFIX).exe
 OUTDIR = obj$(DEBUG_SUFFIX)$(MZSCHEME_SUFFIX)$(ARCH)
 MAIN_TARGET = $(TARGET)
 endif
@@ -1223,12 +1223,12 @@ $(TARGET): $(OBJ)
 endif
 
 upx: exes
-	upx gvim.exe
-	upx vim.exe
+	upx gviai.exe
+	upx viai.exe
 
 mpress: exes
-	mpress gvim.exe
-	mpress vim.exe
+	mpress gviai.exe
+	mpress viai.exe
 
 xxd/xxd.exe: xxd/xxd.c
 	$(MAKE) -C xxd -f Make_ming.mak CC='$(CC)'

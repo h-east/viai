@@ -5991,9 +5991,11 @@ win32_build_env(dict_T *env, garray_T *gap, int is_terminal)
 	    size_t	len = wcslen(p);
 
 	    // The program in a terminal window may be Vim, which must not use
-	    // the runtime files of ViAI.
-	    if (!(is_terminal && (_wcsnicmp(p, L"VIM=", 4) == 0
-				|| _wcsnicmp(p, L"VIMRUNTIME=", 11) == 0))
+	    // the runtime files of ViAI.  Only remove what ViAI has set itself.
+	    if (!(is_terminal
+			&& ((didset_vim && _wcsnicmp(p, L"VIM=", 4) == 0)
+			    || (didset_vimruntime
+				   && _wcsnicmp(p, L"VIMRUNTIME=", 11) == 0)))
 		    && ga_grow(gap, (int)(len + 1)) == OK)
 	    {
 		mch_memmove((WCHAR*)gap->ga_data + gap->ga_len, p,

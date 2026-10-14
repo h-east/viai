@@ -8,10 +8,10 @@
 !INCLUDE ..\auto\nmake\tools.mak
 
 # Testing may be done with a debug build 
-!IF EXIST(..\\vimd.exe) && !EXIST(..\\vim.exe)
-VIMPROG = ..\\vimd.exe
+!IF EXIST(..\\viaid.exe) && !EXIST(..\\viai.exe)
+VIMPROG = ..\\viaid.exe
 !ELSE
-VIMPROG = ..\\vim.exe
+VIMPROG = ..\\viai.exe
 !ENDIF
 
 DIFF = diff.exe

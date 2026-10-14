@@ -47,10 +47,10 @@
 #
 #
 #	DLL support (EXPERIMENTAL): VIMDLL=yes (default is no)
-#	  Creates vim{32,64}.dll, and stub gvim.exe and vim.exe.
+#	  Creates viai{32,64}.dll, and stub gviai.exe and viai.exe.
 #	  The shared codes between the GUI and the console are built into
 #	  the DLL.  This reduces the total file size and memory usage.
-#	  Also supports `vim -g` and the `:gui` command.
+#	  Also supports `viai -g` and the `:gui` command.
 #
 #	Lua interface:
 #	  LUA=[Path to Lua directory]
@@ -205,7 +205,23 @@ PATCHLEVEL = 0
 ! ENDIF
 !ENDIF
 
+# Read VIAI_PATCHLEVEL from version.c
+!IFNDEF VIAI_PATCHLEVEL
+! IF ![for /F %G in \
+	('findstr /NBLC:"static int viai_included_patches" .\version.c \
+	^| (set /p "_t=" ^& set /a _t+=2 ^)') do \
+	@$(CMD) $(CMDFLAGS) "for /F "skip=%G delims=, " %H in \
+	(.\version.c) do (echo:VIAI_PATCHLEVEL=%H> .\_viaipatchlvl.tmp & exit /b)"]
+!  INCLUDE .\_viaipatchlvl.tmp
+!  IF [$(RM) .\_viaipatchlvl.tmp]
+!  ENDIF
+! ELSE
+VIAI_PATCHLEVEL = 0
+! ENDIF
+!ENDIF
+
 !MESSAGE Vim version: $(MAJOR).$(MINOR).$(PATCHLEVEL)
+!MESSAGE ViAI patchlevel: $(VIAI_PATCHLEVEL)
 
 !IF "$(VIMDLL)" == "yes"
 GUI = yes
@@ -552,7 +568,8 @@ CFLAGS = -c /W3 /GF /nologo -I. -Iproto -DHAVE_PATHDEF -DWIN32 -DHAVE_STDINT_H \
 	$(DEFINES) $(CI_CFLAGS) -DWINVER=$(WINVER) -D_WIN32_WINNT=$(WINVER) \
 	/utf-8
 
-RCFLAGS = -DVIM_VERSION_PATCHLEVEL=$(PATCHLEVEL)
+RCFLAGS = -DVIM_VERSION_PATCHLEVEL=$(PATCHLEVEL) \
+	-DVIAI_VERSION_PATCHLEVEL=$(VIAI_PATCHLEVEL)
 
 #>>>>> end of choices
 ###########################################################################
@@ -615,7 +632,7 @@ CPUARG = /arch:$(CPUNR)
 MAKEFLAGS_GVIMEXT = $(MAKEFLAGS_GVIMEXT) CPUARG="$(CPUARG)"
 
 !IF "$(VIMDLL)" == "yes"
-VIMDLLBASE = vim
+VIMDLLBASE = viai
 ! IF "$(CPU)" == "i386"
 VIMDLLBASE = $(VIMDLLBASE)32
 ! ELSE
@@ -647,7 +664,7 @@ CFLAGS = $(CFLAGS) /fsanitize=address
 
 !IFDEF NODEBUG
 
-VIM = vim
+VIM = viai
 ! IF "$(OPTIMIZE)" == "SPACE"
 OPTFLAG = /O1
 ! ELSEIF "$(OPTIMIZE)" == "SPEED"
@@ -673,7 +690,7 @@ LIBC = libcmt.lib
 
 !ELSE  # DEBUG
 
-VIM = vimd
+VIM = viaid
 ! IF ("$(CPU)" == "i386") || ("$(CPU)" == "ix86")
 DEBUGINFO = /ZI
 ! ENDIF
@@ -1479,7 +1496,7 @@ test:
 
 testgvim testgui:
 	cd testdir
-	$(MAKE) -lf Make_mvc.mak "VIMPROG=..\gvim.exe"
+	$(MAKE) -lf Make_mvc.mak "VIMPROG=..\gviai.exe"
 	cd ..
 
 testtiny:
@@ -1489,7 +1506,7 @@ testtiny:
 
 testgvimtiny:
 	cd testdir
-	$(MAKE) -lf Make_mvc.mak "VIMPROG=..\gvim.exe" tiny
+	$(MAKE) -lf Make_mvc.mak "VIMPROG=..\gviai.exe" tiny
 	cd ..
 
 testclean:

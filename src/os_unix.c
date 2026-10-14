@@ -4637,11 +4637,13 @@ set_child_environment(
 # endif
 # ifdef FEAT_TERMINAL
     // The program in a terminal window may be Vim, which must not use the
-    // runtime files of ViAI.
+    // runtime files of ViAI.  Only remove what ViAI has set itself.
     if (is_terminal)
     {
-	vim_unsetenv((char_u *)"VIM");
-	vim_unsetenv((char_u *)"VIMRUNTIME");
+	if (didset_vim)
+	    vim_unsetenv((char_u *)"VIM");
+	if (didset_vimruntime)
+	    vim_unsetenv((char_u *)"VIMRUNTIME");
     }
 # endif
 }

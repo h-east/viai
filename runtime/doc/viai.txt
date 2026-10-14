@@ -32,6 +32,9 @@ Vim:
 	vimdiff		viaidiff
 	gvimdiff	gviaidiff
 
+On MS-Windows the programs are "viai.exe" and "gviai.exe".  When built with
+the DLL support they use "viai32.dll" or "viai64.dll".
+
 "ex", "view", "gview", "rview", "rgview" and "eview" are not installed.  Use
 "viai -e", "viai -R", etc. instead, see |-e| and |-R|.
 
@@ -134,10 +137,11 @@ When $VIM or $VIMRUNTIME is set in the environment, ViAI uses it.  Thus when
 you set $VIMRUNTIME for Vim, e.g. in a shell startup file, ViAI also uses the
 runtime files of Vim.  Set it only where Vim is started.
 
-ViAI does not pass $VIM and $VIMRUNTIME to a program running in a terminal
-window, so that Vim started there uses its own runtime files.  When they are
-given with the "env" argument of |term_start()| they are passed.  Other
-child processes, e.g. started with |:!|, |system()| and |job_start()|, do get
+When ViAI has set $VIM or $VIMRUNTIME itself, it does not pass it to a program
+running in a terminal window, so that Vim started there uses its own runtime
+files.  When it comes from the environment, is set with |:let-environment| or
+is given with the "env" argument of |term_start()|, it is passed.  Other child
+processes, e.g. started with |:!|, |system()| and |job_start()|, always get
 them.
 
 ==============================================================================

@@ -469,7 +469,8 @@ Environment variables are used to pass information to the running job:
     COLORS		number of colors, 't_Co' (256*256*256 in the GUI)
     VIM_SERVERNAME	v:servername
     VIM_TERMINAL	v:version
-ViAI does not pass $VIM and $VIMRUNTIME, see |viai-vimruntime|.
+ViAI does not pass $VIM and $VIMRUNTIME that it has set itself, see
+|viai-vimruntime|.
 
 
 MS-Windows ~
@@ -501,7 +502,8 @@ support is considered stable with the first release of Windows 11.
 
 Environment variables are used to pass information to the running job:
     VIM_SERVERNAME	v:servername
-ViAI does not pass $VIM and $VIMRUNTIME, see |viai-vimruntime|.
+ViAI does not pass $VIM and $VIMRUNTIME that it has set itself, see
+|viai-vimruntime|.
 
 							*git-vimdumps*
 There exists a git-difftool extension called `git-vimdumps` that can be used
