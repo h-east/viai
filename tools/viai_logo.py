@@ -31,17 +31,17 @@ LETTER_COLOR = (0xff, 0xff, 0xff)
 # Design on a 296 x 296 canvas.
 DESIGN = 296
 # block with rounded left corners
-BX0, BY0, BX1, BY1 = 14, 70, 282, 270
-RADIUS = 64
+BX0, BY0, BX1, BY1 = 7, 48, 289, 289
+RADIUS = 67
 # square ("A") over the "i" stem, and the bar ("I") flush with the right edge
-DOT_W, DOT_TOP, DOT_BOTTOM = 34, 20, 54
-GAP, BAR_W = 8, 14
+DOT_W, DOT_TOP, DOT_BOTTOM = 36, 7, 43
+GAP, BAR_W = 8, 15
 # depth of the cut corner
-NOTCH = 46
+NOTCH = 48
 # letters
-V_SHAPE = [(48, 110), (86, 110), (126, 204), (166, 110), (204, 110),
-           (144, 240), (108, 240)]
-STEM_TOP, STEM_BOTTOM = 150, 240
+V_SHAPE = [(43, 90), (86, 90), (132, 209), (178, 90), (221, 90),
+           (152, 255), (112, 255)]
+STEM_TOP, STEM_BOTTOM = 151, 255
 
 # From this size on the icons are beveled, "Vi" is engraved and the square
 # and the bar cast a shadow.
