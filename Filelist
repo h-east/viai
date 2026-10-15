@@ -979,6 +979,7 @@ RT_UNIX_DOS_BIN =	\
 		runtime/viai48x48.png \
 		runtime/viai48x48.xpm \
 		runtime/viai48x48_png.h \
+		runtime/viai_logo.svg \
 
 # Runtime not for Unix-like or extra.
 RT_NO_UNIX =	\
@@ -1001,7 +1002,6 @@ RT_DOS =	\
 
 # MS Windows runtime without CR/LF translation (also in the extra archive).
 RT_DOS_BIN =	\
-		runtime/viai_logo.svg \
 
 # Amiga runtime (also in the extra archive)
 RT_AMI =	\

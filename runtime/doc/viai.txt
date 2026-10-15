@@ -46,7 +46,9 @@ The default client-server name is "GVIAI" instead of "GVIM", see
 
 ViAI has its own logo and icons.  The icon files are named after ViAI, e.g.
 "viai32x32.xpm" for X11 (see |X11-icon|) and "bitmaps/viai.ico" for a custom
-icon on MS-Windows (see |windows-icon|).
+icon on MS-Windows (see |windows-icon|).  On Unix the logo is also installed
+as the scalable icon "/usr/local/share/icons/hicolor/scalable/apps/gviai.svg"
+(when using the default prefix).
 
 With GTK the program name is "gviai" instead of "gvim", so that the windows
 go with the installed "gviai.desktop" file and its icon.  For GTK4 see
