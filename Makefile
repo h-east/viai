@@ -191,10 +191,10 @@ MINOR = 2
 # - Delete viairun.exe, install.exe and uninstall.exe.
 # Win32 GUI version with OLE, PERL, Ruby, TCL, PYTHON and dynamic IME:
 # - Install the interfaces you want, see src/INSTALLpc.txt
-#   Adjust bigvim.bat to match the version of each interface you want.
+#   Adjust bigviai.bat to match the version of each interface you want.
 # - Build:
 #   > cd src
-#   > bigvim.bat
+#   > bigviai.bat
 # - Run the tests:
 #   > nmake.exe -f Make_mvc.mak testclean
 #   > nmake.exe -f Make_mvc.mak testgvim
@@ -219,7 +219,7 @@ MINOR = 2
 # - Build the GUI version:
 #   > nmake.exe -f Make_mvc.mak "GUI=yes"
 # - Build the OLE version with interfaces:
-#   > bigvim64.bat
+#   > bigviai64.bat
 #
 #
 # OBSOLETE systems: You can build these if you have an appropriate system.

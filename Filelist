@@ -629,8 +629,8 @@ SRC_DOS =	\
 		src/Make_ming.mak \
 		src/Make_mvc.mak \
 		tools/rename.bat \
-		src/bigvim.bat \
-		src/bigvim64.bat \
+		src/bigviai.bat \
+		src/bigviai64.bat \
 		src/msvc-latest.bat \
 		src/msvc2015.bat \
 		src/msvc2017.bat \
