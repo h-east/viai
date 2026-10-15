@@ -132,11 +132,13 @@ configuration:
 	Vim			ViAI ~
 	~/.viminfo		~/.viaiinfo		(Unix)
 	$HOME/_viminfo		$HOME/_viaiinfo		(MS-Windows)
+	$VIM/_viminfo		$VIM/_viaiinfo		(MS-Windows, no $HOME)
 
 When ViAI's viminfo file does not exist yet, ViAI reads Vim's viminfo file
 instead, and merges it into ViAI's viminfo file when writing it.  Thus the
 history, marks, etc. of Vim are taken over the first time.  Vim's viminfo
-file is never written.
+file is never written.  It is only looked for in $HOME, thus nothing is taken
+over when $HOME is not set.
 
 This only applies when the viminfo file name is not set with 'viminfofile'
 or the "n" flag of 'viminfo'.
