@@ -1336,7 +1336,7 @@ MAIN_TARGET = $(VIM).exe
 VIMTESTTARGET = $(VIM).exe
 
 all: $(MAIN_TARGET) \
-	vimrun.exe \
+	viairun.exe \
 	install.exe \
 	uninstall.exe \
 	xxd/xxd.exe \
@@ -1408,8 +1408,8 @@ uninstall.exe: uninstall.c dosinst.h version.h
 	$(CC) $(CFLAGS_INST) uninstall.c shell32.lib advapi32.lib \
 		-link -subsystem:$(SUBSYSTEM_TOOLS)
 
-vimrun.exe: vimrun.c
-	$(CC) /nologo -DNDEBUG vimrun.c -link -subsystem:$(SUBSYSTEM_TOOLS)
+viairun.exe: viairun.c
+	$(CC) /nologo -DNDEBUG viairun.c -link -subsystem:$(SUBSYSTEM_TOOLS)
 
 xxd/xxd.exe: xxd/xxd.c
 	cd xxd
@@ -1455,7 +1455,7 @@ clean: testclean
 	- if exist $(VIMDLLBASE).pdb $(RM) $(VIMDLLBASE).pdb
 	- if exist $(VIMDLLBASE).map $(RM) $(VIMDLLBASE).map
 !ENDIF
-	- if exist vimrun.exe $(RM) vimrun.exe
+	- if exist viairun.exe $(RM) viairun.exe
 	- if exist install.exe $(RM) install.exe
 	- if exist uninstall.exe $(RM) uninstall.exe
 	- if exist if_perl.c $(RM) if_perl.c

@@ -100,9 +100,12 @@ static int read_input_record_buffer(INPUT_RECORD* irEvents, int nMaxLength);
 static int write_input_record_buffer(INPUT_RECORD* irEvents, int nLength);
 #endif
 #ifdef FEAT_GUI_MSWIN
+// The program that executes external commands for the GUI.
+# define VIMRUN_NAME	"viairun"
 static int s_dont_use_vimrun = TRUE;
 static int need_vimrun_warning = FALSE;
-static string_T vimrun_path = {(char_u *)"vimrun ", 7};
+static string_T vimrun_path =
+		{(char_u *)VIMRUN_NAME " ", STRLEN_LITERAL(VIMRUN_NAME " ")};
 static int vimrun_path_allocated = FALSE;
 #endif
 
@@ -3032,16 +3035,16 @@ mch_init_g(void)
     Rows = 25;
     Columns = 80;
 
-    // Look for 'vimrun'.
+    // Look for VIMRUN_NAME.
     {
 	char_u	vimrun_location[_MAX_PATH + 4];
 	size_t	exe_pathlen = (size_t)(gettail(exe_name) - exe_name);
 
-	// Note: 10 is length of 'vimrun.exe'.
-	if (exe_pathlen + 10 >= sizeof(vimrun_location))
+	if (exe_pathlen + STRLEN_LITERAL(VIMRUN_NAME ".exe")
+						    >= sizeof(vimrun_location))
 	{
-	    if (executable_exists("vimrun.exe", STRLEN_LITERAL("vimrun.exe"),
-		    NULL, TRUE, FALSE))
+	    if (executable_exists(VIMRUN_NAME ".exe",
+			STRLEN_LITERAL(VIMRUN_NAME ".exe"), NULL, TRUE, FALSE))
 		s_dont_use_vimrun = FALSE;
 	}
 	else
@@ -3049,7 +3052,7 @@ mch_init_g(void)
 	    // First try in same directory as gvim.exe.
 	    if (exe_pathlen > 0)
 		vim_strncpy(vimrun_location, exe_name, exe_pathlen);
-	    STRCPY(vimrun_location + exe_pathlen, "vimrun.exe");
+	    STRCPY(vimrun_location + exe_pathlen, VIMRUN_NAME ".exe");
 
 	    if (mch_getperm(vimrun_location) >= 0)
 	    {
@@ -3062,15 +3065,15 @@ mch_init_g(void)
 		    plen = vim_snprintf_safelen(
 			(char *)vimrun_location,
 			sizeof(vimrun_location),
-			"\"%.*svimrun\" ",
+			"\"%.*s" VIMRUN_NAME "\" ",
 			(int)exe_pathlen, exe_name);
 		}
 		else
 		{
-		    // Remove the suffix ('.exe').
-		    vimrun_location[exe_pathlen + 6] = ' ';
-		    vimrun_location[exe_pathlen + 7] = NUL;
-		    plen = exe_pathlen + 7;
+		    // Replace the suffix ('.exe') with a space.
+		    plen = exe_pathlen + STRLEN_LITERAL(VIMRUN_NAME " ");
+		    vimrun_location[plen - 1] = ' ';
+		    vimrun_location[plen] = NUL;
 		}
 
 		p = vim_strnsave(vimrun_location, plen);
@@ -3082,14 +3085,14 @@ mch_init_g(void)
 		    s_dont_use_vimrun = FALSE;
 		}
 	    }
-	    else if (executable_exists("vimrun.exe", STRLEN_LITERAL("vimrun.exe"),
-		    NULL, TRUE, FALSE))
+	    else if (executable_exists(VIMRUN_NAME ".exe",
+			STRLEN_LITERAL(VIMRUN_NAME ".exe"), NULL, TRUE, FALSE))
 		s_dont_use_vimrun = FALSE;
 	}
 
-	// Don't give the warning for a missing vimrun.exe right now, but only
-	// when vimrun was supposed to be used.  Don't bother people that do
-	// not need vimrun.exe.
+	// Don't give the warning for a missing VIMRUN_NAME right now, but only
+	// when it was supposed to be used.  Don't bother people that do not
+	// need it.
 	if (s_dont_use_vimrun)
 	    need_vimrun_warning = TRUE;
     }
@@ -5830,7 +5833,7 @@ mch_call_shell(
 # endif
 		    need_vimrun_warning)
 		{
-		    char *msg = _("VIMRUN.EXE not found in your $PATH.\n"
+		    char *msg = _("VIAIRUN.EXE not found in your $PATH.\n"
 			"External commands will not pause after completion.\n"
 			"See  :help win32-vimrun  for more information.");
 		    char *title = _("Vim Warning");
@@ -5848,7 +5851,7 @@ mch_call_shell(
 		    (gui.in_use || gui.starting) &&
 # endif
 		    !s_dont_use_vimrun && p_stmp)
-		    // Use vimrun to execute the command.  It opens a console
+		    // Use viairun to execute the command.  It opens a console
 		    // window, which can be closed without killing Vim.
 		    vim_snprintf((char *)newcmd, cmdlen, "%s%s%s %s %s",
 			    vimrun_path.string,
@@ -5860,7 +5863,7 @@ mch_call_shell(
 			(gui.in_use || gui.starting) &&
 # endif
 			s_dont_use_vimrun && STRCMP(p_shcf, "/c") == 0)
-		    // workaround for the case that "vimrun" does not exist
+		    // workaround for the case that "viairun" does not exist
 		    vim_snprintf((char *)newcmd, cmdlen, "%s %s %s %s %s",
 					   p_sh, p_shcf, p_sh, p_shcf, cmd);
 		else
@@ -5884,7 +5887,7 @@ mch_call_shell(
 	settmode(TMODE_RAW);	// set to raw mode
     }
 
-    // Print the return value, unless "vimrun" was used.
+    // Print the return value, unless "viairun" was used.
     if (x != 0 && !(options & SHELL_SILENT) && !emsg_silent
 #if defined(FEAT_GUI_MSWIN)
 	    && ((gui.in_use || gui.starting) ?

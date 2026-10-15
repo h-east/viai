@@ -14,7 +14,7 @@
 # To make just e.g. gviai.exe, 'make -f Make_ming.mak gviai.exe'.
 # After a run, you can 'make -f Make_ming.mak clean' to clean up.
 #
-# NOTE: Sometimes 'GNU Make' will stop after building vimrun.exe -- I think
+# NOTE: Sometimes 'GNU Make' will stop after building viairun.exe -- I think
 # it's just run out of memory or something.  Run again, and it will continue
 # with 'xxd'.
 #
@@ -1178,12 +1178,12 @@ endif
 # To increase the stack size to 16MB, uncomment the following line:
 #LFLAGS += -Wl,-stack -Wl,0x1000000
 
-all: $(MAIN_TARGET) vimrun.exe xxd/xxd.exe tee/tee.exe install.exe uninstall.exe GvimExt/gvimext.dll
+all: $(MAIN_TARGET) viairun.exe xxd/xxd.exe tee/tee.exe install.exe uninstall.exe GvimExt/gvimext.dll
 
-# Coverage instrumentation makes _wsystem() in vimrun hang, and vimrun is not
+# Coverage instrumentation makes _wsystem() in viairun hang, and viairun is not
 # part of Vim itself, so never instrument it.
-vimrun.exe: vimrun.c
-	$(CC) $(filter-out --coverage,$(CFLAGS)) -o vimrun.exe vimrun.c $(LIB)
+viairun.exe: viairun.c
+	$(CC) $(filter-out --coverage,$(CFLAGS)) -o viairun.exe viairun.c $(LIB)
 
 install.exe: dosinst.c dosinst.h version.h
 	$(CC) $(CFLAGS) -o install.exe dosinst.c $(LIB) -lole32 -luuid
@@ -1252,7 +1252,7 @@ clean:
 	-$(DEL) $(OUTDIR)$(DIRSLASH)*.res
 	-$(DEL) $(OUTDIR)$(DIRSLASH)pathdef.c
 	-rmdir $(OUTDIR)
-	-$(DEL) $(MAIN_TARGET) vimrun.exe install.exe uninstall.exe
+	-$(DEL) $(MAIN_TARGET) viairun.exe install.exe uninstall.exe
 	-$(DEL) *.gcno *.gcda
 	-$(DEL) *.map
 ifdef PERL

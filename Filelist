@@ -668,7 +668,7 @@ SRC_DOS =	\
 		src/uninstall.c \
 		src/viai.rc \
 		src/viai.manifest \
-		src/vimrun.c \
+		src/viairun.c \
 		src/xpm_w32.c \
 		src/xpm_w32.h \
 		src/tee/Make_ming.mak \

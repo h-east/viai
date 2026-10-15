@@ -9,10 +9,10 @@
  */
 
 /*
- * vimrun.c - Tiny Win32 program to safely run an external command in a
- *	      DOS console.
- *	      This program is required to avoid that typing CTRL-C in the DOS
- *	      console kills Vim.  Now it only kills vimrun.
+ * viairun.c - Tiny Win32 program to safely run an external command in a
+ *	       DOS console.
+ *	       This program is required to avoid that typing CTRL-C in the DOS
+ *	       console kills ViAI.  Now it only kills viairun.
  */
 
 #include <stdio.h>
@@ -80,7 +80,7 @@ main(void)
 	cmd = malloc(cmdlen * sizeof(wchar_t));
 	if (cmd == NULL)
 	{
-	    perror("vimrun malloc(): ");
+	    perror("viairun malloc(): ");
 	    return -1;
 	}
 	_snwprintf(cmd, cmdlen, L"(%s)", p);
@@ -96,7 +96,7 @@ main(void)
 	free(cmd);
 
     if (retval == -1)
-	perror("vimrun system(): ");
+	perror("viairun system(): ");
     else if (retval != 0)
 	printf("shell returned %d\n", retval);
 

@@ -271,11 +271,11 @@ command.  The external command gets its own environment for running, just like
 it was started from a DOS prompt.
 
 							*win32-vimrun*
-Executing an external command is done indirectly by the "vimrun" command.  The
-"vimrun.exe" must be in the path for this to work.  Or it must be in the same
-directory as the Vim executable.  If "vimrun" cannot be found, the command is
-executed directly, but then the DOS window closes immediately after the
-external command has finished.
+Executing an external command is done indirectly by the "viairun" command.
+The "viairun.exe" must be in the path for this to work.  Or it must be in the
+same directory as the Vim executable.  If "viairun" cannot be found, the
+command is executed directly, but then the DOS window closes immediately after
+the external command has finished.
 WARNING: If you close this window with the "X" button, and confirm the
 question if you really want to kill the application, Vim may be killed too!
 (This does not apply to commands run asynchronously with ":!start".)

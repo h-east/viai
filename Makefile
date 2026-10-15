@@ -188,7 +188,7 @@ MINOR = 2
 # - move "gvim.exe" to here (otherwise the OLE version will overwrite it).
 # - Move gvim.pdb to here.
 # - Copy "GvimExt/gvimext.dll" to here.
-# - Delete vimrun.exe, install.exe and uninstall.exe.
+# - Delete viairun.exe, install.exe and uninstall.exe.
 # Win32 GUI version with OLE, PERL, Ruby, TCL, PYTHON and dynamic IME:
 # - Install the interfaces you want, see src/INSTALLpc.txt
 #   Adjust bigvim.bat to match the version of each interface you want.
@@ -489,7 +489,7 @@ dosbin_gvim: dist dist/$(COMMENT_GVIM)
 	cp gvim.exe dist/vim/$(VIMRTDIR)/gvim.exe
 	cp teew32.exe dist/vim/$(VIMRTDIR)/tee.exe
 	cp xxdw32.exe dist/vim/$(VIMRTDIR)/xxd.exe
-	cp vimrun.exe dist/vim/$(VIMRTDIR)/vimrun.exe
+	cp viairun.exe dist/vim/$(VIMRTDIR)/viairun.exe
 	cp installw32.exe dist/vim/$(VIMRTDIR)/install.exe
 	cp uninstallw32.exe dist/vim/$(VIMRTDIR)/uninstall.exe
 	mkdir dist/vim/$(VIMRTDIR)/GvimExt32
@@ -528,7 +528,7 @@ dosbin_ole: dist dist/$(COMMENT_OLE)
 	cp gvim_ole.exe dist/vim/$(VIMRTDIR)/gvim.exe
 	cp teew32.exe dist/vim/$(VIMRTDIR)/tee.exe
 	cp xxdw32.exe dist/vim/$(VIMRTDIR)/xxd.exe
-	cp vimrun.exe dist/vim/$(VIMRTDIR)/vimrun.exe
+	cp viairun.exe dist/vim/$(VIMRTDIR)/viairun.exe
 	cp installw32.exe dist/vim/$(VIMRTDIR)/install.exe
 	cp uninstallw32.exe dist/vim/$(VIMRTDIR)/uninstall.exe
 	cp gvimext.dll dist/vim/$(VIMRTDIR)/gvimext.dll

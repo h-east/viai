@@ -117,7 +117,7 @@ platform-windows:
         - 'src/uninstall.c'
         - 'src/viai.manifest'
         - 'src/viai.rc'
-        - 'src/vimrun.c'
+        - 'src/viairun.c'
         - 'src/winclip.c'
         - 'src/xpm/**'
         - 'src/xpm_w32.*'

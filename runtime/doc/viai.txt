@@ -34,7 +34,8 @@ Vim:
 	gvimdiff	gviaidiff
 
 On MS-Windows the programs are "viai.exe" and "gviai.exe".  When built with
-the DLL support they use "viai32.dll" or "viai64.dll".
+the DLL support they use "viai32.dll" or "viai64.dll".  The GUI runs external
+commands with "viairun.exe" instead of "vimrun.exe", see |win32-vimrun|.
 
 "ex", "view", "gview", "rview", "rgview" and "eview" are not installed.  Use
 "viai -e", "viai -R", etc. instead, see |-e| and |-R|.
