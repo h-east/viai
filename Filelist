@@ -965,8 +965,8 @@ RT_UNIX =	\
 		README_unix.txt \
 		runtime/hi16-action-make.png \
 		runtime/hi22-action-make.png \
-		runtime/gvim.desktop \
-		runtime/vim.desktop \
+		runtime/gviai.desktop \
+		runtime/viai.desktop \
 
 # Unix-like and MS Windows runtime without CR/LF translation.
 RT_UNIX_DOS_BIN =	\
@@ -1199,8 +1199,8 @@ LANG_SRC = \
 		src/po/Make_cyg.mak \
 		src/po/Make_ming.mak \
 		src/po/Make_mvc.mak \
-		src/po/vim.desktop.in \
-		src/po/gvim.desktop.in \
+		src/po/viai.desktop.in \
+		src/po/gviai.desktop.in \
 		src/po/sjiscorr.c \
 		src/po/big5corr.c \
 		src/po/*.po \

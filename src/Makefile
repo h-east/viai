@@ -2720,15 +2720,15 @@ install-icons:
 	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai16x16.png $(ICON16PATH)/$(GVIMNAME).png; \
 	fi
 	if test -d $(DESKTOPPATH) -a -w $(DESKTOPPATH); then \
-	   if test -f po/vim.desktop -a -f po/gvim.desktop; then \
-		$(INSTALL_DATA) po/vim.desktop \
+	   if test -f po/viai.desktop -a -f po/gviai.desktop; then \
+		$(INSTALL_DATA) po/viai.desktop \
 			$(DESKTOPPATH)/$(VIMNAME).desktop; \
-		$(INSTALL_DATA) po/gvim.desktop \
+		$(INSTALL_DATA) po/gviai.desktop \
 			$(DESKTOPPATH)/$(GVIMNAME).desktop; \
 	   else \
-		$(INSTALL_DATA) $(SCRIPTSOURCE)/vim.desktop \
+		$(INSTALL_DATA) $(SCRIPTSOURCE)/viai.desktop \
 			$(DESKTOPPATH)/$(VIMNAME).desktop; \
-		$(INSTALL_DATA) $(SCRIPTSOURCE)/gvim.desktop \
+		$(INSTALL_DATA) $(SCRIPTSOURCE)/gviai.desktop \
 			$(DESKTOPPATH)/$(GVIMNAME).desktop; \
 	   fi; \
 	   if test -z "$(DESTDIR)" -a -x "$(UPDATE_DESKTOP_DATABASE)"; then \

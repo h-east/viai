@@ -4804,7 +4804,7 @@ if test "$enable_nls" = "yes"; then
 	  AC_MSG_RESULT([broken])
 	else
 	  AC_MSG_RESULT([yes])
-	  MSGFMT_DESKTOP="gvim.desktop vim.desktop"
+	  MSGFMT_DESKTOP="gviai.desktop viai.desktop"
 	fi
       else
 	AC_MSG_RESULT([no])

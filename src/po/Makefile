@@ -239,7 +239,7 @@ prefixcheck:
 
 clean: checkclean
 	- rm -f core core.* *.old.po *.mo sjiscorr
-	- rm -f LINGUAS vim.desktop gvim.desktop tmp_*desktop
+	- rm -f LINGUAS viai.desktop gviai.desktop tmp_*desktop
 	- rm -f ./allfiles
 #	- rm -f big5corr
 
@@ -256,8 +256,8 @@ PO_INPUTLIST = \
 	../globals.h \
 	../if_py_both.h \
 	../vim.h \
-	gvim.desktop.in \
-	vim.desktop.in
+	gviai.desktop.in \
+	viai.desktop.in
 
 $(PACKAGE).pot: $(PO_INPUTLIST) $(PO_VIM_INPUTLIST)
 	# Convert the Vim scripts to (what looks like) Javascript.
@@ -276,25 +276,25 @@ $(PACKAGE).pot: $(PO_INPUTLIST) $(PO_VIM_INPUTLIST)
 	# Delete the temporary files.
 	rm -f *.js ./vim_to_js allfiles
 
-vim.desktop: vim.desktop.in $(POFILES)
+viai.desktop: viai.desktop.in $(POFILES)
 	echo $(LANGUAGES) | tr " " "\n" |$(SED) -e '/[.]/d' | sort > LINGUAS
-	$(MSGFMT) --desktop -d . --template vim.desktop.in -o tmp_vim.desktop
+	$(MSGFMT) --desktop -d . --template viai.desktop.in -o tmp_viai.desktop
 	rm -f LINGUAS
 	if command -v desktop-file-validate; \
-		then desktop-file-validate tmp_vim.desktop; fi
-	mv tmp_vim.desktop vim.desktop
-	cp vim.desktop ../../runtime/
+		then desktop-file-validate tmp_viai.desktop; fi
+	mv tmp_viai.desktop viai.desktop
+	cp viai.desktop ../../runtime/
 
-# The dependency on vim.desktop is only to avoid the two targets are build at
+# The dependency on viai.desktop is only to avoid the two targets are build at
 # the same time, which causes a race for the LINGUAS file.
-gvim.desktop: gvim.desktop.in $(POFILES) vim.desktop
+gviai.desktop: gviai.desktop.in $(POFILES) viai.desktop
 	echo $(LANGUAGES) | tr " " "\n" |$(SED) -e '/[.]/d' | sort > LINGUAS
-	$(MSGFMT) --desktop -d . --template gvim.desktop.in -o tmp_gvim.desktop
+	$(MSGFMT) --desktop -d . --template gviai.desktop.in -o tmp_gviai.desktop
 	rm -f LINGUAS
 	if command -v desktop-file-validate; \
-		then desktop-file-validate tmp_gvim.desktop; fi
-	mv tmp_gvim.desktop gvim.desktop
-	cp gvim.desktop ../../runtime/
+		then desktop-file-validate tmp_gviai.desktop; fi
+	mv tmp_gviai.desktop gviai.desktop
+	cp gviai.desktop ../../runtime/
 
 # Only original translations with default encoding should be updated.
 # The files that are converted to a different encoding clearly state "DO NOT EDIT".
