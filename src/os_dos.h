@@ -72,7 +72,7 @@
 #  define VIM_VIMINFO_FILE	"$HOME\\_viminfo"
 # endif
 # ifndef VIMINFO_FILE2
-#  define VIMINFO_FILE2		"$VIM\\_viminfo"
+#  define VIMINFO_FILE2		"$VIM\\_viaiinfo"
 # endif
 #endif
 

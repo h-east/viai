@@ -1733,7 +1733,8 @@ VIMINFO FILE NAME					*viminfo-file-name*
   is not set, "$VIM\_viminfo" is used.  When $VIM is also not set,
   "c:\_viminfo" is used.
 - ViAI uses "$HOME/.viaiinfo" for Unix and "$HOME\_viaiinfo" for Win32
-  instead, see |viai-viminfo|.
+  instead, and "$VIM\_viaiinfo" and "c:\_viaiinfo" when $HOME is not set,
+  see |viai-viminfo|.
 - The 'n' flag in the 'viminfo' option can be used to specify another viminfo
   file name 'viminfo'.
 - The "-i" Vim argument can be used to set another file name, |-i|.  When the
