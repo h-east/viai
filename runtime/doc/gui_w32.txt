@@ -447,11 +447,11 @@ See the Make_mvc.mak file for instructions, search for XPM.
 To try out if XPM support works do this: >
 	:help
 	:let runtime = escape($VIMRUNTIME, ' \')
-	:exe 'sign define vimxpm icon=' .. runtime .. '\\vim16x16.xpm'
+	:exe 'sign define vimxpm icon=' .. runtime .. '\\viai16x16.xpm'
 	:exe 'sign place 1 line=1 name=vimxpm file=' .. expand('%:p')
 <
-You may need to get the vim16x16.xpm file from github:
-https://github.com/vim/vim/blob/master/runtime/vim16x16.xpm
+You may need to get the viai16x16.xpm file from github:
+https://github.com/viai-editor/viai/blob/master/runtime/viai16x16.xpm
 
 
 Keycode translation strategy    *w32-experimental-keycode-trans-strategy*

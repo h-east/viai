@@ -796,7 +796,7 @@ check_str_len(char_u *str)
 }
 
 /*
- * Passed to do_in_runtimepath() to load a vim.ico file.
+ * Passed to do_in_runtimepath() to load a viai.ico file.
  */
     static void
 mch_icon_load_cb(char_u *fname, void *cookie)
@@ -817,7 +817,7 @@ mch_icon_load_cb(char_u *fname, void *cookie)
     int
 mch_icon_load(HANDLE *iconp)
 {
-    return do_in_runtimepath((char_u *)"bitmaps/vim.ico",
+    return do_in_runtimepath((char_u *)"bitmaps/viai.ico",
 						  0, mch_icon_load_cb, iconp);
 }
 

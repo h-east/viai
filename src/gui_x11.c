@@ -1342,34 +1342,34 @@ gui_mch_init(void)
     if (vim_strchr(p_go, GO_ICON) != NULL)
     {
 #ifndef HAVE_XPM
-# include "vim_icon.xbm"
-# include "vim_mask.xbm"
+# include "viai_icon.xbm"
+# include "viai_mask.xbm"
 
 	Arg	arg[2];
 
 	XtSetArg(arg[0], XtNiconPixmap,
 		XCreateBitmapFromData(gui.dpy,
 		    DefaultRootWindow(gui.dpy),
-		    (char *)vim_icon_bits,
-		    vim_icon_width,
-		    vim_icon_height));
+		    (char *)viai_icon_bits,
+		    viai_icon_width,
+		    viai_icon_height));
 	XtSetArg(arg[1], XtNiconMask,
 		XCreateBitmapFromData(gui.dpy,
 		    DefaultRootWindow(gui.dpy),
-		    (char *)vim_mask_icon_bits,
-		    vim_mask_icon_width,
-		    vim_mask_icon_height));
+		    (char *)viai_mask_icon_bits,
+		    viai_mask_icon_width,
+		    viai_mask_icon_height));
 	XtSetValues(vimShell, arg, (Cardinal)2);
 #else
 // Use Pixmaps, looking much nicer.
 
-# include "../runtime/vim32x32.xpm"
-# include "../runtime/vim16x16.xpm"
-# include "../runtime/vim48x48.xpm"
+# include "../runtime/viai32x32.xpm"
+# include "../runtime/viai16x16.xpm"
+# include "../runtime/viai48x48.xpm"
 
     static Pixmap	icon = 0;
     static Pixmap	icon_mask = 0;
-    static char		**magick = vim32x32;
+    static char		**magick = viai32x32;
     Window		root_window;
     XIconSize		*size;
     int			number_sizes;
@@ -1388,11 +1388,11 @@ gui_mch_init(void)
 	if (number_sizes > 0)
 	{
 	    if (size->max_height >= 48 && size->max_width >= 48)
-		magick = vim48x48;
+		magick = viai48x48;
 	    else if (size->max_height >= 32 && size->max_width >= 32)
-		magick = vim32x32;
+		magick = viai32x32;
 	    else if (size->max_height >= 16 && size->max_width >= 16)
-		magick = vim16x16;
+		magick = viai16x16;
 	}
     }
 

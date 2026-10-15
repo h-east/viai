@@ -347,9 +347,9 @@ A. You have three possible solutions depending on what you want:
    normally.
 
 						*windows-icon*
-Q. I don't like the Vim icon, can I change it?
-A. Yes, place your favorite icon in bitmaps/vim.ico in a directory of
-   'runtimepath'.  For example ~/vimfiles/bitmaps/vim.ico.
+Q. I don't like the ViAI icon, can I change it?
+A. Yes, place your favorite icon in bitmaps/viai.ico in a directory of
+   'runtimepath'.  For example ~/vimfiles/bitmaps/viai.ico.
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:

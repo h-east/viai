@@ -1,4 +1,4 @@
-*viai.txt*	For ViAI version 1.0.  Last change: 2026 Oct 15
+*viai.txt*	For ViAI version 1.0.  Last change: 2026 Oct 16
 
 
 		  VIM REFERENCE MANUAL
@@ -43,6 +43,10 @@ of Vim and the |:Tutor| command.
 
 The default client-server name is "GVIAI" instead of "GVIM", see
 |client-server-name| and |{server}|.
+
+ViAI has its own logo and icons.  The icon files are named after ViAI, e.g.
+"viai32x32.xpm" for X11 (see |X11-icon|) and "bitmaps/viai.ico" for a custom
+icon on MS-Windows (see |windows-icon|).
 
 The runtime files are installed in "/usr/local/share/viai/viai10" instead of
 "/usr/local/share/vim/vim92" (when using the default prefix).  This is

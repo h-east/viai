@@ -2704,7 +2704,7 @@ install-icons:
 
 	if test -d $(ICON48PATH) -a -w $(ICON48PATH) \
 		-a ! -f $(ICON48PATH)/$(GVIMNAME).png; then \
-	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim48x48.png $(ICON48PATH)/$(GVIMNAME).png; \
+	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai48x48.png $(ICON48PATH)/$(GVIMNAME).png; \
 	   if test -z "$(DESTDIR)" -a -x "$(GTK_UPDATE_ICON_CACHE)" \
 		   -a -w $(ICONTHEMEPATH) \
 		   -a -f $(ICONTHEMEPATH)/index.theme; then \
@@ -2713,11 +2713,11 @@ install-icons:
 	fi
 	if test -d $(ICON32PATH) -a -w $(ICON32PATH) \
 		-a ! -f $(ICON32PATH)/$(GVIMNAME).png; then \
-	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim32x32.png $(ICON32PATH)/$(GVIMNAME).png; \
+	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai32x32.png $(ICON32PATH)/$(GVIMNAME).png; \
 	fi
 	if test -d $(ICON16PATH) -a -w $(ICON16PATH) \
 		-a ! -f $(ICON16PATH)/$(GVIMNAME).png; then \
-	   $(INSTALL_DATA) $(SCRIPTSOURCE)/vim16x16.png $(ICON16PATH)/$(GVIMNAME).png; \
+	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai16x16.png $(ICON16PATH)/$(GVIMNAME).png; \
 	fi
 	if test -d $(DESKTOPPATH) -a -w $(DESKTOPPATH); then \
 	   if test -f po/vim.desktop -a -f po/gvim.desktop; then \
@@ -4530,14 +4530,14 @@ objects/gui_gtk_x11.o: auto/osdef.h gui_gtk_x11.c vim.h protodef.h auto/config.h
  beval.h structs.h regexp.h gui.h \
  libvterm/include/vterm.h libvterm/include/vterm_keycodes.h alloc.h \
  ex_cmds.h spell.h proto.h globals.h errors.h auto/gui_gtk_gresources.h \
- gui_gtk_f.h ../runtime/vim16x16_png.h ../runtime/vim32x32_png.h \
- ../runtime/vim48x48_png.h
+ gui_gtk_f.h ../runtime/viai16x16_png.h ../runtime/viai32x32_png.h \
+ ../runtime/viai48x48_png.h
 objects/gui_x11.o: auto/osdef.h gui_x11.c vim.h protodef.h auto/config.h feature.h os_unix.h \
  ascii.h keymap.h termdefs.h macros.h option.h beval.h \
  structs.h regexp.h gui.h libvterm/include/vterm.h \
  libvterm/include/vterm_keycodes.h alloc.h ex_cmds.h spell.h proto.h \
- globals.h errors.h ../runtime/vim32x32.xpm ../runtime/vim16x16.xpm \
- ../runtime/vim48x48.xpm errors.h vim_icon.xbm vim_mask.xbm
+ globals.h errors.h ../runtime/viai32x32.xpm ../runtime/viai16x16.xpm \
+ ../runtime/viai48x48.xpm errors.h viai_icon.xbm viai_mask.xbm
 objects/gui_haiku.o: auto/osdef.h gui_haiku.cc vim.h protodef.h auto/config.h feature.h \
  os_unix.h ascii.h keymap.h termdefs.h macros.h option.h beval.h \
  structs.h regexp.h gui.h libvterm/include/vterm.h \

@@ -1476,13 +1476,13 @@ lua_env :
 [.$(DEST)]gui_gtk_x11.obj : gui_gtk_x11.c vim.h [.$(DEST)]config.h feature.h os_unix.h \
  ascii.h keymap.h termdefs.h macros.h structs.h regexp.h \
  gui.h beval.h option.h ex_cmds.h proto.h \
- errors.h globals.h gui_gtk_f.h [-.runtime]vim32x32.xpm \
- [-.runtime]vim16x16.xpm [-.runtime]vim48x48.xpm version.h
+ errors.h globals.h gui_gtk_f.h [-.runtime]viai32x32.xpm \
+ [-.runtime]viai16x16.xpm [-.runtime]viai48x48.xpm version.h
 [.$(DEST)]gui_x11.obj : gui_x11.c vim.h [.$(DEST)]config.h feature.h os_unix.h \
  ascii.h keymap.h termdefs.h macros.h structs.h regexp.h \
  gui.h beval.h option.h ex_cmds.h proto.h \
- errors.h globals.h [-.runtime]vim32x32.xpm \
- [-.runtime]vim16x16.xpm [-.runtime]vim48x48.xpm [-.pixmaps]tb_new.xpm \
+ errors.h globals.h [-.runtime]viai32x32.xpm \
+ [-.runtime]viai16x16.xpm [-.runtime]viai48x48.xpm [-.pixmaps]tb_new.xpm \
  [-.pixmaps]tb_open.xpm [-.pixmaps]tb_close.xpm [-.pixmaps]tb_save.xpm \
  [-.pixmaps]tb_print.xpm [-.pixmaps]tb_cut.xpm [-.pixmaps]tb_copy.xpm \
  [-.pixmaps]tb_paste.xpm [-.pixmaps]tb_find.xpm \

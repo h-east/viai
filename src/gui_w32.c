@@ -6042,7 +6042,7 @@ gui_mch_init(void)
 	return FAIL;
 
 #ifdef FEAT_LIBCALL
-    // Try loading an icon from $RUNTIMEPATH/bitmaps/vim.ico.
+    // Try loading an icon from $RUNTIMEPATH/bitmaps/viai.ico.
     {
 	HANDLE	hIcon = NULL;
 

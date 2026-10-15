@@ -21,7 +21,7 @@ Microsoft Visual C++ on x64 (tested with versions 2008 and 2010):
 nmake -f Make_mvc.mak GUI=yes CSCOPE=yes XPM=E:\HG\xpm\x64
 
 To test, open some file in Vim and execute commands below:
-:exe 'sign define vimxpm icon='.$VIMRUNTIME.'\\vim32x32.xpm'
+:exe 'sign define vimxpm icon='.$VIMRUNTIME.'\\viai32x32.xpm'
 :exe 'sign place 1 line=1 name=vimxpm file='.expand('%:p')
 
 

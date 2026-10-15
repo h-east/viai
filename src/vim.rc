@@ -20,7 +20,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 // Icons
 //
-IDR_VIM		ICON "vim.ico"
+IDR_VIM		ICON "viai.ico"
 
 #if (defined(FEAT_GUI_MSWIN) && !defined(VIMDLL)) || defined(RCDLL)
 IDR_VIM_ERROR	ICON "vim_error.ico"

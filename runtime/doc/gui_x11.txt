@@ -252,7 +252,7 @@ For example: >
 <
 							*X11-icon*
 Vim uses a black&white icon by default when compiled with Motif.  A
-colored Vim icon is included as $VIMRUNTIME/vim32x32.xpm.  For GTK+, this is
+colored ViAI icon is included as $VIMRUNTIME/viai32x32.xpm.  For GTK+, this is
 the builtin icon used.  Unfortunately, how you should install it depends on
 your window manager.  When you use this, remove the 'i' flag from
 'guioptions', to remove the black&white icon: >
@@ -261,7 +261,7 @@ your window manager.  When you use this, remove the 'i' flag from
 If you use one of the fvwm* family of window managers simply add this line to
 your .fvwm2rc configuration file: >
 
-  Style "vim"		Icon vim32x32.xpm
+  Style "vim"		Icon viai32x32.xpm
 
 Make sure the icon file's location is consistent with the window manager's
 ImagePath statement.  Either modify the ImagePath from within your .fvwm2rc or
@@ -272,10 +272,10 @@ drop the icon into one the pre-defined directories: >
 Note: older versions of fvwm use "IconPath" instead of "ImagePath".
 
 For CDE "dtwm" (a derivative of Motif) add this line in the .Xdefaults: >
-   Dtwm*Vim*iconImage: /usr/local/share/vim/vim32x32.xpm
+   Dtwm*Vim*iconImage: /usr/local/share/viai/viai32x32.xpm
 
 For "mwm" (Motif window manager) the line would be: >
-   Mwm*Vim*iconImage: /usr/local/share/vim/vim32x32.xpm
+   Mwm*Vim*iconImage: /usr/local/share/viai/viai32x32.xpm
 
 
 Mouse Pointers Available in X11 ~

@@ -1,4 +1,4 @@
-![Vim Logo](https://github.com/vim/vim/blob/master/runtime/vimlogo.gif)
+![ViAI Logo](../runtime/viai_logo.svg)
 
 # Vim source code #
 

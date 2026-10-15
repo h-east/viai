@@ -36,6 +36,7 @@ SRC_ALL =	\
 		ci/remove_snap.sh \
 		ci/ddebs.list \
 		ci/pinned-pkgs \
+		tools/viai_logo.py \
 		src/Make_all.mak \
 		src/Make_tags.mak \
 		src/README.md \
@@ -572,8 +573,8 @@ SRC_UNIX =	\
 		src/testdir/Makefile \
 		src/testdir/util/unix.vim \
 		src/toolcheck \
-		src/vim_icon.xbm \
-		src/vim_mask.xbm \
+		src/viai_icon.xbm \
+		src/viai_mask.xbm \
 		src/vimtutor \
 		src/gvimtutor \
 		src/wayland.c \
@@ -683,6 +684,7 @@ SRC_DOS =	\
 SRC_DOS_BIN =	\
 		src/tearoff.bmp \
 		src/tools.bmp \
+		src/viai.ico \
 		src/vim*.ico \
 		src/vim.tlb \
 		src/xpm/COPYRIGHT \
@@ -693,7 +695,7 @@ SRC_DOS_BIN =	\
 		src/xpm/x64/lib/libXpm.a \
 		src/xpm/x86/lib-vc14/libXpm.lib \
 		src/xpm/x86/lib/libXpm.a \
-		runtime/bitmaps/vim.ico \
+		runtime/bitmaps/viai.ico \
 
 # Source files for Amiga, DOS, etc. (also in the extra archive).
 SRC_AMI_DOS =	\
@@ -968,18 +970,15 @@ RT_UNIX =	\
 
 # Unix-like and MS Windows runtime without CR/LF translation.
 RT_UNIX_DOS_BIN =	\
-		runtime/vim16x16.gif \
-		runtime/vim16x16.png \
-		runtime/vim16x16.xpm \
-		runtime/vim16x16_png.h \
-		runtime/vim32x32.gif \
-		runtime/vim32x32.png \
-		runtime/vim32x32.xpm \
-		runtime/vim32x32_png.h \
-		runtime/vim48x48.gif \
-		runtime/vim48x48.png \
-		runtime/vim48x48.xpm \
-		runtime/vim48x48_png.h \
+		runtime/viai16x16.png \
+		runtime/viai16x16.xpm \
+		runtime/viai16x16_png.h \
+		runtime/viai32x32.png \
+		runtime/viai32x32.xpm \
+		runtime/viai32x32_png.h \
+		runtime/viai48x48.png \
+		runtime/viai48x48.xpm \
+		runtime/viai48x48_png.h \
 
 # Runtime not for Unix-like or extra.
 RT_NO_UNIX =	\
@@ -1002,11 +1001,7 @@ RT_DOS =	\
 
 # MS Windows runtime without CR/LF translation (also in the extra archive).
 RT_DOS_BIN =	\
-		runtime/vimlogo.cdr \
-		runtime/vimlogo.eps \
-		runtime/vimlogo.gif \
-		runtime/vimlogo.pdf \
-		runtime/vimlogo.svg \
+		runtime/viai_logo.svg \
 
 # Amiga runtime (also in the extra archive)
 RT_AMI =	\
@@ -1090,7 +1085,6 @@ EXTRA =		\
 		$(RT_EXTRA) \
 		$(SRC_EXTRA) \
 		README_extra.txt \
-		runtime/vimlogo.xpm \
 
 # Files in READMEdir that are included from the top dir.
 IN_README_DIR = \
@@ -1112,7 +1106,6 @@ IN_README_DIR = \
 		README_src.txt \
 		README_srcdos.txt \
 		README_unix.txt \
-		README_vimlogo.txt \
 		README_vms.txt \
 		README_w32s.txt \
 		Contents \

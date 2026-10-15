@@ -2739,9 +2739,9 @@ pixbuf_new_from_png_data(const unsigned char *data, unsigned int len)
     static void
 mainwin_realize(GtkWidget *widget UNUSED, gpointer data UNUSED)
 {
-#include "../runtime/vim16x16_png.h"
-#include "../runtime/vim32x32_png.h"
-#include "../runtime/vim48x48_png.h"
+#include "../runtime/viai16x16_png.h"
+#include "../runtime/viai32x32_png.h"
+#include "../runtime/viai48x48_png.h"
 
     GdkWindow * const mainwin_win = gtk_widget_get_window(gui.mainwin);
 
@@ -2770,9 +2770,9 @@ mainwin_realize(GtkWidget *widget UNUSED, gpointer data UNUSED)
 	     */
 	    GList *icons = NULL;
 
-	    icons = g_list_prepend(icons, pixbuf_new_from_png_data(vim16x16_png, vim16x16_png_len));
-	    icons = g_list_prepend(icons, pixbuf_new_from_png_data(vim32x32_png, vim32x32_png_len));
-	    icons = g_list_prepend(icons, pixbuf_new_from_png_data(vim48x48_png, vim48x48_png_len));
+	    icons = g_list_prepend(icons, pixbuf_new_from_png_data(viai16x16_png, viai16x16_png_len));
+	    icons = g_list_prepend(icons, pixbuf_new_from_png_data(viai32x32_png, viai32x32_png_len));
+	    icons = g_list_prepend(icons, pixbuf_new_from_png_data(viai48x48_png, viai48x48_png_len));
 
 	    gtk_window_set_icon_list(GTK_WINDOW(gui.mainwin), icons);
 
