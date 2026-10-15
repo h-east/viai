@@ -772,7 +772,6 @@ SRC_EXTRA =	\
 
 # Runtime files for all distributions.
 RT_ALL =	\
-		README.txt \
 		README.md \
 		LICENSE \
 		LICENSE-APACHE \
@@ -1005,7 +1004,6 @@ RT_DOS_BIN =	\
 
 # Amiga runtime (also in the extra archive)
 RT_AMI =	\
-		README.txt.info \
 		README_ami.txt \
 		README_ami.txt.info \
 		runtime/doc.info \
@@ -1088,7 +1086,6 @@ EXTRA =		\
 
 # Files in READMEdir that are included from the top dir.
 IN_README_DIR = \
-		README.txt.info \
 		README_ami.txt \
 		README_ami.txt.info \
 		README_amibin.txt \

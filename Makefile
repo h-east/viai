@@ -107,7 +107,7 @@ MINOR = 2
 #
 # - Update Vim version number.  For a test version in: src/version.h,
 #   READMEdir/Contents, MAJOR/MINOR above, VIMMAJOR and VIMMINOR in
-#   src/Makefile, README.txt, README.md, src/README.md, READMEdir/README*.txt,
+#   src/Makefile, README.md, src/README.md, READMEdir/README*.txt,
 #   runtime/doc/*.txt.
 #   For a minor/major version: src/GvimExt/GvimExt.reg, src/viai.manifest.
 # - Compile Vim with GTK, Perl, Python, Python3, TCL, Ruby, Lua, Cscope and
