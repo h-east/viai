@@ -846,13 +846,20 @@ accordingly.  Vim proceeds in this order:
 		Amiga		s:.vimrc, home:.vimrc, home:vimfiles:vimrc
 				or $VIM/.vimrc
 		Haiku		$HOME/config/settings/vim/vimrc
+	When ViAI's own user configuration exists (see |viai-config|), these
+	are used instead of the files of Vim:
+		Unix		$HOME/.viairc, $HOME/.viai/vimrc
+				or $XDG_CONFIG_HOME/viai/vimrc
+		MS-Windows	$HOME/_viairc, $HOME/viaifiles/vimrc
+				or $VIM/_vimrc
 
 	The files are searched in the order specified above and only the first
 	one that is found is read.
 
 	RECOMMENDATION: Put all your Vim configuration stuff in the
 	$HOME/.vim/ directory ($HOME/vimfiles/ for MS-Windows).  That makes it
-	easy to copy it to another system.
+	easy to copy it to another system.  For ViAI's own user configuration
+	use $HOME/.viai/ ($HOME/viaifiles/ for MS-Windows).
 
 	If Vim was started with "-u filename", the file "filename" is used.
 	All following initializations until 4. are skipped. `$MYVIMRC` and
@@ -908,8 +915,14 @@ accordingly.  Vim proceeds in this order:
 		Note: For Win32, "$HOME" is checked first.  If no "_vimrc" or
 		".vimrc" is found there, "$VIM" is tried.  See |$VIM| for when
 		$VIM is not set.
-		Note: ViAI uses its own user vimrc files when its own user
-		configuration exists, see |viai-config|.
+		Note: When ViAI's own user configuration exists (see
+		|viai-config|), these are used instead of the files of Vim:
+			    "$HOME/.viairc"		  (for Unix) (*)
+			    "$HOME/.viai/vimrc"		  (for Unix) (*)
+			    "$XDG_CONFIG_HOME/viai/vimrc" (for Unix) (*)
+			    "$HOME/_viairc"		  (for Win32) (*)
+			    "$HOME/viaifiles/vimrc"	  (for Win32) (*)
+			    "$VIM/_vimrc"		  (for Win32) (*)
 	III The environment variable EXINIT.
 	    The value of $EXINIT is used as an Ex command line.
 	IV  The user exrc file(s).  Same as for the user vimrc file, but with
@@ -1162,7 +1175,9 @@ configuration (see |vimrc|) but it will source it only if no other
 initialization file is found in `$HOME` or `$HOME/.vim` (thus making this
 feature backward compatible).  However, if you want to migrate to use
 `$XDG_CONFIG_HOME/vim/` directory, you will have to move away your `~/.vimrc`
-and `~/.vim/vimrc` file.
+and `~/.vim/vimrc` file.  With ViAI's own user configuration (see
+|viai-config|) the same applies to `$XDG_CONFIG_HOME/viai/vimrc`, `~/.viairc`
+and `~/.viai/vimrc`.
 
 							*xdg-runtime*
 When the |xdg-vimrc| is used the 'runtimepath' and 'packpath' options will be
@@ -1171,6 +1186,8 @@ modified accordingly to respect the |xdg-base-dir|: >
   "$XDG_CONFIG_HOME/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,
    $XDG_CONFIG_HOME/vim/after"
 <
+With ViAI's own user configuration "$XDG_CONFIG_HOME/viai" is used instead of
+"$XDG_CONFIG_HOME/vim".
 
 Avoiding trojan horses ~
 							*trojan-horse*

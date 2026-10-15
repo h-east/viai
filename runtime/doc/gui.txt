@@ -72,6 +72,10 @@ When the GUI starts up initializations are carried out, in this order:
     versa.
   - On Unix, if "~/.config/vim/gvimrc" or "$XDG_CONFIG_HOME/vim/gvimrc"
     exists, it is sourced.  You can check this with ":version".
+  - When ViAI's own user configuration exists (see |viai-config|), the
+    files of ViAI are used instead of the files of Vim: "$HOME/.gviairc",
+    "$HOME/.viai/gvimrc" and "$XDG_CONFIG_HOME/viai/gvimrc" on Unix,
+    "$HOME/_gviairc" and "$HOME/viaifiles/gvimrc" on Win32.
   The name of the first file found is stored in $MYGVIMRC, unless it was
   already set.
 - If the 'exrc' option is set (which is NOT the default) the file ./.gvimrc
@@ -102,6 +106,10 @@ Recommended place for your personal GUI initializations:
 	Amiga		    s:.gvimrc, home:.gvimrc, home:vimfiles:gvimrc
 			    or $VIM/.gvimrc
 	Haiku		    $HOME/config/settings/vim/gvimrc
+When ViAI's own user configuration exists, these are used instead:
+	Unix		    $HOME/.gviairc or $HOME/.viai/gvimrc
+	Win32		    $HOME/_gviairc, $HOME/viaifiles/gvimrc
+			    or $VIM/_gvimrc
 
 The personal initialization files are searched in the order specified above
 and only the first one that is found is read.

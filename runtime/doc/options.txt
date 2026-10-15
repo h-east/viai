@@ -7548,8 +7548,10 @@ A jump table for the options with a short description can be found at |Q_op|.
 	And any other file searched for with the |:runtime| command.
 
 	For $XDG_CONFIG_HOME see |xdg-base-dir|.
-	ViAI uses its own directories when its own user configuration exists,
-	see |viai-config|.
+	When ViAI's own user configuration exists (see |viai-config|), the
+	default uses "$HOME/.viai" or "$XDG_CONFIG_HOME/viai" on Unix and
+	"$HOME/viaifiles" on MS-Windows instead of the personal directory of
+	Vim, also for the "after" directory.
 
 	The defaults for most systems are setup to search five locations:
 	1. In your $MYVIMDIR directory, for your personal preferences.
@@ -10084,7 +10086,9 @@ A jump table for the options with a short description can be found at |Q_op|.
 			feature}
 	Name of the directory where to store files for |:mkview|.
 	For $XDG_CONFIG_HOME see |xdg-base-dir|.
-	For ViAI's own user configuration see |viai-config|.
+	When ViAI's own user configuration exists (see |viai-config|), the
+	default is "$HOME/.viai/view" or "$XDG_CONFIG_HOME/viai/view" for Unix
+	and "$HOME/viaifiles/view" for Win32.
 	Environment variables are expanded |:set_env|.
 	This option cannot be set from a |modeline| or in the |sandbox|, for
 	security reasons.
