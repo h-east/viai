@@ -2688,7 +2688,7 @@ install-languages: languages $(DEST_LANG) $(DEST_KMAP) $(DEST_RT)
 	  fi ; \
 	fi
 
-# Install the icons for KDE, if the directory exists and the icon doesn't.
+# Install the icons for KDE, if the directory exists.
 # Always when $(DESTDIR) is not empty.
 ICONSVGPATH = $(DESTDIR)$(DATADIR)/icons/hicolor/scalable/apps
 ICON48PATH = $(DESTDIR)$(DATADIR)/icons/hicolor/48x48/apps
@@ -2703,17 +2703,10 @@ install-icons:
 		$(ICON16PATH) $(DESKTOPPATH); \
 	fi
 
-	if test -d $(ICONSVGPATH) -a -w $(ICONSVGPATH) \
-		-a ! -f $(ICONSVGPATH)/$(GVIMNAME).svg; then \
+	if test -d $(ICONSVGPATH) -a -w $(ICONSVGPATH); then \
 	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai_logo.svg $(ICONSVGPATH)/$(GVIMNAME).svg; \
-	   if test -z "$(DESTDIR)" -a -x "$(GTK_UPDATE_ICON_CACHE)" \
-		   -a -w $(ICONTHEMEPATH) \
-		   -a -f $(ICONTHEMEPATH)/index.theme; then \
-		$(GTK_UPDATE_ICON_CACHE) -q $(ICONTHEMEPATH); \
-	   fi \
 	fi
-	if test -d $(ICON48PATH) -a -w $(ICON48PATH) \
-		-a ! -f $(ICON48PATH)/$(GVIMNAME).png; then \
+	if test -d $(ICON48PATH) -a -w $(ICON48PATH); then \
 	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai48x48.png $(ICON48PATH)/$(GVIMNAME).png; \
 	   if test -z "$(DESTDIR)" -a -x "$(GTK_UPDATE_ICON_CACHE)" \
 		   -a -w $(ICONTHEMEPATH) \
@@ -2721,12 +2714,10 @@ install-icons:
 		$(GTK_UPDATE_ICON_CACHE) -q $(ICONTHEMEPATH); \
 	   fi \
 	fi
-	if test -d $(ICON32PATH) -a -w $(ICON32PATH) \
-		-a ! -f $(ICON32PATH)/$(GVIMNAME).png; then \
+	if test -d $(ICON32PATH) -a -w $(ICON32PATH); then \
 	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai32x32.png $(ICON32PATH)/$(GVIMNAME).png; \
 	fi
-	if test -d $(ICON16PATH) -a -w $(ICON16PATH) \
-		-a ! -f $(ICON16PATH)/$(GVIMNAME).png; then \
+	if test -d $(ICON16PATH) -a -w $(ICON16PATH); then \
 	   $(INSTALL_DATA) $(SCRIPTSOURCE)/viai16x16.png $(ICON16PATH)/$(GVIMNAME).png; \
 	fi
 	if test -d $(DESKTOPPATH) -a -w $(DESKTOPPATH); then \
