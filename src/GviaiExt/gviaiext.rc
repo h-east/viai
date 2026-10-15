@@ -51,9 +51,9 @@ BEGIN
             VALUE "InternalName", "gvim right-click menu extension\0"
             VALUE "LegalCopyright", "Copyright © 1999 Tianmiao Hu\0"
             VALUE "LegalTrademarks", "Tianmiao Hu's Gvim Context Menu Extension\0"
-            VALUE "OriginalFilename", "gvimext.dll\0"
+            VALUE "OriginalFilename", "gviaiext.dll\0"
             VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "Tianmiao Hu's  gvimext context menu extension\0"
+            VALUE "ProductName", "Tianmiao Hu's  gviaiext context menu extension\0"
             VALUE "ProductVersion", "1, 0, 0, 1\0"
             VALUE "SpecialBuild", "\0"
         END

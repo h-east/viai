@@ -1,4 +1,4 @@
-README.txt for the gvimext DLL.
+README.txt for the gviaiext DLL.
 
 Written by Tianmiao Hu.  Edited by Bram Moolenaar.
 
@@ -11,16 +11,16 @@ registry entries.
 
 In special situations you might want to make changes by hand.  Check these
 items:
-- The gvimext.dll, gviai.exe and uninstall.exe either need to be in the search
+- The gviaiext.dll, gviai.exe and uninstall.exe either need to be in the search
   path, or you have to set the full path in the registry entries.  You could
-  move the gvimext.dll to the "windows\system" or "windows\system32"
+  move the gviaiext.dll to the "windows\system" or "windows\system32"
   directory, where the other DLL files are.
 - You can find the names of the used registry entries in the file
-  "GvimExt.reg".  You can edit this file to add the paths.  To install the
-  registry entries, right-click the gvimext.reg file and choose the "merge"
+  "GviaiExt.reg".  You can edit this file to add the paths.  To install the
+  registry entries, right-click the gviaiext.reg file and choose the "merge"
   menu option.
 - The registry key [HKEY_LOCAL_MACHINE\Software\ViAI\Gviai] is used by the
-  gvimext.dll.  The value "path" specifies the location of "gviai.exe".  If
+  gviaiext.dll.  The value "path" specifies the location of "gviai.exe".  If
   gviai.exe is in the search path, the path can be omitted.  The value "lang"
   can be used to set the language, for example "de" for German.  If "lang" is
   omitted, the language set for Windows will be used.
@@ -36,17 +36,17 @@ the "uninstal.exe" program.
 
 In special situations you might want to uninstall by hand:
 - Open the registry by running regedit.exe.
-- Delete all the keys listed in GvimExt.reg, except this one:
+- Delete all the keys listed in GviaiExt.reg, except this one:
   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved]
   For this key, only delete one value:
   "{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}"="ViAI Shell Extension"
-- Delete the gvimext.dll, if you want.  You might need to reboot the machine
+- Delete the gviaiext.dll, if you want.  You might need to reboot the machine
   in order to remove this file.  A quick way is to log off and re-login.
 
 Another method is by using the uninst.bat script:
-    uninst gvimext.inf
+    uninst gviaiext.inf
 This batch file will remove all the registry keys from the system.  Then you
-can remove the gvimext.dll file.
+can remove the gviaiext.dll file.
 Note: In order for this batch file to work, you must have two system files:
 rundll32.exe and setupapi.dll.  I believe you will have rundll32.exe in your
 system.  I know windows nt 4.0 with the service pack 4 has setupapi.dll.  My
@@ -60,27 +60,27 @@ windows nt, both files are under c:\winnt\system32 directory. In my windows 95
 system, I got setupapi.dll at c:\windows\system and rundll32.exe at
 c:\windows.  So you might want to try something like:
     rundll32.exe c:\windows\system\setupapi.dll,InstallHinfSection DefaultUninstall 128 %1
-where %1 can be substituted by gvimext.inf
+where %1 can be substituted by gviaiext.inf
 
 
 THE SOURCE CODE
 
 I have provided the source code here in hope that gvim users around world can
 further enhance this little dll.  I believe the only thing you need to change
-is gvimext.cpp file.  The important two functions you need to look at are
+is gviaiext.cpp file.  The important two functions you need to look at are
 QueryContextMenu and InvokeCommand.  You can modify right-click menus in the
 QueryContextMenu function and invoke gvim in the InvokeCommand function.  Note
 the selected files can be accessed from the DragQueryFile function.  I am not
 familiar with the invoking options for gvim.  I believe there are some
 improvements that can be made on that side.
 
-I use MS Visual C++ 6.0's nmake to make the gvimext.dll.  I don't have a
+I use MS Visual C++ 6.0's nmake to make the gviaiext.dll.  I don't have a
 chance to try earlier versions of MSVC.  The files that are required for build
 are:
-	gvimext.cpp
-	gvimext.h
-	gvimext.def
-	gvimext.rc
+	gviaiext.cpp
+	gviaiext.h
+	gviaiext.def
+	gviaiext.rc
 	resource.h
 	Makefile
 

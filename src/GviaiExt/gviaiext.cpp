@@ -7,14 +7,14 @@
  */
 
 /*
- * gvimext is a DLL which is used for the "Edit with Vim" context menu
+ * gviaiext is a DLL which is used for the "Edit with ViAI" context menu
  * extension.  It implements a MS defined interface with the Shell.
  *
  * If you have any questions or any suggestions concerning gvimext, please
  * contact Tianmiao Hu: tianmiao@acm.org.
  */
 
-#include "gvimext.h"
+#include "gviaiext.h"
 #include "../version.h"
 
 #define ARRAY_LENGTH(a) (sizeof(a) / sizeof((a)[0]))
@@ -22,7 +22,7 @@
 static char *searchpath(char *name);
 
 // Always get an error while putting the following stuff to the
-// gvimext.h file as class protected variables, give up and
+// gviaiext.h file as class protected variables, give up and
 // declare them as global stuff
 FORMATETC fmte = {CF_HDROP,
 		  (DVTARGETDEVICE FAR *)NULL,
@@ -276,7 +276,7 @@ dyn_libintl_init(char *dir)
     if (hLibintlDLL)
 	return 1;
 
-    // Load gettext library from $VIMRUNTIME\GvimExt{64,32} directory.
+    // Load gettext library from $VIMRUNTIME\GviaiExt{64,32} directory.
     // Add the directory to $PATH temporarily.
     len = GetEnvironmentVariableW(L"PATH", NULL, 0);
     len2 = MAX_PATH + 1 + len;
@@ -286,9 +286,9 @@ dyn_libintl_init(char *dir)
     {
 	GetEnvironmentVariableW(L"PATH", buf, len);
 # ifdef _WIN64
-	_snwprintf(buf2, len2, L"%S\\GvimExt64;%s", dir, buf);
+	_snwprintf(buf2, len2, L"%S\\GviaiExt64;%s", dir, buf);
 # else
-	_snwprintf(buf2, len2, L"%S\\GvimExt32;%s", dir, buf);
+	_snwprintf(buf2, len2, L"%S\\GviaiExt32;%s", dir, buf);
 # endif
 	SetEnvironmentVariableW(L"PATH", buf2);
 	hLibintlDLL = LoadLibrary(GETTEXT_DLL);
@@ -1083,7 +1083,7 @@ STDMETHODIMP CShellExt::InvokeSingleGvim(HWND hParent,
 	char *prev = set_gettext_codeset();
 
 	WCHAR *msg = W(_("Error creating process: Check if gviai is in your path!"));
-	WCHAR *title = W(_("gvimext.dll error"));
+	WCHAR *title = W(_("gviaiext.dll error"));
 
 	MessageBoxW(hParent, msg, title, MB_OK);
 

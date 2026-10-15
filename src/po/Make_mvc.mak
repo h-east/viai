@@ -384,7 +384,7 @@ uk.cp1251.po: uk.po
 PO_INPUTLIST = \
 	..\*.c \
 	..\if_perl.xs \
-	..\GvimExt\gvimext.cpp \
+	..\GviaiExt\gviaiext.cpp \
 	..\errors.h \
 	..\globals.h \
 	..\if_py_both.h \

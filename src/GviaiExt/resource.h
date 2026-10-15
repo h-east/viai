@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
-// Used by gvimext.rc
+// Used by gviaiext.rc
 //
 
 // Next default values for new objects

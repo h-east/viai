@@ -29,7 +29,7 @@ src/Make_mvc.mak	MS Visual C++ makefile for the Win32 GUI.
 
 src/if_ole.*		OLE automation interface, for MS Windows.
 
-src/GvimExt/*		DLL for the "Edit with Vim" context menu entry
+src/GviaiExt/*		DLL for the "Edit with Vim" context menu entry
 
 runtime/doc/*.man	Preprocessed manual pages.
 

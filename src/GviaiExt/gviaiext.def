@@ -1,6 +1,6 @@
 ;gvimdef.def : Declares the module parameters for the DLL.
 
-LIBRARY      gvimext
+LIBRARY      gviaiext
 ; DESCRIPTION  'Vim Shell Extension'
 
 EXPORTS

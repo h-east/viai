@@ -1,8 +1,8 @@
 ;gvimdef_ming.def : Declares the module parameters for the DLL.
 ;The mingw environment doesn't know anything about private declarations
-;Hence this is the same file as gvimext.def with private removed
+;Hence this is the same file as gviaiext.def with private removed
 
-LIBRARY      gvimext
+LIBRARY      gviaiext
 ; DESCRIPTION  'Vim Shell Extension build with MinGW'
 
 EXPORTS

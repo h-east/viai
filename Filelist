@@ -609,19 +609,19 @@ SRC_DOS_UNIX =	\
 # Source files for MS Windows (also in the extra archive).
 SRC_DOS =	\
 		src/auto/nmake/tools.mak \
-		src/GvimExt/*.mak \
-		src/GvimExt/GvimExt.reg \
-		src/GvimExt/Makefile \
-		src/GvimExt/README.txt \
-		src/GvimExt/gvimext.cpp \
-		src/GvimExt/gvimext.def \
-		src/GvimExt/gvimext.h \
-		src/GvimExt/gvimext.inf \
-		src/GvimExt/gvimext.rc \
-		src/GvimExt/gvimext_ming.def \
-		src/GvimExt/gvimext_ming.rc \
-		src/GvimExt/resource.h \
-		src/GvimExt/uninst.bat \
+		src/GviaiExt/*.mak \
+		src/GviaiExt/GviaiExt.reg \
+		src/GviaiExt/Makefile \
+		src/GviaiExt/README.txt \
+		src/GviaiExt/gviaiext.cpp \
+		src/GviaiExt/gviaiext.def \
+		src/GviaiExt/gviaiext.h \
+		src/GviaiExt/gviaiext.inf \
+		src/GviaiExt/gviaiext.rc \
+		src/GviaiExt/gviaiext_ming.def \
+		src/GviaiExt/gviaiext_ming.rc \
+		src/GviaiExt/resource.h \
+		src/GviaiExt/uninst.bat \
 		README_srcdos.txt \
 		src/INSTALLpc.txt \
 		src/Make_cyg.mak \

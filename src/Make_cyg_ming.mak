@@ -1178,7 +1178,7 @@ endif
 # To increase the stack size to 16MB, uncomment the following line:
 #LFLAGS += -Wl,-stack -Wl,0x1000000
 
-all: $(MAIN_TARGET) viairun.exe xxd/xxd.exe tee/tee.exe install.exe uninstall.exe GvimExt/gvimext.dll
+all: $(MAIN_TARGET) viairun.exe xxd/xxd.exe tee/tee.exe install.exe uninstall.exe GviaiExt/gviaiext.dll
 
 # Coverage instrumentation makes _wsystem() in viairun hang, and viairun is not
 # part of Vim itself, so never instrument it.
@@ -1236,8 +1236,8 @@ xxd/xxd.exe: xxd/xxd.c
 tee/tee.exe: tee/tee.c
 	$(MAKE) -C tee -f Make_ming.mak CC='$(CC)'
 
-GvimExt/gvimext.dll: GvimExt/gvimext.cpp GvimExt/gvimext.rc GvimExt/gvimext.h
-	$(MAKE) -C GvimExt -f Make_ming.mak CROSS=$(CROSS) CROSS_COMPILE=$(CROSS_COMPILE) CXX=$(CXX) STATIC_STDCPLUS=$(STATIC_STDCPLUS)
+GviaiExt/gviaiext.dll: GviaiExt/gviaiext.cpp GviaiExt/gviaiext.rc GviaiExt/gviaiext.h
+	$(MAKE) -C GviaiExt -f Make_ming.mak CROSS=$(CROSS) CROSS_COMPILE=$(CROSS_COMPILE) CXX=$(CXX) STATIC_STDCPLUS=$(STATIC_STDCPLUS)
 
 tags: notags
 	$(CTAGS) $(TAGS_FILES)
@@ -1262,7 +1262,7 @@ endif
 ifdef MZSCHEME
 	-$(DEL) mzscheme_base.c
 endif
-	$(MAKE) -C GvimExt -f Make_ming.mak clean
+	$(MAKE) -C GviaiExt -f Make_ming.mak clean
 	$(MAKE) -C xxd -f Make_ming.mak clean
 	$(MAKE) -C tee -f Make_ming.mak clean
 

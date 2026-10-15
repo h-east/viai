@@ -305,7 +305,7 @@ OBJDIR = $(OBJDIR)$(CPU)
 NODEBUG = 1
 !ELSE
 ! UNDEF NODEBUG
-MAKEFLAGS_GVIMEXT = DEBUG=yes
+MAKEFLAGS_GVIAIEXT = DEBUG=yes
 !ENDIF
 
 LINK = link
@@ -628,8 +628,8 @@ CPUARG = /arch:AVX512
 CPUARG = /arch:$(CPUNR)
 !ENDIF
 
-# Pass CPUARG to GvimExt, to avoid using version-dependent defaults
-MAKEFLAGS_GVIMEXT = $(MAKEFLAGS_GVIMEXT) CPUARG="$(CPUARG)"
+# Pass CPUARG to GviaiExt, to avoid using version-dependent defaults
+MAKEFLAGS_GVIAIEXT = $(MAKEFLAGS_GVIAIEXT) CPUARG="$(CPUARG)"
 
 !IF "$(VIMDLL)" == "yes"
 VIMDLLBASE = viai
@@ -938,8 +938,8 @@ SUBSYSTEM_TOOLS = $(SUBSYSTEM_TOOLS),$(SUBSYSTEM_VER)
 ! IF "$(VIMDLL)" == "yes"
 SUBSYSTEM_CON = $(SUBSYSTEM_CON),$(SUBSYSTEM_VER)
 ! ENDIF
-# Pass SUBSYSTEM_VER to GvimExt and other tools
-MAKEFLAGS_GVIMEXT = $(MAKEFLAGS_GVIMEXT) SUBSYSTEM_VER=$(SUBSYSTEM_VER)
+# Pass SUBSYSTEM_VER to GviaiExt and other tools
+MAKEFLAGS_GVIAIEXT = $(MAKEFLAGS_GVIAIEXT) SUBSYSTEM_VER=$(SUBSYSTEM_VER)
 MAKEFLAGS_TOOLS = $(MAKEFLAGS_TOOLS) SUBSYSTEM_VER=$(SUBSYSTEM_VER)
 !ENDIF
 
@@ -1341,7 +1341,7 @@ all: $(MAIN_TARGET) \
 	uninstall.exe \
 	xxd/xxd.exe \
 	tee/tee.exe \
-	GvimExt/gvimext.dll
+	GviaiExt/gviaiext.dll
 
 # To get around the command line limit: Make use of nmake's response files to
 # capture the arguments for $(LINK) in a file  using the @<<ARGS<< syntax.
@@ -1421,9 +1421,9 @@ tee/tee.exe: tee/tee.c
 	$(MAKE) -lf Make_mvc.mak $(MAKEFLAGS_TOOLS)
 	cd ..
 
-GvimExt/gvimext.dll: GvimExt/gvimext.cpp GvimExt/gvimext.rc GvimExt/gvimext.h
-	cd GvimExt
-	$(MAKE) -lf Make_mvc.mak $(MAKEFLAGS_GVIMEXT)
+GviaiExt/gviaiext.dll: GviaiExt/gviaiext.cpp GviaiExt/gviaiext.rc GviaiExt/gviaiext.h
+	cd GviaiExt
+	$(MAKE) -lf Make_mvc.mak $(MAKEFLAGS_GVIAIEXT)
 	cd ..
 
 
@@ -1467,7 +1467,7 @@ clean: testclean
 	cd tee
 	$(MAKE) -lf Make_mvc.mak clean
 	cd ..
-	cd GvimExt
+	cd GviaiExt
 	$(MAKE) -lf Make_mvc.mak clean
 	cd ..
 

@@ -1029,17 +1029,17 @@ correct directory structure.
      copy src\xxd\xxd.exe vim91
 
   To install the "Edit with Vim" popup menu, you need both 32-bit and 64-bit
-  versions of gvimext.dll.  They should be copied to "vim91\GvimExt32" and
-  "vim91\GvimExt64" respectively.
+  versions of gviaiext.dll.  They should be copied to "vim91\GviaiExt32" and
+  "vim91\GviaiExt64" respectively.
   First, build the 32-bit version, then:
 
-     mkdir vim91\GvimExt32
-     copy src\GvimExt\gvimext.dll vim91\GvimExt32
+     mkdir vim91\GviaiExt32
+     copy src\GviaiExt\gviaiext.dll vim91\GviaiExt32
 
   Next, clean the 32-bit version and build the 64-bit version, then:
 
-     mkdir vim91\GvimExt64
-     copy src\GvimExt\gvimext.dll vim91\GvimExt64
+     mkdir vim91\GviaiExt64
+     copy src\GviaiExt\gviaiext.dll vim91\GviaiExt64
 
   C.  Copy gettext and iconv DLLs into the "vim91" directory
   ----------------------------------------------------------
@@ -1054,12 +1054,12 @@ correct directory structure.
             |   libiconv-2.dll
             |   libgcc_s_sjlj-1.dll     (only for 32-bit)
             |
-            + GvimExt32\
+            + GviaiExt32\
             |   libintl-8.dll
             |   libiconv-2.dll
             |   libgcc_s_sjlj-1.dll
             |
-            ` GvimExt64\
+            ` GviaiExt64\
                 libintl-8.dll
                 libiconv-2.dll
 

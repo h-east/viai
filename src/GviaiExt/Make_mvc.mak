@@ -1,4 +1,4 @@
-# Makefile for GvimExt, using MSVC
+# Makefile for GviaiExt, using MSVC
 # Options:
 #   DEBUG=yes		Build debug version (for VC7 and maybe later)
 #   CPUARG=		/arch:IA32/AVX/etc, call from main makefile to set
@@ -77,26 +77,26 @@ OFFSET = 0x11C000000
 OFFSET = 0x1C000000
 !ENDIF
 
-all: gvimext.dll
+all: gviaiext.dll
 
-gvimext.dll: gvimext.obj gvimext.res
-	$(link) $(lflags) -dll -def:gvimext.def -base:$(OFFSET) \
+gviaiext.dll: gviaiext.obj gviaiext.res
+	$(link) $(lflags) -dll -def:gviaiext.def -base:$(OFFSET) \
 		-out:$*.dll $** $(olelibsdll) shell32.lib comctl32.lib \
 		-subsystem:$(SUBSYSTEM)
 
-gvimext.obj: gvimext.h ../version.h
+gviaiext.obj: gviaiext.h ../version.h
 
 .cpp.obj:
 	$(cc) $(cflags) -DFEAT_GETTEXT $(cvarsmt) $*.cpp
 
-gvimext.res: gvimext.rc
-	$(rc) /nologo $(rcflags) $(rcvars) gvimext.rc
+gviaiext.res: gviaiext.rc
+	$(rc) /nologo $(rcflags) $(rcvars) gviaiext.rc
 
 clean:
-	- if exist gvimext.dll $(RM) gvimext.dll
-	- if exist gvimext.lib $(RM) gvimext.lib
-	- if exist gvimext.exp $(RM) gvimext.exp
-	- if exist gvimext.obj $(RM) gvimext.obj
-	- if exist gvimext.res $(RM) gvimext.res
+	- if exist gviaiext.dll $(RM) gviaiext.dll
+	- if exist gviaiext.lib $(RM) gviaiext.lib
+	- if exist gviaiext.exp $(RM) gviaiext.exp
+	- if exist gviaiext.obj $(RM) gviaiext.obj
+	- if exist gviaiext.res $(RM) gviaiext.res
 
 # vim: set noet sw=8 ts=8 sts=0 wm=0 tw=79 ft=make:

@@ -34,8 +34,8 @@ src/dobj*/pathdef.c
 src/gobj*/pathdef.c
 src/obj*/pathdef.c
 src/Obj*/pathdef.c
-gvimext.dll
-gvimext.lib
+gviaiext.dll
+gviaiext.lib
 gvim.lib
 gviai.lib
 runtime/doc/uganda.nsis.txt

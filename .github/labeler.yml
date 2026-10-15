@@ -97,7 +97,7 @@ platform-windows:
         - 'src/*.bat'
         - 'src/*.bmp'
         - 'src/*.ico'
-        - 'src/GvimExt/*'
+        - 'src/GviaiExt/*'
         - 'src/INSTALLpc.txt'
         - 'src/Make_cyg*.mak'
         - 'src/Make_ming.mak'

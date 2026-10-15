@@ -19,4 +19,4 @@ HKLM,Software\ViAI\Gviai
 HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\Vim 9.2"
 
 [Strings]
-ThisDll="gvimext.dll"
+ThisDll="gviaiext.dll"

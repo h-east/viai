@@ -109,7 +109,7 @@ MINOR = 2
 #   READMEdir/Contents, MAJOR/MINOR above, VIMMAJOR and VIMMINOR in
 #   src/Makefile, README.md, src/README.md, READMEdir/README*.txt,
 #   runtime/doc/*.txt.
-#   For a minor/major version: src/GvimExt/GvimExt.reg, src/viai.manifest.
+#   For a minor/major version: src/GviaiExt/GviaiExt.reg, src/viai.manifest.
 # - Compile Vim with GTK, Perl, Python, Python3, TCL, Ruby, Lua, Cscope and
 #   "huge" features.  Add MZscheme if you can make it work.
 #   Use "make reconfig" after selecting the configure arguments.
@@ -187,7 +187,7 @@ MINOR = 2
 #   > nmake.exe -f Make_mvc.mak testgvim
 # - move "gvim.exe" to here (otherwise the OLE version will overwrite it).
 # - Move gvim.pdb to here.
-# - Copy "GvimExt/gvimext.dll" to here.
+# - Copy "GviaiExt/gviaiext.dll" to here.
 # - Delete viairun.exe, install.exe and uninstall.exe.
 # Win32 GUI version with OLE, PERL, Ruby, TCL, PYTHON and dynamic IME:
 # - Install the interfaces you want, see src/INSTALLpc.txt
@@ -492,10 +492,10 @@ dosbin_gvim: dist dist/$(COMMENT_GVIM)
 	cp viairun.exe dist/vim/$(VIMRTDIR)/viairun.exe
 	cp installw32.exe dist/vim/$(VIMRTDIR)/install.exe
 	cp uninstallw32.exe dist/vim/$(VIMRTDIR)/uninstall.exe
-	mkdir dist/vim/$(VIMRTDIR)/GvimExt32
-	cp gvimext.dll dist/vim/$(VIMRTDIR)/GvimExt32/gvimext.dll
-	mkdir dist/vim/$(VIMRTDIR)/GvimExt64
-	cp gvimext64.dll dist/vim/$(VIMRTDIR)/GvimExt64/gvimext.dll
+	mkdir dist/vim/$(VIMRTDIR)/GviaiExt32
+	cp gviaiext.dll dist/vim/$(VIMRTDIR)/GviaiExt32/gviaiext.dll
+	mkdir dist/vim/$(VIMRTDIR)/GviaiExt64
+	cp gviaiext64.dll dist/vim/$(VIMRTDIR)/GviaiExt64/gviaiext.dll
 	cd dist && zip -9 -rD -z gvim$(VERSION).zip vim <$(COMMENT_GVIM)
 	cp gvim.pdb dist/gvim$(VERSION).pdb
 
@@ -531,7 +531,7 @@ dosbin_ole: dist dist/$(COMMENT_OLE)
 	cp viairun.exe dist/vim/$(VIMRTDIR)/viairun.exe
 	cp installw32.exe dist/vim/$(VIMRTDIR)/install.exe
 	cp uninstallw32.exe dist/vim/$(VIMRTDIR)/uninstall.exe
-	cp gvimext.dll dist/vim/$(VIMRTDIR)/gvimext.dll
+	cp gviaiext.dll dist/vim/$(VIMRTDIR)/gviaiext.dll
 	cp README_ole.txt dist/vim/$(VIMRTDIR)
 	cd dist && zip -9 -rD -z gvim$(VERSION)ole.zip vim <$(COMMENT_OLE)
 	cp gvim_ole.pdb dist/gvim$(VERSION)ole.pdb

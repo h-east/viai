@@ -159,7 +159,7 @@ you can.
    HKEY_CLASSES_ROOT\CLSID\{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}
 		{default}		    ViAI Shell Extension
    HKEY_CLASSES_ROOT\CLSID\{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}\InProcServer32
-		{default}		    {path}\gvimext.dll
+		{default}		    {path}\gviaiext.dll
 		ThreadingModel		    Apartment
    HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\gviai
 		{default}		    {F191A2A2-D786-484E-A3F4-8A75FDD9AC00}

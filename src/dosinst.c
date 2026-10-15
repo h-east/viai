@@ -20,8 +20,8 @@
 #include "dosinst.h"
 #include <io.h>
 
-#define GVIMEXT64_PATH	    "GvimExt64\\gvimext.dll"
-#define GVIMEXT32_PATH	    "GvimExt32\\gvimext.dll"
+#define GVIAIEXT64_PATH	    "GviaiExt64\\gviaiext.dll"
+#define GVIAIEXT32_PATH	    "GviaiExt32\\gviaiext.dll"
 
 // Macro to do an error check I was typing over and over
 #define CHECK_REG_ERROR(code) \
@@ -1598,12 +1598,12 @@ install_registry(void)
 	{
 	    if (i == 0)
 	    {
-		sprintf(bufg, "%s\\" GVIMEXT32_PATH, installdir);
+		sprintf(bufg, "%s\\" GVIAIEXT32_PATH, installdir);
 		flag = KEY_WOW64_32KEY;
 	    }
 	    else
 	    {
-		sprintf(bufg, "%s\\" GVIMEXT64_PATH, installdir);
+		sprintf(bufg, "%s\\" GVIAIEXT64_PATH, installdir);
 		flag = KEY_WOW64_64KEY;
 	    }
 
@@ -1687,7 +1687,7 @@ change_popup_choice(int idx)
 
 /*
  * Only add the choice for the popup menu entry when gvim.exe was found and
- * both gvimext.dll and regedit.exe exist.
+ * both gviaiext.dll and regedit.exe exist.
  */
     static void
 init_popup_choice(void)
@@ -1695,8 +1695,8 @@ init_popup_choice(void)
     struct stat	st;
 
     if (has_gvim
-	    && (stat(GVIMEXT32_PATH, &st) >= 0
-		|| stat(GVIMEXT64_PATH, &st) >= 0))
+	    && (stat(GVIAIEXT32_PATH, &st) >= 0
+		|| stat(GVIAIEXT64_PATH, &st) >= 0))
     {
 	choices[choice_count].changefunc = change_popup_choice;
 	choices[choice_count].installfunc = NULL;
@@ -2603,7 +2603,7 @@ show_help(void)
 ,
 "Edit-with-Vim context menu entry\n"
 "--------------------------------\n"
-"(this choice is only available when gvim.exe and gvimext.dll are present)\n"
+"(this choice is only available when gvim.exe and gviaiext.dll are present)\n"
 "You can associate different file types with Vim, so that you can (double)\n"
 "click on a file to edit it with Vim.  This means you have to individually\n"
 "select each file type.\n"

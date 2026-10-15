@@ -1,5 +1,5 @@
-# Project: gvimext
-# Generates gvimext.dll with gcc.
+# Project: gviaiext
+# Generates gviaiext.dll with gcc.
 # To be used with MingW and Cygwin.
 #
 # Originally, the DLL base address was fixed: -Wl,--image-base=0x1C000000
@@ -64,13 +64,13 @@ WINDRES := $(CROSS_COMPILE)windres
 # this used to have --preprocessor, but it's no longer supported
 WINDRES_FLAGS =
 LIBS :=  -luuid -lgdi32
-RES  := gvimext.res
+RES  := gviaiext.res
 ifeq ($(findstring clang++,$(CXX)),)
-DEFFILE = gvimext_ming.def
+DEFFILE = gviaiext_ming.def
 endif
-OBJ  := gvimext.o
+OBJ  := gviaiext.o
 
-DLL  := gvimext.dll
+DLL  := gviaiext.dll
 
 .PHONY: all all-before all-after clean clean-custom
 
@@ -86,10 +86,10 @@ $(DLL): $(OBJ) $(RES) $(DEFFILE)
 			$(LIBS) \
 		-Wl,-Bstatic $(STATIC_LIBS) -Wl,-Bdynamic
 
-gvimext.o: gvimext.cpp gvimext.h ../version.h
+gviaiext.o: gviaiext.cpp gviaiext.h ../version.h
 	$(CXX) $(CXXFLAGS) -DFEAT_GETTEXT -DWINVER=$(WINVER) -D_WIN32_WINNT=$(WINVER) -c $< -o $@
 
-$(RES): gvimext_ming.rc
+$(RES): gviaiext_ming.rc
 	$(WINDRES) $(WINDRES_FLAGS) --input-format=rc --output-format=coff -DMING $? -o $@
 
 clean: clean-custom
