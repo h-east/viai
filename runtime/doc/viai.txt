@@ -36,6 +36,10 @@ Vim:
 On MS-Windows the programs are "viai.exe" and "gviai.exe".  When built with
 the DLL support they use "viai32.dll" or "viai64.dll".  The GUI runs external
 commands with "viairun.exe" instead of "vimrun.exe", see |win32-vimrun|.
+The "Edit with ViAI" entry of the Explorer context menu and the "Open
+With..." entry use their own registry entries, so that they do not replace
+the ones of Vim, see |win32-popup-menu|.  The window class of the GUI is
+"ViAI" instead of "Vim".
 
 "ex", "view", "gview", "rview", "rgview" and "eview" are not installed.  Use
 "viai -e", "viai -R", etc. instead, see |-e| and |-R|.

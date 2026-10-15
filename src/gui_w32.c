@@ -4653,7 +4653,7 @@ static UINT	s_menu_id = 100;
 #define USE_SYSMENU_FONT
 
 #define VIM_NAME	"vim"
-#define VIM_CLASSW	L"Vim"
+#define VIM_CLASSW	L"ViAI"
 
 // Initial size for the dialog template.  For gui_mch_dialog() it's fixed,
 // thus there should be room for every dialog.  For tearoffs it's made bigger
@@ -5949,7 +5949,7 @@ gui_mch_init(void)
 	    // structure.
 	    s_hwnd = CreateWindowExW(
 		WS_EX_MDICHILD,
-		szVimWndClassW, L"Vim MSWindows GUI",
+		szVimWndClassW, L"ViAI MSWindows GUI",
 		WS_OVERLAPPEDWINDOW | WS_CHILD
 				 | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | 0xC000,
 		gui_win_x == -1 ? CW_USEDEFAULT : gui_win_x,
@@ -5981,7 +5981,7 @@ gui_mch_init(void)
 	// Create a window.  If win_socket_id is not zero without border and
 	// titlebar, it will be reparented below.
 	s_hwnd = CreateWindowW(
-		szVimWndClassW, L"Vim MSWindows GUI",
+		szVimWndClassW, L"ViAI MSWindows GUI",
 		(win_socket_id == 0 ? WS_OVERLAPPEDWINDOW : WS_POPUP)
 					  | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
 		gui_win_x == -1 ? CW_USEDEFAULT : gui_win_x,

@@ -38,8 +38,8 @@ UINT cbFiles = 0;
  * enough */
 #define BUFSIZE 1100
 
-// The "Edit with Vim" shell extension provides these choices when
-// a new instance of Gvim is selected:
+// The "Edit with ViAI" shell extension provides these choices when
+// a new instance of Gviai is selected:
 //   - use tabpages
 //   - enable diff mode
 //   - none of the above
@@ -58,11 +58,11 @@ getGvimName(char *name, BOOL runtime)
     HKEY	keyhandle;
     DWORD	hlen;
 
-    // Get the location of gvim from the registry.  Try
+    // Get the location of gviai from the registry.  Try
     // HKEY_CURRENT_USER first, then fall back to HKEY_LOCAL_MACHINE if
     // not found.
     name[0] = 0;
-    if (RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Vim\\Gvim", 0,
+    if (RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\ViAI\\Gviai", 0,
 				       KEY_READ, &keyhandle) == ERROR_SUCCESS)
     {
 	hlen = BUFSIZE;
@@ -75,7 +75,7 @@ getGvimName(char *name, BOOL runtime)
     }
 
     if ((name[0] == 0) &&
-	    (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Vim\\Gvim", 0,
+	    (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\ViAI\\Gviai", 0,
 				       KEY_READ, &keyhandle) == ERROR_SUCCESS))
     {
 	hlen = BUFSIZE;
@@ -89,16 +89,16 @@ getGvimName(char *name, BOOL runtime)
 
     // Registry didn't work, use the search path.
     if (name[0] == 0)
-	strcpy(name, searchpath((char *)"gvim.exe"));
+	strcpy(name, searchpath((char *)"gviai.exe"));
 
     if (!runtime)
     {
 	// Only when looking for the executable, not the runtime dir, we can
 	// search for the batch file or a name without a path.
 	if (name[0] == 0)
-	    strcpy(name, searchpath((char *)"gvim.bat"));
+	    strcpy(name, searchpath((char *)"gviai.bat"));
 	if (name[0] == 0)
-	    strcpy(name, "gvim");	// finds gvim.bat or gvim.exe
+	    strcpy(name, "gviai");	// finds gviai.bat or gviai.exe
     }
 }
 
@@ -148,7 +148,7 @@ getRuntimeDir(char *buf)
     if (strchr(buf, '/') == NULL && strchr(buf, '\\') == NULL)
 	strcpy(buf, searchpath(buf));
 
-    // remove "gvim.exe" from the end
+    // remove "gviai.exe" from the end
     for (idx = (int)strlen(buf) - 1; idx >= 0; idx--)
 	if (buf[idx] == '\\' || buf[idx] == '/')
 	{
@@ -696,8 +696,8 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     bool showExisting = true;
     bool showIcons = true;
 
-    // Check whether "Edit with existing Vim" entries are disabled.
-    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Vim\\Gvim", 0,
+    // Check whether "Edit with existing ViAI" entries are disabled.
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\ViAI\\Gviai", 0,
 				       KEY_READ, &keyhandle) == ERROR_SUCCESS)
     {
 	if (RegQueryValueEx(keyhandle, "DisableEditWithExisting", 0, NULL,
@@ -712,7 +712,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     // Use UTF-8 for gettext.
     char *prev = set_gettext_codeset();
 
-    // Retrieve all the vim instances, unless disabled.
+    // Retrieve all the ViAI instances, unless disabled.
     if (showExisting)
 	EnumWindows(EnumWindowsProc, (LPARAM)this);
 
@@ -727,13 +727,13 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     if (cbFiles > 1)
     {
 	mii.wID = idCmd++;
-	mii.dwTypeData = W(_("Edit with Vim using &tabpages"));
+	mii.dwTypeData = W(_("Edit with ViAI using &tabpages"));
 	mii.cch = wcslen(mii.dwTypeData);
 	InsertMenuItemW(hMenu, indexMenu++, TRUE, &mii);
 	free(mii.dwTypeData);
 
 	mii.wID = idCmd++;
-	mii.dwTypeData = W(_("Edit with single &Vim"));
+	mii.dwTypeData = W(_("Edit with single &ViAI"));
 	mii.cch = wcslen(mii.dwTypeData);
 	InsertMenuItemW(hMenu, indexMenu++, TRUE, &mii);
 	free(mii.dwTypeData);
@@ -742,7 +742,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	{
 	    // Can edit up to 4 files in diff mode
 	    mii.wID = idCmd++;
-	    mii.dwTypeData = W(_("Diff with Vim"));
+	    mii.dwTypeData = W(_("Diff with ViAI"));
 	    mii.cch = wcslen(mii.dwTypeData);
 	    InsertMenuItemW(hMenu, indexMenu++, TRUE, &mii);
 	    free(mii.dwTypeData);
@@ -755,7 +755,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     else
     {
 	mii.wID = idCmd++;
-	mii.dwTypeData = W(_("Edit with &Vim"));
+	mii.dwTypeData = W(_("Edit with &ViAI"));
 	mii.cch = wcslen(mii.dwTypeData);
 	InsertMenuItemW(hMenu, indexMenu++, TRUE, &mii);
 	free(mii.dwTypeData);
@@ -768,7 +768,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	hSubMenu = CreatePopupMenu();
 	mii.fMask |= MIIM_SUBMENU;
 	mii.wID = idCmd;
-	mii.dwTypeData = W(_("Edit with existing Vim"));
+	mii.dwTypeData = W(_("Edit with existing ViAI"));
 	mii.cch = wcslen(mii.dwTypeData);
 	mii.hSubMenu = hSubMenu;
 	InsertMenuItemW(hMenu, indexMenu++, TRUE, &mii);
@@ -776,7 +776,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	mii.fMask = mii.fMask & ~MIIM_SUBMENU;
 	mii.hSubMenu = NULL;
     }
-    // Now display all the vim instances
+    // Now display all the ViAI instances
     for (int i = 0; i < m_cntOfHWnd; i++)
     {
 	WCHAR title[BUFSIZE];
@@ -800,7 +800,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	    temp[0] = L'\0';
 	else
 	{
-	    WCHAR *s = W(_("Edit with existing Vim - "));
+	    WCHAR *s = W(_("Edit with existing ViAI - "));
 	    wcsncpy(temp, s, BUFSIZE - 1);
 	    temp[BUFSIZE - 1] = L'\0';
 	    free(s);
@@ -958,17 +958,17 @@ BOOL CALLBACK CShellExt::EnumWindowsProc(HWND hWnd, LPARAM lParam)
 	return TRUE;
     // No child window ???
     // if (GetParent(hWnd)) return TRUE;
-    // Class name should be Vim, if failed to get class name, return
+    // Class name should be ViAI, if failed to get class name, return
     if (GetClassName(hWnd, temp, ARRAY_LENGTH(temp)) == 0)
 	return TRUE;
-    // Compare class name to that of vim, if not, return
-    if (_strnicmp(temp, "vim", ARRAY_LENGTH("vim")) != 0)
+    // Compare class name to that of ViAI, if not, return
+    if (_strnicmp(temp, "viai", ARRAY_LENGTH("viai")) != 0)
 	return TRUE;
-    // First check if the number of vim instance exceeds MAX_HWND
+    // First check if the number of ViAI instance exceeds MAX_HWND
     CShellExt *cs = (CShellExt*) lParam;
     if (cs->m_cntOfHWnd >= MAX_HWND)
 	return FALSE;	// stop enumeration
-    // Now we get the vim window, put it into some kind of array
+    // Now we get the ViAI window, put it into some kind of array
     cs->m_hWnd[cs->m_cntOfHWnd] = hWnd;
     cs->m_cntOfHWnd ++;
 
@@ -1082,7 +1082,7 @@ STDMETHODIMP CShellExt::InvokeSingleGvim(HWND hParent,
 	// Use UTF-8 for gettext.
 	char *prev = set_gettext_codeset();
 
-	WCHAR *msg = W(_("Error creating process: Check if gvim is in your path!"));
+	WCHAR *msg = W(_("Error creating process: Check if gviai is in your path!"));
 	WCHAR *title = W(_("gvimext.dll error"));
 
 	MessageBoxW(hParent, msg, title, MB_OK);

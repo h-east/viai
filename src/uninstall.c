@@ -67,10 +67,10 @@ popup_gvim_path(char *buf, DWORD bufsize)
     DWORD	value_type;
     int		r;
 
-    // Open the key where the path to gvim.exe is stored.
-    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Vim\\Gvim", 0,
+    // Open the key where the path to gviai.exe is stored.
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\ViAI\\Gviai", 0,
 		    KEY_WOW64_64KEY | KEY_READ, &key_handle) != ERROR_SUCCESS)
-	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Vim\\Gvim", 0,
+	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\ViAI\\Gviai", 0,
 		    KEY_WOW64_32KEY | KEY_READ, &key_handle) != ERROR_SUCCESS)
 	    return 0;
 
@@ -93,9 +93,9 @@ openwith_gvim_path(char *buf, DWORD bufsize)
     DWORD	value_type;
     int		r;
 
-    // Open the key where the path to gvim.exe is stored.
+    // Open the key where the path to gviai.exe is stored.
     if (RegOpenKeyEx(HKEY_CLASSES_ROOT,
-		"Applications\\gvim.exe\\shell\\edit\\command", 0,
+		"Applications\\gviai.exe\\shell\\edit\\command", 0,
 		    KEY_WOW64_64KEY | KEY_READ, &key_handle) != ERROR_SUCCESS)
 	return 0;
 
@@ -123,33 +123,33 @@ remove_popup(void)
 	else
 	    flag = KEY_WOW64_64KEY;
 
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "CLSID\\{51EEE242-AD87-11d3-9C1E-0090278BBD99}\\InProcServer32", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "CLSID\\{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}\\InProcServer32", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "CLSID\\{51EEE242-AD87-11d3-9C1E-0090278BBD99}", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "CLSID\\{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "*\\shellex\\ContextMenuHandlers\\gvim", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "*\\shellex\\ContextMenuHandlers\\gviai", flag) != ERROR_SUCCESS)
 	    ++fail;
 	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved", 0,
 		    flag | KEY_ALL_ACCESS, &kh) != ERROR_SUCCESS)
 	    ++fail;
 	else
 	{
-	    if (RegDeleteValue(kh, "{51EEE242-AD87-11d3-9C1E-0090278BBD99}") != ERROR_SUCCESS)
+	    if (RegDeleteValue(kh, "{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}") != ERROR_SUCCESS)
 		++fail;
 	    RegCloseKey(kh);
 	}
-	if (reg_delete_key(HKEY_LOCAL_MACHINE, "Software\\Vim\\Gvim", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_LOCAL_MACHINE, "Software\\ViAI\\Gviai", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_LOCAL_MACHINE, "Software\\Vim", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_LOCAL_MACHINE, "Software\\ViAI", flag) != ERROR_SUCCESS)
 	    ++fail;
     }
 
     if (fail == maxfail)
-	printf("No Vim popup registry entries could be removed\n");
+	printf("No ViAI popup registry entries could be removed\n");
     else if (fail > 0)
-	printf("Some Vim popup registry entries could not be removed\n");
+	printf("Some ViAI popup registry entries could not be removed\n");
     else
-	printf("The Vim popup registry entries have been removed\n");
+	printf("The ViAI popup registry entries have been removed\n");
 }
 
     static void
@@ -168,28 +168,28 @@ remove_openwith(void)
 	else
 	    flag = KEY_WOW64_64KEY;
 
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gvim.exe\\shell\\edit\\command", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gviai.exe\\shell\\edit\\command", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gvim.exe\\shell\\edit", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gviai.exe\\shell\\edit", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gvim.exe\\shell", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gviai.exe\\shell", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gvim.exe", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "Applications\\gviai.exe", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, ".htm\\OpenWithList\\gvim.exe", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, ".htm\\OpenWithList\\gviai.exe", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, ".vim\\OpenWithList\\gvim.exe", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, ".vim\\OpenWithList\\gviai.exe", flag) != ERROR_SUCCESS)
 	    ++fail;
-	if (reg_delete_key(HKEY_CLASSES_ROOT, "*\\OpenWithList\\gvim.exe", flag) != ERROR_SUCCESS)
+	if (reg_delete_key(HKEY_CLASSES_ROOT, "*\\OpenWithList\\gviai.exe", flag) != ERROR_SUCCESS)
 	    ++fail;
     }
 
     if (fail == maxfail)
-	printf("No Vim open-with registry entries could be removed\n");
+	printf("No ViAI open-with registry entries could be removed\n");
     else if (fail > 0)
-	printf("Some Vim open-with registry entries could not be removed\n");
+	printf("Some ViAI open-with registry entries could not be removed\n");
     else
-	printf("The Vim open-with registry entries have been removed\n");
+	printf("The ViAI open-with registry entries have been removed\n");
 }
 
 /*

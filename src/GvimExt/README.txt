@@ -5,13 +5,13 @@ Written by Tianmiao Hu.  Edited by Bram Moolenaar.
 
 INSTALLATION
 
-To install the "Edit with Vim" popup menu entry, it is recommended to use the
+To install the "Edit with ViAI" popup menu entry, it is recommended to use the
 "install.exe" program.  It will ask you a few questions and install the needed
 registry entries.
 
 In special situations you might want to make changes by hand.  Check these
 items:
-- The gvimext.dll, gvim.exe and uninstall.exe either need to be in the search
+- The gvimext.dll, gviai.exe and uninstall.exe either need to be in the search
   path, or you have to set the full path in the registry entries.  You could
   move the gvimext.dll to the "windows\system" or "windows\system32"
   directory, where the other DLL files are.
@@ -19,19 +19,19 @@ items:
   "GvimExt.reg".  You can edit this file to add the paths.  To install the
   registry entries, right-click the gvimext.reg file and choose the "merge"
   menu option.
-- The registry key [HKEY_LOCAL_MACHINE\Software\Vim\Gvim] is used by the
-  gvimext.dll.  The value "path" specifies the location of "gvim.exe".  If
-  gvim.exe is in the search path, the path can be omitted.  The value "lang"
+- The registry key [HKEY_LOCAL_MACHINE\Software\ViAI\Gviai] is used by the
+  gvimext.dll.  The value "path" specifies the location of "gviai.exe".  If
+  gviai.exe is in the search path, the path can be omitted.  The value "lang"
   can be used to set the language, for example "de" for German.  If "lang" is
   omitted, the language set for Windows will be used.
 
-It is the preferred method to keep gvim.exe with the runtime files, so that
+It is the preferred method to keep gviai.exe with the runtime files, so that
 Vim will find them (also the translated menu items are there).
 
 
 UNINSTALLATION
 
-To uninstall the "Edit with Vim" popup menu entry, it is recommended to use
+To uninstall the "Edit with ViAI" popup menu entry, it is recommended to use
 the "uninstal.exe" program.
 
 In special situations you might want to uninstall by hand:
@@ -39,7 +39,7 @@ In special situations you might want to uninstall by hand:
 - Delete all the keys listed in GvimExt.reg, except this one:
   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved]
   For this key, only delete one value:
-  "{51EEE242-AD87-11d3-9C1E-0090278BBD99}"="Vim Shell Extension"
+  "{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}"="ViAI Shell Extension"
 - Delete the gvimext.dll, if you want.  You might need to reboot the machine
   in order to remove this file.  A quick way is to log off and re-login.
 

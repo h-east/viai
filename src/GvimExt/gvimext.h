@@ -55,7 +55,7 @@
 //
 // The class ID of this Shell extension class.
 //
-// class id:  {51EEE242-AD87-11d3-9C1E-0090278BBD99}
+// class id:  {F191A2A2-D786-484E-A3F4-8A75FDD9AC00}
 //
 //
 // NOTE!!!  If you use this shell extension as a starting point,
@@ -63,19 +63,19 @@
 //	    to generate a new GUID.
 //
 
-// {51EEE242-AD87-11d3-9C1E-0090278BBD99}
+// {F191A2A2-D786-484E-A3F4-8A75FDD9AC00}
 // static const GUID <<name>> =
-// { 0x51eee242, 0xad87, 0x11d3, { 0x9c, 0x1e, 0x0, 0x90, 0x27, 0x8b, 0xbd, 0x99 } };
+// { 0xf191a2a2, 0xd786, 0x484e, { 0xa3, 0xf4, 0x8a, 0x75, 0xfd, 0xd9, 0xac, 0x0 } };
 //
 //
 
-// {51EEE242-AD87-11d3-9C1E-0090278BBD99}
+// {F191A2A2-D786-484E-A3F4-8A75FDD9AC00}
 // IMPLEMENT_OLECREATE(<<class>>, <<external_name>>,
-// 0x51eee242, 0xad87, 0x11d3, 0x9c, 0x1e, 0x0, 0x90, 0x27, 0x8b, 0xbd, 0x99);
+// 0xf191a2a2, 0xd786, 0x484e, 0xa3, 0xf4, 0x8a, 0x75, 0xfd, 0xd9, 0xac, 0x0);
 //
 
-// {51EEE242-AD87-11d3-9C1E-0090278BBD99}  -- this is the registry format
-DEFINE_GUID(CLSID_ShellExtension, 0x51eee242, 0xad87, 0x11d3, 0x9c, 0x1e, 0x0, 0x90, 0x27, 0x8b, 0xbd, 0x99);
+// {F191A2A2-D786-484E-A3F4-8A75FDD9AC00}  -- this is the registry format
+DEFINE_GUID(CLSID_ShellExtension, 0xf191a2a2, 0xd786, 0x484e, 0xa3, 0xf4, 0x8a, 0x75, 0xfd, 0xd9, 0xac, 0x0);
 
 // this class factory object creates context menu handlers for windows 32 shell
 class CShellExtClassFactory : public IClassFactory

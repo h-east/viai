@@ -11,11 +11,11 @@ AddReg=ThisDll.Add.Reg
 DelReg=ThisDLL.Add.Reg
 
 [ThisDll.Add.Reg]
-HKCR,CLSID\{51EEE242-AD87-11d3-9C1E-0090278BBD99}
-HKCR,CLSID\{51EEE242-AD87-11d3-9C1E-0090278BBD99}\InProcServer32
-HKCR,*\shellex\ContextMenuHandlers\gvim
-HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved",{51EEE242-AD87-11d3-9C1E-0090278BBD99}
-HKLM,Software\Vim\Gvim
+HKCR,CLSID\{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}
+HKCR,CLSID\{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}\InProcServer32
+HKCR,*\shellex\ContextMenuHandlers\gviai
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved",{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}
+HKLM,Software\ViAI\Gviai
 HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\Vim 9.2"
 
 [Strings]

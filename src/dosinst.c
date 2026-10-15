@@ -1475,7 +1475,7 @@ register_shellex(
 {
     LONG lRet = reg_create_key_and_value(
 	    hRootKey,
-	    "*\\shellex\\ContextMenuHandlers\\gvim",
+	    "*\\shellex\\ContextMenuHandlers\\gviai",
 	    NULL,
 	    clsid,
 	    flag);
@@ -1493,7 +1493,7 @@ register_shellex(
 	{
 	    lRet = reg_create_key_and_value(
 		    HKEY_LOCAL_MACHINE,
-		    "Software\\Vim\\Gvim",
+		    "Software\\ViAI\\Gviai",
 		    "path",
 		    exe_path,
 		    flag);
@@ -1514,7 +1514,7 @@ register_openwith(
     sprintf(exe_cmd, "\"%s\" \"%%1\"", exe_path);
     lRet = reg_create_key_and_value(
 	    hRootKey,
-	    "Applications\\gvim.exe\\shell\\edit\\command",
+	    "Applications\\gviai.exe\\shell\\edit\\command",
 	    NULL,
 	    exe_cmd,
 	    flag);
@@ -1523,9 +1523,9 @@ register_openwith(
     {
 	int i;
 	static const char *openwith[] = {
-		".htm\\OpenWithList\\gvim.exe",
-		".vim\\OpenWithList\\gvim.exe",
-		"*\\OpenWithList\\gvim.exe",
+		".htm\\OpenWithList\\gviai.exe",
+		".vim\\OpenWithList\\gviai.exe",
+		"*\\OpenWithList\\gviai.exe",
 	};
 
 	for (i = 0; ERROR_SUCCESS == lRet && i < (int)ARRAYSIZE(openwith); i++)
@@ -1575,8 +1575,8 @@ install_registry(void)
 {
     LONG	lRet = ERROR_SUCCESS;
     const char	*vim_ext_ThreadingModel = "Apartment";
-    const char	*vim_ext_name = "Vim Shell Extension";
-    const char	*vim_ext_clsid = "{51EEE242-AD87-11d3-9C1E-0090278BBD99}";
+    const char	*vim_ext_name = "ViAI Shell Extension";
+    const char	*vim_ext_clsid = "{F191A2A2-D786-484E-A3F4-8A75FDD9AC00}";
     char	vim_exe_path[MAX_PATH];
     char	display_name[BUFSIZE];
     char	uninstall_string[BUFSIZE];
@@ -1586,13 +1586,13 @@ install_registry(void)
     int		loop_count = is_64bit_os() ? 2 : 1;
     DWORD	flag;
 
-    sprintf(vim_exe_path, "%s\\gvim.exe", installdir);
+    sprintf(vim_exe_path, "%s\\gviai.exe", installdir);
 
     if (install_popup)
     {
 	char	    bufg[BUFSIZE];
 
-	printf("Creating \"Edit with Vim\" popup menu entry\n");
+	printf("Creating \"Edit with ViAI\" popup menu entry\n");
 
 	for (i = 0; i < loop_count; i++)
 	{
