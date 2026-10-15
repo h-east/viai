@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="runtime/viai_logo.svg" alt="ViAI" width="200">
+</p>
+
 # ViAI - Vim Advanced Integrated
 
 ViAI is a text editor based on [Vim](https://github.com/vim/vim), developed
@@ -13,6 +17,11 @@ Plugins written for Vim should work in ViAI as well.
 The name stands for "Vim Advanced Integrated".  It happens to be the same
 words as the "AI synthesis" (Advanced Integrated) of the KORG M1 synthesizer,
 released in 1988, the year in which Bram Moolenaar started writing Vim.
+
+## Use of AI tools
+
+The maintainer reviews every change made with AI tools before committing
+it, and is responsible for all changes in ViAI, however they were written.
 
 ## Differences from Vim
 
