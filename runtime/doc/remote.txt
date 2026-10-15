@@ -93,18 +93,18 @@ The following command line arguments are available:
 
 Examples ~
 
-Edit "file.txt" in an already running GVIM server: >
-    gvim --remote file.txt
+Edit "file.txt" in an already running GVIAI server: >
+    gviai --remote file.txt
 
 Edit "file.txt" in an already running server called FOOBAR: >
-    gvim --servername FOOBAR --remote file.txt
+    gviai --servername FOOBAR --remote file.txt
 
 Edit "file.txt" in server "FILES" if it exists, become server "FILES"
 otherwise: >
-    gvim --servername FILES --remote-silent file.txt
+    gviai --servername FILES --remote-silent file.txt
 
 This doesn't work, all arguments after --remote will be used as file names: >
-    gvim --remote --servername FOOBAR file.txt
+    gviai --remote --servername FOOBAR file.txt
 
 Edit file "+foo" in a remote server (note the use of "./" to avoid the special
 meaning of the leading plus): >
@@ -116,14 +116,14 @@ Tell the remote server "BLA" to write all files and exit: >
 
 SERVER NAME						*client-server-name*
 
-By default Vim will try to register the name under which it was invoked (gvim,
-egvim ...).  This can be overridden with the --servername argument.  If the
-specified name is not available, a postfix is applied until a free name is
-encountered, i.e. "gvim1" for the second invocation of gvim on a particular
-X-server.  The resulting name is available in the servername builtin variable
-|v:servername|.  The case of the server name is ignored, thus "gvim" and
-"GVIM" are considered equal.  Note if a socket server is being used, there are
-some differences, see |socketserver-differences|.
+By default Vim will try to register the name under which it was invoked
+(gviai, egviai ...).  This can be overridden with the --servername argument.
+If the specified name is not available, a postfix is applied until a free
+name is encountered, i.e. "gviai1" for the second invocation of gviai on a
+particular X-server.  The resulting name is available in the servername
+builtin variable |v:servername|.  The case of the server name is ignored, thus
+"gviai" and "GVIAI" are considered equal.  Note if a socket server is being
+used, there are some differences, see |socketserver-differences|.
 
 When Vim is invoked with --remote, --remote-wait or --remote-send it will try
 to locate the server name determined by the invocation name and --servername
@@ -133,7 +133,7 @@ postfix is specified with the --servername argument, it must match exactly.
 
 If no server can be located and --remote or --remote-wait was used, Vim will
 start up according to the rest of the command line and do the editing by
-itself.  This way it is not necessary to know whether gvim is already started
+itself.  This way it is not necessary to know whether gviai is already started
 when sending command to it.
 
 The --serverlist argument will cause Vim to print a list of registered command
@@ -197,7 +197,7 @@ By default, a GUI Vim will register a name on the X-server by which it can be
 addressed for subsequent execution of injected strings.  Vim can also act as
 a client and send strings to other instances of Vim on the same X11 display.
 
-When an X11 GUI Vim (gvim) is started, it will try to register a send-server
+When an X11 GUI Vim (gviai) is started, it will try to register a send-server
 name on the 'VimRegistry' property on the root window.
 
 A non GUI Vim with access to the X11 display (|xterm-clipboard| enabled), can
@@ -221,9 +221,9 @@ Since MS-Windows messages are used, any other application should be able to
 communicate with a Vim server.  An alternative is using the OLE functionality
 |ole-interface|.
 
-When using gvim, the --remote-wait only works properly this way: >
+When using gviai, the --remote-wait only works properly this way: >
 
-	start /w gvim --remote-wait file.txt
+	start /w gviai --remote-wait file.txt
 <
 ==============================================================================
 4. Socket server specific items			    *socketserver-clientserver*

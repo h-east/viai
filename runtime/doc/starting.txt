@@ -91,34 +91,38 @@ filename	One or more file names.  The first one will be the current
 		new buffer.  It's empty and doesn't have a file name.
 
 
-The startup mode can be changed by using another name instead of "vim", which
-is equal to giving options:
-ex	 vim -e	    Start in Ex mode (see |Ex-mode|).		  *ex*
-exim	 vim -E	    Start in improved Ex mode (see |Ex-mode|).	  *exim*
+The startup mode can be changed by using another name instead of "viai",
+which is equal to giving options:
+ex	 viai -e    Start in Ex mode (see |Ex-mode|).		  *ex*
+exim	 viai -E    Start in improved Ex mode (see |Ex-mode|).	  *exim*
 		    (normally not installed)
-view	 vim -R	    Start in read-only mode (see |-R|).		  *view*
-gvim	 vim -g	    Start the GUI (see |gui|).			  *gvim*
-gex	 vim -eg    Start the GUI in Ex mode.			  *gex*
-gview	 vim -Rg    Start the GUI in read-only mode.		  *gview*
-rvim	 vim -Z	    Like "vim", but in restricted mode (see |-Z|)   *rvim*
-rview	 vim -RZ    Like "view", but in restricted mode.	  *rview*
-rgvim	 vim -gZ    Like "gvim", but in restricted mode.	  *rgvim*
-rgview	 vim -RgZ   Like "gview", but in restricted mode.	  *rgview*
-evim	 vim -y     Easy Vim: set 'insertmode' (see |-y|)	  *evim*
-eview	 vim -yR    Like "evim" in read-only mode		  *eview*
-vimdiff	 vim -d	    Start in diff mode |diff-mode|
-gvimdiff vim -gd    Start in diff mode |diff-mode|
+view	 viai -R    Start in read-only mode (see |-R|).		  *view*
+gviai	 viai -g    Start the GUI (see |gui|).			  *gvim*
+gex	 viai -eg   Start the GUI in Ex mode.			  *gex*
+gview	 viai -Rg   Start the GUI in read-only mode.		  *gview*
+rviai	 viai -Z    Like "viai", but in restricted mode (see |-Z|)  *rvim*
+rview	 viai -RZ   Like "view", but in restricted mode.	  *rview*
+rgviai	 viai -gZ   Like "gviai", but in restricted mode.	  *rgvim*
+rgview	 viai -RgZ  Like "gview", but in restricted mode.	  *rgview*
+eviai	 viai -y    Easy Vim: set 'insertmode' (see |-y|)	  *evim*
+eview	 viai -yR   Like "eviai" in read-only mode		  *eview*
+viaidiff viai -d    Start in diff mode |diff-mode|
+gviaidiff viai -gd  Start in diff mode |diff-mode|
+
+Only "viai", "gviai", "rviai", "rgviai", "eviai", "viaidiff" and "gviaidiff"
+are installed, see |viai-programs|.  The other names and the names of Vim
+("vim", "gvim", etc.) work as well.
 
 Additional characters may follow, they are ignored.  For example, you can have
-"gvim-8" to start the GUI.  You must have an executable by that name then, of
+"gviai-1" to start the GUI.  You must have an executable by that name then, of
 course.
 
-On Unix, you would normally have one executable called "vim", and links from
+On Unix, you would normally have one executable called "viai", and links from
 the different startup-names to that executable.  If your system does not
 support links and you do not want to have several copies of the executable,
 you could use an alias instead.  For example, in a C shell descendant: >
-	alias view   vim -R
-	alias gvim   vim -g
+	alias view    viai -R
+	alias gviai   viai -g
 <
 							*startup-options*
 The option arguments may be given in any order.  Single-letter options can be
@@ -1256,12 +1260,12 @@ will try to get the value for $VIM in this order:
    variable too (the default is "$VIMRUNTIME/doc/help.txt": chicken-egg
    problem).  The file name ("help.txt" or any other) is removed.  Then
    trailing directory names are removed, in this order: "doc", "runtime" and
-   "vim{version}" (e.g., "vim82").
+   "viai{version}" (e.g., "viai10").
 3. For Win32 Vim tries to use the directory name of the executable.  If it
    ends in "/src", this is removed.  This is useful if you unpacked the .zip
    file in some directory, and adjusted the search path to find the vim
    executable.  Trailing directory names are removed, in this order: "runtime"
-   and "vim{version}" (e.g., "vim82").
+   and "viai{version}" (e.g., "viai10").
 4. For Unix the compile-time defined installation directory is used (see the
    output of ":version").
 
@@ -1278,9 +1282,9 @@ You don't normally set $VIMRUNTIME yourself, but let Vim figure it out.  This
 is the order used to find the value of $VIMRUNTIME:
 1. If the environment variable $VIMRUNTIME is set, it is used.  You can use
    this when the runtime files are in an unusual location.
-2. If "$VIM/vim{version}" exists, it is used.  {version} is the version
-   number of Vim, without any '-' or '.'.  For example: "$VIM/vim82".  This is
-   the normal value for $VIMRUNTIME.
+2. If "$VIM/viai{version}" exists, it is used.  {version} is the version
+   number of ViAI, without any '-' or '.'.  For example: "$VIM/viai10".  This
+   is the normal value for $VIMRUNTIME.
 3. If "$VIM/runtime" exists, it is used.
 4. The value of $VIM is used.  This is for backwards compatibility with older
    versions.
@@ -1291,11 +1295,11 @@ For Unix, when there is a compiled-in default for $VIMRUNTIME (check the
 output of ":version"), steps 2, 3 and 4 are skipped, and the compiled-in
 default is used after step 5.  This means that the compiled-in default
 overrules the value of $VIM.  This is useful if $VIM is "/etc" and the runtime
-files are in "/usr/share/vim/vim82".
+files are in "/usr/share/viai/viai10".
 
 Once Vim has done this once, it will set the $VIMRUNTIME environment variable.
 To change it later, use a ":let" command like this: >
-	:let $VIMRUNTIME = "/home/piet/vim/vim82"
+	:let $VIMRUNTIME = "/home/piet/viai/viai10"
 
 In case you need the value of $VIMRUNTIME in a shell (e.g., for a script that
 greps in the help files) you might be able to use this: >
