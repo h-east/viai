@@ -85,9 +85,7 @@ Before submitting any patch, at minimum:
   under the Vim license.
 - **Keep the diff against Vim small**, so that Vim patches keep applying.
   Change existing Vim code only where needed.  Put ViAI-specific tests in
-  their own files (e.g. `src/testdir/test_viai_config.vim`) and describe
-  ViAI-specific behavior in `runtime/doc/viai.txt` rather than rewriting
-  Vim's help files.
+  their own files (e.g. `src/testdir/test_viai_config.vim`).
 - **ViAI has its own version** (`VIAI_VERSION_MAJOR` and
   `VIAI_VERSION_MINOR` in `src/version.h`) and patch numbers (1.0.0001, ...).
   `v:version` and `has('patch-...')` keep reporting the Vim version.
@@ -259,7 +257,10 @@ Further rules, not spelled out here, live in `runtime/doc/develop.txt`:
 ## Documentation
 
 - User-facing option or feature changes require a `runtime/doc/*.txt`
-  update in the same patch.
+  update in the same patch.  **Update the help text that describes the
+  changed behavior**, also in Vim's help files, so that the help stays
+  correct for ViAI, and list the change in `runtime/doc/viai.txt`, the
+  overview of the differences from Vim.
 - Bump the `Last change:` header only of ViAI's own help files, such as
   `viai.txt`.
 

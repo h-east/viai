@@ -7,8 +7,9 @@
 Differences between ViAI and Vim		*viai*
 
 ViAI (Vim Advanced Integrated) is a modified version of Vim.  This file
-describes where ViAI differs from Vim.  The rest of the documentation
-describes Vim and applies to ViAI as well, except for what is written here.
+lists where ViAI differs from Vim.  The rest of the documentation applies to
+ViAI as well, also where it mentions Vim.  Where it does not agree with this
+file, this file is right.
 
 1. Programs			|viai-programs|
 2. Version			|viai-version|
