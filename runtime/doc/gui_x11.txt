@@ -330,7 +330,7 @@ If using the GTK4 GUI, then only the following are supported:
 Command line arguments specific to GTK4:
     command line argument   meaning ~
     --prg-name {name}	    Argument passed to g_set_prgname(), otherwise
-			    "gvim" is used.  On Wayland this will set the app
+			    "gviai" is used.  On Wayland this will set the app
 			    id, which is equivalent to the X11 WM_CLASS
 
 To set the font, see 'guifont'.  For GTK, there's also a menu option that does

@@ -1761,9 +1761,9 @@ gui_mch_init_check(void)
 #endif
 
     // This defaults to argv[0], but we want it to match the name of the
-    // shipped gvim.desktop so that Vim's windows can be associated with this
-    // file.
-    g_set_prgname("gvim");
+    // installed gviai.desktop so that ViAI's windows can be associated with
+    // this file.
+    g_set_prgname("gviai");
 
     // Don't use gtk_init() or gnome_init(), it exits on failure.
     if (!gtk_init_check(&gui_argc, &gui_argv))
@@ -2761,8 +2761,8 @@ mainwin_realize(GtkWidget *widget UNUSED, gpointer data UNUSED)
 
 	icon_theme = gtk_icon_theme_get_default();
 
-	if (icon_theme && gtk_icon_theme_has_icon(icon_theme, "gvim"))
-	    gtk_window_set_icon_name(GTK_WINDOW(gui.mainwin), "gvim");
+	if (icon_theme && gtk_icon_theme_has_icon(icon_theme, "gviai"))
+	    gtk_window_set_icon_name(GTK_WINDOW(gui.mainwin), "gviai");
 	else
 	{
 	    /*

@@ -484,10 +484,10 @@ gui_mch_early_init_check(int give_message UNUSED)
 gui_mch_init_check(void)
 {
     // This defaults to argv[0], but we want it to match the name of the
-    // shipped gvim.desktop so that Vim's windows can be associated with this
-    // file.  Also sets WM_CLASS on X11. If "--prg-name" is specified, then use
-    // that.
-    g_set_prgname(prgname == NULL ? "gvim" : prgname);
+    // installed gviai.desktop so that ViAI's windows can be associated with
+    // this file.  Also sets WM_CLASS on X11. If "--prg-name" is specified,
+    // then use that.
+    g_set_prgname(prgname == NULL ? "gviai" : prgname);
 
     // Suppress noisy EGL warnings when GL is not available.  Only set
     // this when actually starting the GUI, so non-GUI invocations are
