@@ -4,7 +4,7 @@
 // (Vim.tlb).
 //
 // Command line:
-//   MIDL /proxy nul /iid iid_ole.c /h if_ole.h /tlb vim.tlb if_ole.idl
+//   MIDL /proxy nul /iid iid_ole.c /h if_ole.h /tlb viai.tlb if_ole.idl
 
 [
 	object,

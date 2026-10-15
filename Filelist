@@ -666,8 +666,8 @@ SRC_DOS =	\
 		src/testdir/Make_ming.mak \
 		src/testdir/util/dos.vim \
 		src/uninstall.c \
-		src/vim.rc \
-		src/vim.manifest \
+		src/viai.rc \
+		src/viai.manifest \
 		src/vimrun.c \
 		src/xpm_w32.c \
 		src/xpm_w32.h \
@@ -685,8 +685,8 @@ SRC_DOS_BIN =	\
 		src/tearoff.bmp \
 		src/tools.bmp \
 		src/viai.ico \
-		src/vim*.ico \
-		src/vim.tlb \
+		src/viai_*.ico \
+		src/viai.tlb \
 		src/xpm/COPYRIGHT \
 		src/xpm/README.txt \
 		src/xpm/arm64/lib-vc14/libXpm.lib \

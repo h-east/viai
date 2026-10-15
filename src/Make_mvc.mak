@@ -1889,28 +1889,28 @@ $(OUTDIR)/xpm_w32.obj: $(OUTDIR) xpm_w32.c
 	$(CC) $(CFLAGS_OUTDIR) $(XPM_INC) xpm_w32.c
 
 !IF "$(VIMDLL)" == "yes"
-$(OUTDIR)/vimc.res: $(OUTDIR) vim.rc vim.manifest version.h gui_w32_rc.h \
+$(OUTDIR)/vimc.res: $(OUTDIR) viai.rc viai.manifest version.h gui_w32_rc.h \
 				viai.ico
-	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS:-DFEAT_GUI_MSWIN=) vim.rc
+	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS:-DFEAT_GUI_MSWIN=) viai.rc
 
-$(OUTDIR)/vimg.res: $(OUTDIR) vim.rc vim.manifest version.h gui_w32_rc.h \
+$(OUTDIR)/vimg.res: $(OUTDIR) viai.rc viai.manifest version.h gui_w32_rc.h \
 				viai.ico
-	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS) vim.rc
+	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS) viai.rc
 
-$(OUTDIR)/vimd.res: $(OUTDIR) vim.rc version.h gui_w32_rc.h \
-			tools.bmp tearoff.bmp viai.ico vim_error.ico \
-			vim_alert.ico vim_info.ico vim_quest.ico
+$(OUTDIR)/vimd.res: $(OUTDIR) viai.rc version.h gui_w32_rc.h \
+			tools.bmp tearoff.bmp viai.ico viai_error.ico \
+			viai_alert.ico viai_info.ico viai_quest.ico
 	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS) \
-		-DRCDLL -DVIMDLLBASE=\"$(VIMDLLBASE)\" vim.rc
+		-DRCDLL -DVIMDLLBASE=\"$(VIMDLLBASE)\" viai.rc
 !ELSE
-$(OUTDIR)/vim.res: $(OUTDIR) vim.rc vim.manifest version.h gui_w32_rc.h \
-			tools.bmp tearoff.bmp viai.ico vim_error.ico \
-			vim_alert.ico vim_info.ico vim_quest.ico
-	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS) vim.rc
+$(OUTDIR)/vim.res: $(OUTDIR) viai.rc viai.manifest version.h gui_w32_rc.h \
+			tools.bmp tearoff.bmp viai.ico viai_error.ico \
+			viai_alert.ico viai_info.ico viai_quest.ico
+	$(RC) /nologo /l 0x409 /Fo$@ $(RCFLAGS) viai.rc
 !ENDIF
 
-iid_ole.c if_ole.h vim.tlb: if_ole.idl
-	midl /nologo /error none /proxy nul /iid iid_ole.c /tlb vim.tlb \
+iid_ole.c if_ole.h viai.tlb: if_ole.idl
+	midl /nologo /error none /proxy nul /iid iid_ole.c /tlb viai.tlb \
 		/header if_ole.h if_ole.idl
 
 

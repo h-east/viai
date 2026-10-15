@@ -5,7 +5,7 @@
 // Do ":help uganda"  in Vim to read copying and usage conditions.
 // Do ":help credits" in Vim to see a list of people who contributed.
 
-// vim.rc
+// viai.rc
 //   Icon and version information for the Win32 version of Vim
 //   Must be in DOS format <CR><NL>!
 
@@ -23,10 +23,10 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 IDR_VIM		ICON "viai.ico"
 
 #if (defined(FEAT_GUI_MSWIN) && !defined(VIMDLL)) || defined(RCDLL)
-IDR_VIM_ERROR	ICON "vim_error.ico"
-IDR_VIM_ALERT	ICON "vim_alert.ico"
-IDR_VIM_INFO	ICON "vim_info.ico"
-IDR_VIM_QUESTION ICON "vim_quest.ico"
+IDR_VIM_ERROR	ICON "viai_error.ico"
+IDR_VIM_ALERT	ICON "viai_alert.ico"
+IDR_VIM_INFO	ICON "viai_info.ico"
+IDR_VIM_QUESTION ICON "viai_quest.ico"
 
 //
 // Bitmaps
@@ -46,14 +46,14 @@ IDR_TOOLBAR1	BITMAP  DISCARDABLE  "tools.bmp"
 # define RT_MANIFEST 24
 #endif
 
-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "vim.manifest"
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "viai.manifest"
 #endif // RCDLL
 
 //
 // Type Library
 //
 #ifdef FEAT_OLE
- 1 TYPELIB "vim.tlb"
+ 1 TYPELIB "viai.tlb"
 #endif
 
 //

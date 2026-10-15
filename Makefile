@@ -109,7 +109,7 @@ MINOR = 2
 #   READMEdir/Contents, MAJOR/MINOR above, VIMMAJOR and VIMMINOR in
 #   src/Makefile, README.txt, README.md, src/README.md, READMEdir/README*.txt,
 #   runtime/doc/*.txt.
-#   For a minor/major version: src/GvimExt/GvimExt.reg, src/vim.manifest.
+#   For a minor/major version: src/GvimExt/GvimExt.reg, src/viai.manifest.
 # - Compile Vim with GTK, Perl, Python, Python3, TCL, Ruby, Lua, Cscope and
 #   "huge" features.  Add MZscheme if you can make it work.
 #   Use "make reconfig" after selecting the configure arguments.

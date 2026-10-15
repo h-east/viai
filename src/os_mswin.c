@@ -1078,7 +1078,7 @@ static HWND		hDlgPrint;
 static int		*bUserAbort = NULL;
 static char_u		*prt_name = NULL;
 
-// Defines which are also in vim.rc.
+// Defines which are also in viai.rc.
 # define IDC_BOX1		400
 # define IDC_PRINTTEXT1		401
 # define IDC_PRINTTEXT2		402

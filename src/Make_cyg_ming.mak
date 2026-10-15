@@ -1306,25 +1306,25 @@ $(OUTDIR)/%.o : %.c $(INCL)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 ifeq ($(VIMDLL),yes)
-$(OUTDIR)/vimresc.o:	vim.rc vim.manifest version.h gui_w32_rc.h viai.ico
+$(OUTDIR)/vimresc.o:	viai.rc viai.manifest version.h gui_w32_rc.h viai.ico
 	$(WINDRES) $(WINDRES_FLAGS) $(DEFINES) -UFEAT_GUI_MSWIN \
-	    --input-format=rc --output-format=coff -i vim.rc -o $@
+	    --input-format=rc --output-format=coff -i viai.rc -o $@
 
-$(OUTDIR)/vimresg.o:	vim.rc vim.manifest version.h gui_w32_rc.h viai.ico
+$(OUTDIR)/vimresg.o:	viai.rc viai.manifest version.h gui_w32_rc.h viai.ico
 	$(WINDRES) $(WINDRES_FLAGS) $(DEFINES) \
-	    --input-format=rc --output-format=coff -i vim.rc -o $@
+	    --input-format=rc --output-format=coff -i viai.rc -o $@
 
-$(OUTDIR)/vimresd.o:	vim.rc version.h gui_w32_rc.h \
-			tools.bmp tearoff.bmp viai.ico vim_error.ico \
-			vim_alert.ico vim_info.ico vim_quest.ico
+$(OUTDIR)/vimresd.o:	viai.rc version.h gui_w32_rc.h \
+			tools.bmp tearoff.bmp viai.ico viai_error.ico \
+			viai_alert.ico viai_info.ico viai_quest.ico
 	$(WINDRES) $(WINDRES_FLAGS) $(DEFINES) -DRCDLL -DVIMDLLBASE=\\\"$(VIMDLLBASE)\\\" \
-	    --input-format=rc --output-format=coff -i vim.rc -o $@
+	    --input-format=rc --output-format=coff -i viai.rc -o $@
 else
-$(OUTDIR)/vimres.o:	vim.rc vim.manifest version.h gui_w32_rc.h \
-			tools.bmp tearoff.bmp viai.ico vim_error.ico \
-			vim_alert.ico vim_info.ico vim_quest.ico
+$(OUTDIR)/vimres.o:	viai.rc viai.manifest version.h gui_w32_rc.h \
+			tools.bmp tearoff.bmp viai.ico viai_error.ico \
+			viai_alert.ico viai_info.ico viai_quest.ico
 	$(WINDRES) $(WINDRES_FLAGS) $(DEFINES) \
-	    --input-format=rc --output-format=coff -i vim.rc -o $@
+	    --input-format=rc --output-format=coff -i viai.rc -o $@
 endif
 
 $(OUTDIR):

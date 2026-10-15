@@ -4,13 +4,14 @@
 # The logo is a dark green block with "Vi" cut out.  A green square and a bar
 # ("A" and "I") spin out of its top right corner and leave a notch.
 #
-# Requires pycairo and Pillow.  Run from anywhere:
+# Requires pycairo, Pillow and the DejaVu Sans font.  Run from anywhere:
 #	python3 tools/viai_logo.py
 #
 # Writes:
 #	runtime/viai_logo.svg
 #	runtime/viai{16x16,32x32,48x48}.png, .xpm and _png.h
 #	runtime/bitmaps/viai.ico, src/viai.ico
+#	src/viai_{alert,error,info,quest}.ico for the MS-Windows dialogs
 #	src/viai_icon.xbm, src/viai_mask.xbm
 
 import io
@@ -27,6 +28,11 @@ SRC = os.path.join(TOP_DIR, 'src')
 BLOCK_COLOR = (0x06, 0x28, 0x1a)
 DOT_COLOR = (0x01, 0x98, 0x33)
 LETTER_COLOR = (0xff, 0xff, 0xff)
+# symbols of the dialog icons
+ALERT_COLOR = (0xff, 0xd2, 0x1f)
+ERROR_COLOR = (0xd3, 0x2f, 0x2f)
+INFO_COLOR = (0x1e, 0x6f, 0xd9)
+DIALOG_SIZES = (16, 32)
 
 # Design on a 296 x 296 canvas.
 DESIGN = 296
@@ -166,11 +172,61 @@ def draw(ctx, size):
     fill(ctx, dots_path, g, DOT_COLOR, bevel(DOT_BEVEL), DOT_LIT, DOT_DARK)
 
 
-def render(size):
+def dialog_symbol(ctx, kind, size):
+    """Draw the symbol of a dialog icon in the bottom right corner."""
+    r = size * 0.27
+    cx = cy = size - r - size * 0.01
+    lw = max(1.0, r * 0.12)
+    ctx.set_line_join(cairo.LINE_JOIN_ROUND)
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    if kind == 'alert':
+        h = r * 1.9
+        ctx.move_to(cx, cy - h * 0.55)
+        ctx.line_to(cx + r, cy + h * 0.45)
+        ctx.line_to(cx - r, cy + h * 0.45)
+        ctx.close_path()
+        rgb(ctx, ALERT_COLOR)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0, 0, 0)
+        ctx.set_line_width(lw)
+        ctx.stroke()
+        mark, mark_color, mark_y = '!', (0, 0, 0), cy + h * 0.1
+    else:
+        ctx.arc(cx, cy, r, 0, 2 * math.pi)
+        rgb(ctx, ERROR_COLOR if kind == 'error' else INFO_COLOR)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.set_line_width(lw)
+        ctx.stroke()
+        if kind == 'error':
+            d = r * 0.42
+            ctx.set_line_width(max(1.5, r * 0.28))
+            ctx.move_to(cx - d, cy - d)
+            ctx.line_to(cx + d, cy + d)
+            ctx.move_to(cx + d, cy - d)
+            ctx.line_to(cx - d, cy + d)
+            ctx.stroke()
+            return
+        mark = 'i' if kind == 'info' else '?'
+        mark_color, mark_y = (1, 1, 1), cy
+    ctx.select_font_face('DejaVu Sans', cairo.FONT_SLANT_NORMAL,
+                         cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(r * 1.5)
+    ext = ctx.text_extents(mark)
+    ctx.move_to(cx - ext.x_bearing - ext.width / 2,
+                mark_y - ext.y_bearing - ext.height / 2)
+    ctx.set_source_rgb(*mark_color)
+    ctx.show_text(mark)
+
+
+def render(size, dialog=None):
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, size, size)
     ctx = cairo.Context(surf)
     ctx.scale(size / DESIGN, size / DESIGN)
     draw(ctx, size)
+    if dialog is not None:
+        ctx.identity_matrix()
+        dialog_symbol(ctx, dialog, size)
     buf = io.BytesIO()
     surf.write_to_png(buf)
     buf.seek(0)
@@ -260,6 +316,11 @@ def main():
                  os.path.join(SRC, 'viai.ico')):
         ico[0].save(path, sizes=[im.size for im in ico],
                     append_images=ico[1:])
+
+    for kind in ('alert', 'error', 'info', 'quest'):
+        ico = [render(s, kind) for s in sorted(DIALOG_SIZES, reverse=True)]
+        ico[0].save(os.path.join(SRC, f'viai_{kind}.ico'),
+                    sizes=[im.size for im in ico], append_images=ico[1:])
 
     # 32 x 32 bitmaps for X11 without XPM: the icon is set for the dark
     # parts, the mask for the opaque parts
