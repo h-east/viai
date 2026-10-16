@@ -109,18 +109,22 @@ char	*(mouse_choices[]) =
 int	mouse_choice = (int)mouse_default;
 char	*mouse_text = "- The mouse %s";
 
+// The choices in $HOME must be the last ones, they are not offered when
+// $HOME is not set.
 enum
 {
     vimfiles_dir_none = 1,
     vimfiles_dir_vim,
-    vimfiles_dir_home
+    vimfiles_dir_home,
+    vimfiles_dir_home_vim
 };
 static char *(vimfiles_dir_choices[]) =
 {
     "\nCreate plugin directories:",
     "No",
     "In the VIM directory",
-    "In your HOME directory",
+    "In your HOME directory, for ViAI only (viaifiles)",
+    "In your HOME directory, shared with Vim (vimfiles)",
 };
 
 // non-zero when selected to install the popup menu entry.
@@ -2223,9 +2227,9 @@ change_directories_choice(int idx)
 {
     int	    choice_count = TABLE_SIZE(vimfiles_dir_choices);
 
-    // Don't offer the $HOME choice if $HOME isn't set.
+    // Don't offer the $HOME choices if $HOME isn't set.
     if (homedir == NULL)
-	--choice_count;
+	choice_count -= 2;
     choices[idx].arg = get_choice(vimfiles_dir_choices, choice_count);
     set_directories_text(idx);
 }
@@ -2241,7 +2245,7 @@ install_vimfilesdir(int idx)
     int vimfiles_dir_choice = choices[idx].arg;
     char *p;
     char vimdir_path[MAX_PATH];
-    char vimfiles_path[MAX_PATH + 9];
+    char vimfiles_path[MAX_PATH + 10];
     char tmp_dirname[BUFSIZE];
 
     // switch on the location that the user wants the plugin directories
@@ -2262,6 +2266,7 @@ install_vimfilesdir(int idx)
 	    break;
 	}
 	case vimfiles_dir_home:
+	case vimfiles_dir_home_vim:
 	{
 	    // Find the $HOME directory.  Its existence was already checked.
 	    p = homedir;
@@ -2282,7 +2287,10 @@ install_vimfilesdir(int idx)
 
     // Now, just create the directory.	If it already exists, it will fail
     // silently.
-    sprintf(vimfiles_path, "%s\\vimfiles", vimdir_path);
+    // "viaifiles" in $HOME makes ViAI use its own user configuration.
+    sprintf(vimfiles_path, "%s\\%s", vimdir_path,
+	    vimfiles_dir_choice == (int)vimfiles_dir_home
+						    ? "viaifiles" : "vimfiles");
     vim_mkdir(vimfiles_path, 0755);
 
     printf("Creating the following directories in \"%s\":\n", vimfiles_path);
@@ -2317,7 +2325,7 @@ init_directories_choice(void)
     if (p != NULL)
     {
 	vimfiles_dir_choice = (int)vimfiles_dir_home;
-	sprintf(tmp_dirname, "%s\\vimfiles\\compiler", p);
+	sprintf(tmp_dirname, "%s\\viaifiles\\compiler", p);
 	if (stat(tmp_dirname, &st) == 0)
 	    vimfiles_dir_choice = (int)vimfiles_dir_none;
     }
@@ -2390,9 +2398,11 @@ print_cmd_line_help(void)
     printf("    Add ViAI to the start menu\n");
     printf("-install-icons");
     printf("    Create icons for GViAI executables on the desktop\n");
-    printf("-create-directories [vim|home]\n");
+    printf("-create-directories [vim|home|home-vim]\n");
     printf("    Create runtime directories to drop plugins into; in the $VIM\n");
-    printf("    or $HOME directory\n");
+    printf("    or $HOME directory.\n");
+    printf("    \"home\" creates \"viaifiles\" for ViAI only, \"home-vim\"\n");
+    printf("    creates \"vimfiles\" shared with Vim.\n");
     printf("-register-OLE");
     printf("    Ignored\n");
     printf("\n");
@@ -2498,12 +2508,15 @@ command_line_setup_choices(int argc, char **argv)
 		i++;
 		if (strcmp(argv[i], "vim") == 0)
 		    vimfiles_dir_choice = (int)vimfiles_dir_vim;
-		else if (strcmp(argv[i], "home") == 0)
+		else if (strcmp(argv[i], "home") == 0
+			|| strcmp(argv[i], "home-vim") == 0)
 		{
 		    if (homedir == NULL)  // No $HOME in environment
 			vimfiles_dir_choice = (int)vimfiles_dir_none;
-		    else
+		    else if (strcmp(argv[i], "home") == 0)
 			vimfiles_dir_choice = (int)vimfiles_dir_home;
+		    else
+			vimfiles_dir_choice = (int)vimfiles_dir_home_vim;
 		}
 		else
 		{
@@ -2627,9 +2640,11 @@ show_help(void)
 ,
 "Create plugin directories\n"
 "-------------------------\n"
-"Plugin directories allow extending Vim by dropping a file into a directory.\n"
+"Plugin directories allow extending ViAI by dropping a file into a directory.\n"
 "This choice allows creating them in $HOME (if you have a home directory) or\n"
 "$VIM (used for everybody on the system).\n"
+"In $HOME, \"viaifiles\" makes ViAI use its own user configuration, while\n"
+"\"vimfiles\" is shared with Vim.\n"
 ,
 NULL
     };
