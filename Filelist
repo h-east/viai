@@ -1031,7 +1031,6 @@ EXTRA =		\
 
 # Generic language files.
 LANG_GEN = \
-		lang/README.*.txt \
 		lang/LICENSE.*.txt \
 		runtime/doc/*-da.1 \
 		runtime/doc/*-da.UTF-8.1 \
