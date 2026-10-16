@@ -2083,17 +2083,17 @@ init_shortcut_choices(void)
 }
 
 /*
- * Attempt to register OLE for Vim.
+ * Attempt to register OLE for ViAI.
  */
    static void
 install_OLE_register(void)
 {
     char register_command_string[BUFSIZE + 30];
 
-    printf("\n--- Attempting to register Vim with OLE ---\n");
+    printf("\n--- Attempting to register ViAI with OLE ---\n");
     printf("(There is no message whether this works or not.)\n");
 
-    sprintf(register_command_string, "\"%s\\gvim.exe\" -silent -register", installdir);
+    sprintf(register_command_string, "\"%s\\gviai.exe\" -silent -register", installdir);
     system(register_command_string);
 }
 

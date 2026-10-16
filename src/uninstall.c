@@ -396,12 +396,12 @@ main(int argc, char *argv[])
 	    remove_batfiles(1);
     }
 
-    fd = fopen("gvim.exe", "r");
+    fd = fopen("gviai.exe", "r");
     if (fd != NULL)
     {
 	fclose(fd);
-	printf("gvim.exe detected.  Attempting to unregister gvim with OLE\n");
-	system("gvim.exe -silent -unregister");
+	printf("gviai.exe detected.  Attempting to unregister gviai with OLE\n");
+	system("gviai.exe -silent -unregister");
     }
 
     delete_uninstall_key();

@@ -60,17 +60,17 @@ static CVimCF *cf = 0;
 static CVim *app = 0;
 
 /* GUIDs, versions and type library information */
-#define MYCLSID CLSID_Vim
-#define MYLIBID LIBID_Vim
-#define MYIID IID_IVim
+#define MYCLSID CLSID_ViAI
+#define MYLIBID LIBID_ViAI
+#define MYIID IID_IViAI
 
 #define MAJORVER 1
 #define MINORVER 0
 #define LOCALE 0x0409
 
-#define MYNAME "Vim"
-#define MYPROGID "Vim.Application.1"
-#define MYVIPROGID "Vim.Application"
+#define MYNAME "ViAI"
+#define MYPROGID "ViAI.Application.1"
+#define MYVIPROGID "ViAI.Application"
 
 #define MAX_CLSID_LEN 100
 
@@ -82,7 +82,7 @@ static CVim *app = 0;
  * ----------
  */
 
-class CVim FINAL : public IVim
+class CVim FINAL : public IViAI
 {
 public:
     virtual ~CVim();
@@ -99,7 +99,7 @@ public:
     STDMETHOD(GetIDsOfNames)(const IID &iid, OLECHAR **names, UINT n, LCID, DISPID *dispids);
     STDMETHOD(Invoke)(DISPID member, const IID &iid, LCID, WORD flags, DISPPARAMS *dispparams, VARIANT *result, EXCEPINFO *excepinfo, UINT *argerr);
 
-    // IVim members
+    // IViAI members
     STDMETHOD(SendKeys)(BSTR keys);
     STDMETHOD(Eval)(BSTR expr, BSTR *result);
     STDMETHOD(SetForeground)(void);
@@ -133,7 +133,7 @@ CVim *CVim::Create(int *pbDoRestart)
     me = new CVim();
     if (me == NULL)
     {
-	MessageBox(0, "Cannot create application object", "Vim Initialisation", 0);
+	MessageBox(0, "Cannot create application object", "ViAI Initialisation", 0);
 	return NULL;
     }
 
@@ -154,8 +154,8 @@ CVim *CVim::Create(int *pbDoRestart)
 	}
 	RegCloseKey(hKey);
 
-	if (MessageBox(0, "Cannot load registered type library.\nDo you want to register Vim now?",
-		    "Vim Initialisation", MB_YESNO | MB_ICONQUESTION) != IDYES)
+	if (MessageBox(0, "Cannot load registered type library.\nDo you want to register ViAI now?",
+		    "ViAI Initialisation", MB_YESNO | MB_ICONQUESTION) != IDYES)
 	{
 	    delete me;
 	    return NULL;
@@ -167,8 +167,8 @@ CVim *CVim::Create(int *pbDoRestart)
 	hr = LoadRegTypeLib(MYLIBID, 1, 0, 0x00, &typelib);
 	if (FAILED(hr))
 	{
-	    MessageBox(0, "You must restart Vim in order for the registration to take effect.",
-						     "Vim Initialisation", 0);
+	    MessageBox(0, "You must restart ViAI in order for the registration to take effect.",
+						     "ViAI Initialisation", 0);
 	    *pbDoRestart = TRUE;
 	    delete me;
 	    return NULL;
@@ -182,7 +182,7 @@ CVim *CVim::Create(int *pbDoRestart)
     if (FAILED(hr))
     {
 	MessageBox(0, "Cannot get interface type information",
-						     "Vim Initialisation", 0);
+						     "ViAI Initialisation", 0);
 	delete me;
 	return NULL;
     }
@@ -446,7 +446,7 @@ CVimCF *CVimCF::Create()
     CVimCF *me = new CVimCF();
 
     if (me == NULL)
-	MessageBox(0, "Cannot create class factory", "Vim Initialisation", 0);
+	MessageBox(0, "Cannot create class factory", "ViAI Initialisation", 0);
 
     return me;
 }
@@ -558,7 +558,7 @@ extern "C" void RegisterMe(int silent)
     {
 	if (!silent)
 	    MessageBox(0, "Cannot load type library to register",
-						       "Vim Registration", 0);
+						       "ViAI Registration", 0);
 	ok = FALSE;
     }
     else
@@ -567,14 +567,14 @@ extern "C" void RegisterMe(int silent)
 	{
 	    if (!silent)
 		MessageBox(0, "Cannot register type library",
-						       "Vim Registration", 0);
+						       "ViAI Registration", 0);
 	    ok = FALSE;
 	}
 	typelib->Release();
     }
 
     if (ok && !silent)
-	MessageBox(0, "Registered successfully", "Vim", 0);
+	MessageBox(0, "Registered successfully", "ViAI", 0);
 }
 
 // Remove the component from the registry
@@ -616,7 +616,7 @@ extern "C" void UnregisterMe(int bNotifyUser)
     RecursiveDeleteKey(HKEY_CLASSES_ROOT, MYPROGID);
 
     if (bNotifyUser)
-	MessageBox(0, "Unregistered successfully", "Vim", 0);
+	MessageBox(0, "Unregistered successfully", "ViAI", 0);
 }
 
 /****************************************************************************/
@@ -710,7 +710,7 @@ extern "C" void InitOLE(int *pbDoRestart)
     hr = OleInitialize(NULL);
     if (FAILED(hr))
     {
-	MessageBox(0, "Cannot initialise OLE", "Vim Initialisation", 0);
+	MessageBox(0, "Cannot initialise OLE", "ViAI Initialisation", 0);
 	goto error0;
     }
 
@@ -734,7 +734,7 @@ extern "C" void InitOLE(int *pbDoRestart)
 
     if (FAILED(hr))
     {
-	MessageBox(0, "Cannot register class factory", "Vim Initialisation", 0);
+	MessageBox(0, "Cannot register class factory", "ViAI Initialisation", 0);
 	goto error1;
     }
 
@@ -747,7 +747,7 @@ extern "C" void InitOLE(int *pbDoRestart)
 
     if (FAILED(hr))
     {
-	MessageBox(0, "Cannot register application object", "Vim Initialisation", 0);
+	MessageBox(0, "Cannot register application object", "ViAI Initialisation", 0);
 	goto error1;
     }
 

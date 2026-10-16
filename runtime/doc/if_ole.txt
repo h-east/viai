@@ -21,28 +21,28 @@ An alternative is using the client-server communication |clientserver|.
 
 Vim acts as an OLE automation server, accessible from any automation client,
 for example, Visual Basic, Python, or Perl.  The Vim application "name" (its
-"ProgID", in OLE terminology) is "Vim.Application".
+"ProgID", in OLE terminology) is "ViAI.Application".
 
 Hence, in order to start a Vim instance (or connect to an already running
 instance), code similar to the following should be used:
 
 [Visual Basic] >
 	Dim Vim As Object
-	Set Vim = CreateObject("Vim.Application")
+	Set Vim = CreateObject("ViAI.Application")
 
 [Python] >
 	from win32com.client.dynamic import Dispatch
-	vim = Dispatch('Vim.Application')
+	vim = Dispatch('ViAI.Application')
 
 [Perl] >
 	use Win32::OLE;
-	$vim = new Win32::OLE 'Vim.Application';
+	$vim = new Win32::OLE 'ViAI.Application';
 
 [C#] >
 	// Add a reference to Vim in your project.
 	// Choose the COM tab.
-	// Select "Vim Ole Interface 1.1 Type Library"
-	Vim.Vim vimobj = new Vim.Vim();
+	// Select "ViAI OLE Interface 1.1 Type Library"
+	ViAI.ViAI vimobj = new ViAI.ViAI();
 
 Vim does not support acting as a "hidden" OLE server, like some other OLE
 Automation servers.  When a client starts up an instance of Vim, that instance
@@ -126,34 +126,34 @@ Before Vim will act as an OLE server, it must be registered in the system
 registry.  In order to do this, Vim should be run with a single parameter of
 "-register".
 							*-register*  >
-	gvim -register
+	gviai -register
 
-If gvim with OLE support is run and notices that no Vim OLE server has been
+If gviai with OLE support is run and notices that no ViAI OLE server has been
 registered, it will present a dialog and offers you the choice to register by
 clicking "Yes".
 
 In some situations registering is not possible.  This happens when the
-registry is not writable.  If you run into this problem you need to run gvim
+registry is not writable.  If you run into this problem you need to run gviai
 as "Administrator".
 
 Once vim is registered, the application path is stored in the registry.
 Before moving, deleting, or upgrading Vim, the registry entries should be
 removed using the "-unregister" switch.
 							*-unregister*  >
-	gvim -unregister
+	gviai -unregister
 
 The OLE mechanism will use the first registered Vim it finds.  If a Vim is
 already running, this one will be used.  If you want to have (several) Vim
 sessions open that should not react to OLE commands, use the non-OLE version,
 and put it in a different directory.  The OLE version should then be put in a
-directory that is not in your normal path, so that typing "gvim" will start
+directory that is not in your normal path, so that typing "gviai" will start
 the non-OLE version.
 
 							*-silent*
 To avoid the message box that pops up to report the result, prepend "-silent":
 >
-	gvim -silent -register
-	gvim -silent -unregister
+	gviai -silent -register
+	gviai -silent -unregister
 
 ==============================================================================
 5. MS Visual Studio integration				*MSVisualStudio*
@@ -168,7 +168,7 @@ Using Vim with Visual Studio .Net~
 In .Net Studio choose from the menu Tools->External Tools...
 Add
      Title     - Vim
-     Command   - c:\vim\vim63\gvim.exe
+     Command   - c:\viai\viai10\gviai.exe
      Arguments - --servername VS_NET --remote-silent "+call cursor($(CurLine), $(CurCol))" $(ItemPath)
      Init Dir  - Empty
 
