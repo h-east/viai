@@ -663,13 +663,8 @@ C keywords since ctags version 5.1.)
 
 8.14 VIMTUTOR for beginners
 
-The VIMTUTOR.COM DCL script can help Vim beginners to learn/make their first
-steps with Vim on OpenVMS.  Depending of binary distribution you may start it
-with: >
-
-	@vim:vimtutor
-
-(Thomas.R.Wyant III, Vim 6.1)
+ViAI does not have the VIMTUTOR.COM DCL script of Vim.  Use the |:Tutor|
+command to learn the first steps with Vim.
 
 8.16 Slow start in console mode issue
 

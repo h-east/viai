@@ -109,58 +109,34 @@ For more info see |vimrc| and |compatible-default|.
 ==============================================================================
 *01.3*	Using the Vim tutor				*tutor* *vimtutor*
 
-For the interactive tutor, see |vim-tutor-mode|
-
-Instead of reading the text (boring!) you can use the vimtutor to learn your
+Instead of reading the text (boring!) you can use the Vim tutor to learn your
 first Vim commands.  This is a 30-minute tutorial provided in 2 chapters, that
 teaches the most basic Vim functionality hands-on.
 
-On Unix, if Vim has been properly installed, you can start it from the shell:
->
-	vimtutor
-
-On MS-Windows you can find it in the "Program/Vim 9.1" menu.  Or execute
-vimtutor.bat from the installation directory (You can use `:echo $VIMRUNTIME`
-from within Vim to find this directory).
-
-This will make a copy of chapter 1 tutor file, so that you can edit it without
-the risk of damaging the original.  To continue with chapter 2, you can use
-the following command: >
-	vimtutor -c 2
+Start chapter 1 from within ViAI with: >
+	:Tutor
 <
-   There are a few translated versions of the tutor.  To find out if yours is
-available, use the two-letter language code.  For French: >
-
-	vimtutor fr
-
-On Unix, if you prefer using the GUI version of Vim, use "gvimtutor" or
-"vimtutor -g" instead of "vimtutor".
-
-For OpenVMS, if Vim has been properly installed, you can start vimtutor from a
-VMS prompt with: >
-
-	@VIM:vimtutor
-
-Optionally add the two-letter language code as above.
-
-
-On other systems, you have to do a little work:
-
-1. Copy the tutor file.  You can do this with Vim (it knows where to find it):
->
-	vim --clean -c 'e $VIMRUNTIME/tutor/tutor1' -c 'w! TUTORCOPY' -c 'q'
+To continue with chapter 2, use: >
+	:Tutor vim-02-beginner
 <
-   This will write the file "TUTORCOPY" in the current directory.  To use a
-translated version of the tutor, append the two-letter language code to the
-filename.  For French:
+The tutor uses the current message language when it has been translated, see
+|vim-tutor-mode|.  ViAI does not have the "vimtutor" program of Vim.
+
+There are more translations of the plain text version of chapter 1.  To use
+one of them you have to do a little work:
+
+1. Copy the tutor file.  You can do this with ViAI (it knows where to find
+   it).  Append the two-letter language code to the file name, for French:
 >
-	vim --clean -c 'e $VIMRUNTIME/tutor/tutor1.fr' -c 'w! TUTORCOPY' -c 'q'
+	viai --clean -c 'e $VIMRUNTIME/tutor/tutor1.fr' -c 'w! TUTORCOPY' -c q
 <
-2. Edit the copied file with Vim:
+   This will write the file "TUTORCOPY" in the current directory.
+
+2. Edit the copied file with ViAI:
 >
-	vim --clean TUTORCOPY
+	viai --clean TUTORCOPY
 <
-   The --clean argument makes sure Vim is started with nice defaults.
+   The --clean argument makes sure ViAI is started with nice defaults.
 
 3. Delete the copied file when you are finished with it:
 >

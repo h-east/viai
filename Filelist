@@ -575,8 +575,6 @@ SRC_UNIX =	\
 		src/toolcheck \
 		src/viai_icon.xbm \
 		src/viai_mask.xbm \
-		src/vimtutor \
-		src/gvimtutor \
 		src/wayland.c \
 		src/wayland.h \
 		src/which.sh \
@@ -745,7 +743,6 @@ SRC_VMS =	\
 		src/testdir/Make_vms.mms \
 		src/testdir/util/vms.vim \
 		src/xxd/Make_vms.mms \
-		vimtutor.com \
 
 # Source files for QNX (in the extra archive).
 SRC_QNX =	\
@@ -997,7 +994,6 @@ RT_DOS =	\
 		runtime/doc/Make_mvc.mak \
 		runtime/indent/Make_mvc.mak \
 		runtime/lang/Make_mvc.mak \
-		vimtutor.bat \
 
 # MS Windows runtime without CR/LF translation (also in the extra archive).
 RT_DOS_BIN =	\

@@ -44,8 +44,8 @@ the ones of Vim, see |win32-popup-menu|.  The window class of the GUI is
 "ex", "view", "gview", "rview", "rgview" and "eview" are not installed.  Use
 "viai -e", "viai -R", etc. instead, see |-e| and |-R|.
 
-On Unix "xxd" and "vimtutor" are not installed either.  Use the xxd program
-of Vim and the |:Tutor| command.
+There is no "vimtutor" program, use the |:Tutor| command.  On Unix "xxd" is
+not installed either, use the xxd program of Vim.
 
 The default client-server name is "GVIAI" instead of "GVIM", see
 |client-server-name| and |{server}|.
