@@ -785,7 +785,6 @@ RT_ALL =	\
 		runtime/doc/vim.1 \
 		runtime/doc/evim.1 \
 		runtime/doc/vimdiff.1 \
-		runtime/doc/vimtutor.1 \
 		runtime/doc/xxd.1 \
 		runtime/ftoff.vim \
 		runtime/gvimrc_example.vim \
@@ -985,7 +984,6 @@ RT_AMI_DOS =	\
 		runtime/doc/evim.man \
 		runtime/doc/vim.man \
 		runtime/doc/vimdiff.man \
-		runtime/doc/vimtutor.man \
 		runtime/doc/xxd.man \
 
 # MS Windows runtime (also in the extra archive).

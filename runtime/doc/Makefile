@@ -19,7 +19,7 @@ include Make_all.mak
 .SUFFIXES: .c .o .txt .html
 .PHONY: all vimtags noerrors perlhtml clean test_urls
 
-all: tags vim.man evim.man vimdiff.man vimtutor.man xxd.man $(CONVERTED)
+all: tags vim.man evim.man vimdiff.man xxd.man $(CONVERTED)
 
 # Use Vim to generate the tags file.  Can only be used when Vim has been
 # compiled.  Supports multiple languages.
@@ -41,9 +41,6 @@ evim.man: evim.1
 	nroff -c -man $? | sed -e s/.//g > $@
 
 vimdiff.man: vimdiff.1
-	nroff -c -man $? | sed -e s/.//g > $@
-
-vimtutor.man: vimtutor.1
 	nroff -c -man $? | sed -e s/.//g > $@
 
 xxd.man: xxd.1
@@ -160,9 +157,6 @@ vim-da.UTF-8.1: vim-da.1
 vimdiff-da.UTF-8.1: vimdiff-da.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
-vimtutor-da.UTF-8.1: vimtutor-da.1
-	iconv -f latin1 -t UTF-8 $? >$@
-
 vim-de.UTF-8.1: vim-de.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
@@ -173,9 +167,6 @@ evim-fr.UTF-8.1: evim-fr.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
 vimdiff-fr.UTF-8.1: vimdiff-fr.1
-	iconv -f latin1 -t UTF-8 $? >$@
-
-vimtutor-fr.UTF-8.1: vimtutor-fr.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
 xxd-fr.UTF-8.1: xxd-fr.1
@@ -190,9 +181,6 @@ evim-it.UTF-8.1: evim-it.1
 vimdiff-it.UTF-8.1: vimdiff-it.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
-vimtutor-it.UTF-8.1: vimtutor-it.1
-	iconv -f latin1 -t UTF-8 $? >$@
-
 xxd-it.UTF-8.1: xxd-it.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
@@ -203,9 +191,6 @@ evim-pl.UTF-8.1: evim-pl.1
 	iconv -f latin2 -t UTF-8 $? >$@
 
 vimdiff-pl.UTF-8.1: vimdiff-pl.1
-	iconv -f latin2 -t UTF-8 $? >$@
-
-vimtutor-pl.UTF-8.1: vimtutor-pl.1
 	iconv -f latin2 -t UTF-8 $? >$@
 
 xxd-pl.UTF-8.1: xxd-pl.1
@@ -220,9 +205,6 @@ evim-ru.UTF-8.1: evim-ru.1
 vimdiff-ru.UTF-8.1: vimdiff-ru.1
 	iconv -f KOI8-R -t UTF-8 $? >$@
 
-vimtutor-ru.UTF-8.1: vimtutor-ru.1
-	iconv -f KOI8-R -t UTF-8 $? >$@
-
 xxd-ru.UTF-8.1: xxd-ru.1
 	iconv -f KOI8-R -t UTF-8 $? >$@
 
@@ -235,9 +217,6 @@ evim-tr.UTF-8.1: evim-tr.1
 vimdiff-tr.UTF-8.1: vimdiff-tr.1
 	iconv -f latin5 -t UTF-8 $? >$@
 
-vimtutor-tr.UTF-8.1: vimtutor-tr.1
-	iconv -f latin5 -t UTF-8 $? >$@
-
 vim-sv.UTF-8.1: vim-sv.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
@@ -245,9 +224,6 @@ evim-sv.UTF-8.1: evim-sv.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
 vimdiff-sv.UTF-8.1: vimdiff-sv.1
-	iconv -f latin1 -t UTF-8 $? >$@
-
-vimtutor-sv.UTF-8.1: vimtutor-sv.1
 	iconv -f latin1 -t UTF-8 $? >$@
 
 xxd-sv.UTF-8.1: xxd-sv.1

@@ -500,9 +500,6 @@ FILES
        For recent info read the VIM home page:
        <URL:http://www.vim.org/>
 
-SEE ALSO
-       vimtutor(1)
-
 AUTHOR
        Most of Vim was made by Bram Moolenaar, with a lot of help from others.
        See ":help credits" in Vim.

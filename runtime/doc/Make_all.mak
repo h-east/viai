@@ -319,35 +319,28 @@ HTMLS = \
 CONVERTED = \
 	vim-da.UTF-8.1 \
 	vimdiff-da.UTF-8.1 \
-	vimtutor-da.UTF-8.1 \
 	vim-de.UTF-8.1 \
 	vim-fr.UTF-8.1 \
 	evim-fr.UTF-8.1 \
 	vimdiff-fr.UTF-8.1 \
-	vimtutor-fr.UTF-8.1 \
 	xxd-fr.UTF-8.1 \
 	vim-it.UTF-8.1 \
 	evim-it.UTF-8.1 \
 	vimdiff-it.UTF-8.1 \
-	vimtutor-it.UTF-8.1 \
 	xxd-it.UTF-8.1 \
 	vim-pl.UTF-8.1 \
 	evim-pl.UTF-8.1 \
 	vimdiff-pl.UTF-8.1 \
-	vimtutor-pl.UTF-8.1 \
 	xxd-pl.UTF-8.1 \
 	vim-ru.UTF-8.1 \
 	evim-ru.UTF-8.1 \
 	vimdiff-ru.UTF-8.1 \
-	vimtutor-ru.UTF-8.1 \
 	xxd-ru.UTF-8.1 \
 	vim-sv.UTF-8.1 \
 	evim-sv.UTF-8.1 \
 	vimdiff-sv.UTF-8.1 \
-	vimtutor-sv.UTF-8.1 \
 	xxd-sv.UTF-8.1 \
 	vim-tr.UTF-8.1 \
 	evim-tr.UTF-8.1 \
-	vimdiff-tr.UTF-8.1 \
-	vimtutor-tr.UTF-8.1
+	vimdiff-tr.UTF-8.1
 
