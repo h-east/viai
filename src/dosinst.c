@@ -33,8 +33,8 @@
 	} \
     } while (0)
 
-int	has_vim = 0;		// installable vim.exe exists
-int	has_gvim = 0;		// installable gvim.exe exists
+int	has_vim = 0;		// installable viai.exe exists
+int	has_gvim = 0;		// installable gviai.exe exists
 
 char	oldvimrc[BUFSIZE];	// name of existing vimrc file
 char	vimrc[BUFSIZE];		// name of vimrc file to create
@@ -216,20 +216,20 @@ check_unpack(void)
 	myexit(1);
     }
 
-    // Check if vim.exe or gvim.exe is in the current directory.
-    if ((fd = fopen("gvim.exe", "r")) != NULL)
+    // Check if viai.exe or gviai.exe is in the current directory.
+    if ((fd = fopen("gviai.exe", "r")) != NULL)
     {
 	fclose(fd);
 	has_gvim = 1;
     }
-    if ((fd = fopen("vim.exe", "r")) != NULL)
+    if ((fd = fopen("viai.exe", "r")) != NULL)
     {
 	fclose(fd);
 	has_vim = 1;
     }
     if (!has_gvim && !has_vim)
     {
-	printf("ERROR: Cannot find any Vim executables in \"%s\"\n\n",
+	printf("ERROR: Cannot find any ViAI executables in \"%s\"\n\n",
 								  installdir);
 	myexit(1);
     }
@@ -339,7 +339,7 @@ findoldfile(char **destination)
 }
 
 /*
- * Check if there is a vim.[exe|bat|, gvim.[exe|bat|, etc. in the path.
+ * Check if there is a viai.[exe|bat|, gviai.[exe|bat|, etc. in the path.
  * When "check_bat_only" is TRUE, only find "default_bat_dir".
  */
     static void
@@ -376,7 +376,7 @@ find_bat_exe(int check_bat_only)
 /*
  * Get the value of $VIMRUNTIME or $VIM and write it in $TEMP/vimini.ini, so
  * that NSIS can read it.
- * When not set, use the directory of a previously installed Vim.
+ * When not set, use the directory of a previously installed ViAI.
  */
     static void
 get_vim_env(void)
@@ -445,7 +445,7 @@ window_cb(HWND hwnd, LPARAM lparam UNUSED)
 
     title[0] = 0;
     GetWindowText(hwnd, title, 256);
-    if (strstr(title, "Vim ") != NULL && strstr(title, " Uninstall") != NULL)
+    if (strstr(title, "ViAI ") != NULL && strstr(title, " Uninstall") != NULL)
 	++num_windows;
     return TRUE;
 }
@@ -529,9 +529,9 @@ uninstall_check(int skip_question)
 		NULL, NULL, NULL, &temp_pfiletime) == ERROR_NO_MORE_ITEMS)
 	    break;
 
-	if (strncmp("Vim", subkey_name_buff, 3) == 0)
+	if (strncmp("ViAI", subkey_name_buff, 4) == 0)
 	{
-	    // Open the key named Vim*
+	    // Open the key named ViAI*
 	    code = RegOpenKeyEx(key_handle, subkey_name_buff, 0,
 			   KEY_WOW64_64KEY | KEY_READ, &uninstall_key_handle);
 	    CHECK_REG_ERROR(code);
@@ -555,12 +555,12 @@ uninstall_check(int skip_question)
 
 	    foundone = 1;
 	    printf("\n*********************************************************\n");
-	    printf("Vim Install found what looks like an existing Vim version.\n");
+	    printf("ViAI Install found what looks like an existing ViAI version.\n");
 	    printf("The name of the entry is:\n");
 	    printf("\n        \"%s\"\n\n", temp_string_buffer);
 
 	    printf("Installing the new version will disable part of the existing version.\n");
-	    printf("(The batch files used in a console and the \"Edit with Vim\" entry in\n");
+	    printf("(The batch files used in a console and the \"Edit with ViAI\" entry in\n");
 	    printf("the popup menu will use the new version)\n");
 
 	    if (skip_question)
@@ -717,7 +717,7 @@ inspect_system(void)
     {
 	printf("------------------------------------------------------\n");
 	printf("$VIM is set to \"%s\".\n", p);
-	printf("This is different from where this version of Vim is:\n");
+	printf("This is different from where this version of ViAI is:\n");
 	strcpy(buf, installdir);
 	*(buf + runtimeidx - 1) = NUL;
 	printf("\"%s\"\n", buf);
@@ -727,7 +727,7 @@ inspect_system(void)
 	    printf("to be able to use this install program.\n");
 	    myexit(1);
 	}
-	printf("otherwise Vim WILL NOT WORK properly!\n");
+	printf("otherwise ViAI WILL NOT WORK properly!\n");
 	printf("------------------------------------------------------\n");
     }
 
@@ -739,7 +739,7 @@ inspect_system(void)
     {
 	printf("------------------------------------------------------\n");
 	printf("$VIMRUNTIME is set to \"%s\".\n", p);
-	printf("This is different from where this version of Vim is:\n");
+	printf("This is different from where this version of ViAI is:\n");
 	printf("\"%s\"\n", installdir);
 	printf("You must adjust or remove the setting of $VIMRUNTIME,\n");
 	if (interactive)
@@ -747,12 +747,12 @@ inspect_system(void)
 	    printf("to be able to use this install program.\n");
 	    myexit(1);
 	}
-	printf("otherwise Vim WILL NOT WORK properly!\n");
+	printf("otherwise ViAI WILL NOT WORK properly!\n");
 	printf("------------------------------------------------------\n");
     }
 
     /*
-     * Check if there is a vim.[exe|bat|, gvim.[exe|bat|, etc. in the path.
+     * Check if there is a viai.[exe|bat|, gviai.[exe|bat|, etc. in the path.
      */
     find_bat_exe(FALSE);
 
@@ -771,7 +771,7 @@ inspect_system(void)
 
     if (foundone)
     {
-	printf("Warning: Found Vim executable(s) in your $PATH:\n");
+	printf("Warning: Found ViAI executable(s) in your $PATH:\n");
 	for (i = 1; i < TARGET_COUNT; ++i)
 	    if (targets[i].oldexe != NULL)
 		printf("%s\n", targets[i].oldexe);
@@ -819,7 +819,7 @@ add_dummy_choice(void)
 // stuff for creating the batch files.
 
 /*
- * Install the vim.bat, gvim.bat, etc. files.
+ * Install the viai.bat, gviai.bat, etc. files.
  */
     static void
 install_bat_choice(int idx)
@@ -843,7 +843,7 @@ install_bat_choice(int idx)
     need_uninstall_entry = 1;
 
     fprintf(fd, "@echo off\n");
-    fprintf(fd, "rem -- Run Vim --\n");
+    fprintf(fd, "rem -- Run ViAI --\n");
     fprintf(fd, VIMBAT_UNINSTKEY "\n");
     fprintf(fd, "\n");
     fprintf(fd, "setlocal\n");
@@ -852,9 +852,9 @@ install_bat_choice(int idx)
      * Don't use double quotes for the "set" argument, also when it
      * contains a space.  The quotes would be included in the value.
      * The order of preference is:
-     * 1. $VIMRUNTIME/vim.exe	    (user preference)
-     * 2. $VIM/vim81/vim.exe	    (hard coded version)
-     * 3. installdir/vim.exe	    (hard coded install directory)
+     * 1. $VIMRUNTIME/viai.exe    (user preference)
+     * 2. $VIM/viai10/viai.exe    (hard coded version)
+     * 3. installdir/viai.exe     (hard coded install directory)
      */
     fprintf(fd, "set VIM_EXE_DIR=%s\n", installdir);
     fprintf(fd, "if exist \"%%VIM%%\\%s\\%s\" set VIM_EXE_DIR=%%VIM%%\\%s\n",
@@ -888,7 +888,7 @@ install_bat_choice(int idx)
 
     if (*exename == 'g')
     {
-	// For gvim.exe use "start /b" to avoid that the console window
+	// For gviai.exe use "start /b" to avoid that the console window
 	// stays open.
 	fprintf(fd, "if .%%VIMNOFORK%%==.1 (\n");
 	fprintf(fd, "    start \"dummy\" /b /wait ");
@@ -929,7 +929,7 @@ alloc_text(int idx, char *fmt, char *arg)
 }
 
 /*
- * Toggle the "Overwrite .../vim.bat" to "Don't overwrite".
+ * Toggle the "Overwrite .../viai.bat" to "Don't overwrite".
  */
     static void
 toggle_bat_choice(int idx)
@@ -1046,8 +1046,8 @@ change_bat_choice(int idx)
     free(names);
 }
 
-char *bat_text_yes = "Install .bat files to use Vim at the command line:";
-char *bat_text_no = "do NOT install .bat files to use Vim at the command line";
+char *bat_text_yes = "Install .bat files to use ViAI at the command line:";
+char *bat_text_no = "do NOT install .bat files to use ViAI at the command line";
 
     static void
 change_main_bat_choice(int idx)
@@ -1065,8 +1065,8 @@ change_main_bat_choice(int idx)
     // update the individual batch file selections
     for (i = 1; i < TARGET_COUNT; ++i)
     {
-	// Only make it active when the first item has a path and the vim.exe
-	// or gvim.exe exists (there is a changefunc then).
+	// Only make it active when the first item has a path and the viai.exe
+	// or gviai.exe exists (there is a changefunc then).
 	if (targets[0].batpath[0] != NUL
 		&& choices[idx + i].changefunc != NULL)
 	{
@@ -1100,7 +1100,7 @@ init_bat_choice(int target)
     choices[choice_count].text = NULL;	// will be set below
     if (oldbat != NULL)
     {
-	// A [g]vim.bat exists: Only choice is to overwrite it or not.
+	// A [g]viai.bat exists: Only choice is to overwrite it or not.
 	choices[choice_count].changefunc = toggle_bat_choice;
 	*batpath = NUL;
 	toggle_bat_choice(choice_count);
@@ -1112,7 +1112,7 @@ init_bat_choice(int target)
 	    strcpy(batpath, default_bat_dir);
 	else
 	{
-	    // No [g]vim.bat exists: Write it to a directory in $PATH.  Use
+	    // No [g]viai.bat exists: Write it to a directory in $PATH.  Use
 	    // $WINDIR by default, if it's empty the first item in $PATH.
 	    p = getenv("WINDIR");
 	    if (p != NULL && *p != NUL)
@@ -1323,7 +1323,7 @@ change_vimrc_choice(int idx)
 }
 
 /*
- * Change the choice how to run Vim.
+ * Change the choice how to run ViAI.
  */
     static void
 change_run_choice(int idx)
@@ -1565,9 +1565,9 @@ register_uninstall(
 
 /*
  * Add some entries to the registry:
- * - to add "Edit with Vim" to the context * menu
- * - to add Vim to the "Open with..." list
- * - to uninstall Vim
+ * - to add "Edit with ViAI" to the context * menu
+ * - to add ViAI to the "Open with..." list
+ * - to uninstall ViAI
  */
 //ARGSUSED
     static int
@@ -1638,7 +1638,7 @@ install_registry(void)
     }
 
     printf("Creating an uninstall entry\n");
-    sprintf(display_name, "Vim " VIM_VERSION_SHORT
+    sprintf(display_name, "ViAI " VIAI_VERSION_SHORT
 #ifdef _M_ARM64
 	    " (arm64)"
 #elif _M_X64
@@ -1652,18 +1652,19 @@ install_registry(void)
     else
 	sprintf(uninstall_string, "%s\\uninstall-gui.exe", installdir);
 
-    sprintf(icon_string, "%s\\gvim.exe,0", installdir);
+    sprintf(icon_string, "%s\\gviai.exe,0", installdir);
 
-    sprintf(version_string, VIM_VERSION_SHORT "." VIM_VERSION_PATCHLEVEL_STR);
+    sprintf(version_string,
+	       VIAI_VERSION_SHORT "." VIAI_VERSION_PATCHLEVEL_STR);
 
     lRet = register_uninstall(
 	HKEY_LOCAL_MACHINE,
-	"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Vim " VIM_VERSION_SHORT,
+	"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\ViAI " VIAI_VERSION_SHORT,
 	display_name,
 	uninstall_string,
 	icon_string,
 	version_string,
-	"The Vim Project");
+	"The ViAI Project");
     if (ERROR_SUCCESS != lRet)
 	return FAIL;
 
@@ -1675,18 +1676,18 @@ change_popup_choice(int idx)
 {
     if (install_popup == 0)
     {
-	choices[idx].text = "Install an entry for Vim in the popup menu for the right\n    mouse button so that you can edit any file with Vim";
+	choices[idx].text = "Install an entry for ViAI in the popup menu for the right\n    mouse button so that you can edit any file with ViAI";
 	install_popup = 1;
     }
     else
     {
-	choices[idx].text = "Do NOT install an entry for Vim in the popup menu for the\n    right mouse button to edit any file with Vim";
+	choices[idx].text = "Do NOT install an entry for ViAI in the popup menu for the\n    right mouse button to edit any file with ViAI";
 	install_popup = 0;
     }
 }
 
 /*
- * Only add the choice for the popup menu entry when gvim.exe was found and
+ * Only add the choice for the popup menu entry when gviai.exe was found and
  * both gviaiext.dll and regedit.exe exist.
  */
     static void
@@ -1713,18 +1714,18 @@ change_openwith_choice(int idx)
 {
     if (install_openwith == 0)
     {
-	choices[idx].text = "Add Vim to the \"Open With...\" list in the popup menu for the right\n    mouse button so that you can edit any file with Vim";
+	choices[idx].text = "Add ViAI to the \"Open With...\" list in the popup menu for the right\n    mouse button so that you can edit any file with ViAI";
 	install_openwith = 1;
     }
     else
     {
-	choices[idx].text = "Do NOT add Vim to the \"Open With...\" list in the popup menu for the\n    right mouse button to edit any file with Vim";
+	choices[idx].text = "Do NOT add ViAI to the \"Open With...\" list in the popup menu for the\n    right mouse button to edit any file with ViAI";
 	install_openwith = 0;
     }
 }
 
 /*
- * Only add the choice for the open-with menu entry when gvim.exe was found
+ * Only add the choice for the open-with menu entry when gviai.exe was found
  * and regedit.exe exist.
  */
     static void
@@ -1848,7 +1849,7 @@ build_link_name(
     // Ignore errors if it already exists.
     vim_mkdir(shell_folder_path, 0755);
 
-    // build the path to the shortcut and the path to gvim.exe
+    // build the path to the shortcut and the path to gviai.exe
     sprintf(link_path, "%s\\%s.lnk", shell_folder_path, link_name);
 
     return OK;
@@ -1857,7 +1858,7 @@ build_link_name(
     static int
 build_shortcut(
 	const char *name,	// Name of the shortcut
-	const char *exename,	// Name of the executable (e.g., vim.exe)
+	const char *exename,	// Name of the executable (e.g., viai.exe)
 	const char *args,
 	const char *shell_folder,
 	const char *workingdir)
@@ -1889,7 +1890,7 @@ build_shortcut(
 #define WORKDIR "%HOMEDRIVE%%HOMEPATH%"
 
 /*
- * Create shortcut(s) in the Start Menu\Programs\Vim folder.
+ * Create shortcut(s) in the Start Menu\Programs\ViAI folder.
  */
     static void
 install_start_menu(int idx UNUSED)
@@ -1898,28 +1899,28 @@ install_start_menu(int idx UNUSED)
     printf("Creating start menu\n");
     if (has_vim)
     {
-	if (build_shortcut("Vim", "vim.exe", "",
+	if (build_shortcut("ViAI", "viai.exe", "",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
-	if (build_shortcut("Vim Read-only", "vim.exe", "-R",
+	if (build_shortcut("ViAI Read-only", "viai.exe", "-R",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
-	if (build_shortcut("Vim Diff", "vim.exe", "-d",
+	if (build_shortcut("ViAI Diff", "viai.exe", "-d",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
     }
     if (has_gvim)
     {
-	if (build_shortcut("gVim", "gvim.exe", "",
+	if (build_shortcut("GViAI", "gviai.exe", "",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
-	if (build_shortcut("gVim Easy", "gvim.exe", "-y",
+	if (build_shortcut("GViAI Easy", "gviai.exe", "-y",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
-	if (build_shortcut("gVim Read-only", "gvim.exe", "-R",
+	if (build_shortcut("GViAI Read-only", "gviai.exe", "-R",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
-	if (build_shortcut("gVim Diff", "gvim.exe", "-d",
+	if (build_shortcut("GViAI Diff", "gviai.exe", "-d",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	    return;
     }
@@ -1927,12 +1928,7 @@ install_start_menu(int idx UNUSED)
 		interactive ? "uninstall.exe" : "uninstall-gui.exe", "",
 					   VIM_STARTMENU, installdir) == FAIL)
 	return;
-    // For Windows NT the working dir of the vimtutor.bat must be right,
-    // otherwise gvim.exe won't be found and using gvimbat doesn't work.
-    if (build_shortcut("Vim tutor", "vimtutor.bat", "",
-					   VIM_STARTMENU, installdir) == FAIL)
-	return;
-    if (build_shortcut("Help", has_gvim ? "gvim.exe" : "vim.exe", "-c h",
+    if (build_shortcut("Help", has_gvim ? "gviai.exe" : "viai.exe", "-c h",
 					      VIM_STARTMENU, WORKDIR) == FAIL)
 	return;
     {
@@ -1945,11 +1941,12 @@ install_start_menu(int idx UNUSED)
 	    return ;
 	}
 	add_pathsep(shell_folder_path);
-	strcat(shell_folder_path, "Vim Online.url");
+	strcat(shell_folder_path, "ViAI Online.url");
 	if (!WritePrivateProfileString("InternetShortcut", "URL",
-				    "https://www.vim.org/", shell_folder_path))
+				    "https://github.com/viai-editor/viai",
+				    shell_folder_path))
 	{
-	    printf("Creating the Vim online URL failed\n");
+	    printf("Creating the ViAI online URL failed\n");
 	    return;
 	}
     }
@@ -1961,12 +1958,12 @@ toggle_startmenu_choice(int idx)
     if (choices[idx].installfunc == NULL)
     {
 	choices[idx].installfunc = install_start_menu;
-	choices[idx].text = "Add Vim to the Start menu";
+	choices[idx].text = "Add ViAI to the Start menu";
     }
     else
     {
 	choices[idx].installfunc = NULL;
-	choices[idx].text = "Do NOT add Vim to the Start menu";
+	choices[idx].text = "Do NOT add ViAI to the Start menu";
     }
 }
 
@@ -1985,7 +1982,7 @@ install_shortcut_gvim(int idx)
     // Create shortcut(s) on the desktop
     if (choices[idx].arg)
     {
-	(void)build_shortcut(icon_names[0], "gvim.exe",
+	(void)build_shortcut(icon_names[0], "gviai.exe",
 						      "", "desktop", WORKDIR);
 	need_uninstall_entry = 1;
     }
@@ -1996,7 +1993,7 @@ install_shortcut_evim(int idx)
 {
     if (choices[idx].arg)
     {
-	(void)build_shortcut(icon_names[1], "gvim.exe",
+	(void)build_shortcut(icon_names[1], "gviai.exe",
 						    "-y", "desktop", WORKDIR);
 	need_uninstall_entry = 1;
     }
@@ -2007,7 +2004,7 @@ install_shortcut_gview(int idx)
 {
     if (choices[idx].arg)
     {
-	(void)build_shortcut(icon_names[2], "gvim.exe",
+	(void)build_shortcut(icon_names[2], "gviai.exe",
 						    "-R", "desktop", WORKDIR);
 	need_uninstall_entry = 1;
     }
@@ -2019,11 +2016,11 @@ toggle_shortcut_choice(int idx)
     char	*arg;
 
     if (choices[idx].installfunc == install_shortcut_gvim)
-	arg = "gVim";
+	arg = "GViAI";
     else if (choices[idx].installfunc == install_shortcut_evim)
-	arg = "gVim Easy";
+	arg = "GViAI Easy";
     else
-	arg = "gVim Read-only";
+	arg = "GViAI Read-only";
     if (choices[idx].arg)
     {
 	choices[idx].arg = 0;
@@ -2373,10 +2370,10 @@ setup_choices(void)
     static void
 print_cmd_line_help(void)
 {
-    printf("Vim installer non-interactive command line arguments:\n");
+    printf("ViAI installer non-interactive command line arguments:\n");
     printf("\n");
-    printf("-create-batfiles  [vim gvim evim view gview vimdiff gvimdiff]\n");
-    printf("    Create .bat files for Vim variants in the Windows directory.\n");
+    printf("-create-batfiles  [viai gviai eviai viaidiff gviaidiff]\n");
+    printf("    Create .bat files for ViAI variants in the Windows directory.\n");
     printf("-create-vimrc\n");
     printf("    Create a default _vimrc file if one does not already exist.\n");
     printf("-vimrc-remap [no|win]\n");
@@ -2386,13 +2383,13 @@ print_cmd_line_help(void)
     printf("-vimrc-compat [vi|vim|defaults|all]\n");
     printf("    Set Vi compatibility when creating a default _vimrc file.\n");
     printf("-install-popup\n");
-    printf("    Install the Edit-with-Vim context menu entry\n");
+    printf("    Install the Edit-with-ViAI context menu entry\n");
     printf("-install-openwith\n");
-    printf("    Add Vim to the \"Open With...\" context menu list\n");
+    printf("    Add ViAI to the \"Open With...\" context menu list\n");
     printf("-add-start-menu");
-    printf("    Add Vim to the start menu\n");
+    printf("    Add ViAI to the start menu\n");
     printf("-install-icons");
-    printf("    Create icons for gVim executables on the desktop\n");
+    printf("    Create icons for GViAI executables on the desktop\n");
     printf("-create-directories [vim|home]\n");
     printf("    Create runtime directories to drop plugins into; in the $VIM\n");
     printf("    or $HOME directory\n");
@@ -2542,19 +2539,19 @@ show_help(void)
     {
 "Installing .bat files\n"
 "---------------------\n"
-"The vim.bat file is written in one of the directories in $PATH.\n"
-"This makes it possible to start Vim from the command line.\n"
-"If vim.exe can be found in $PATH, the choice for vim.bat will not be\n"
-"present.  It is assumed you will use the existing vim.exe.\n"
-"If vim.bat can already be found in $PATH this is probably for an old\n"
-"version of Vim (but this is not checked!).  You can overwrite it.\n"
-"If no vim.bat already exists, you can select one of the directories in\n"
-"$PATH for creating the batch file, or disable creating a vim.bat file.\n"
+"The viai.bat file is written in one of the directories in $PATH.\n"
+"This makes it possible to start ViAI from the command line.\n"
+"If viai.exe can be found in $PATH, the choice for viai.bat will not be\n"
+"present.  It is assumed you will use the existing viai.exe.\n"
+"If viai.bat can already be found in $PATH this is probably for an old\n"
+"version of ViAI (but this is not checked!).  You can overwrite it.\n"
+"If no viai.bat already exists, you can select one of the directories in\n"
+"$PATH for creating the batch file, or disable creating a viai.bat file.\n"
 "\n"
-"If you choose not to create the vim.bat file, Vim can still be executed\n"
+"If you choose not to create the viai.bat file, ViAI can still be executed\n"
 "in other ways, but not from the command line.\n"
 "\n"
-"The same applies to choices for gvim, evim, (g)view, and (g)vimdiff.\n"
+"The same applies to choices for gviai, eviai, viaidiff and gviaidiff.\n"
 "The first item can be used to change the path for all of them.\n"
 ,
 "Creating a _vimrc file\n"
@@ -2601,31 +2598,31 @@ show_help(void)
 "   copy/paste text, undo/redo, etc.  Extending the selection can still be\n"
 "   done by keeping SHIFT pressed while using the left mouse button\n"
 ,
-"Edit-with-Vim context menu entry\n"
-"--------------------------------\n"
-"(this choice is only available when gvim.exe and gviaiext.dll are present)\n"
-"You can associate different file types with Vim, so that you can (double)\n"
-"click on a file to edit it with Vim.  This means you have to individually\n"
+"Edit-with-ViAI context menu entry\n"
+"---------------------------------\n"
+"(this choice is only available when gviai.exe and gviaiext.dll are present)\n"
+"You can associate different file types with ViAI, so that you can (double)\n"
+"click on a file to edit it with ViAI.  This means you have to individually\n"
 "select each file type.\n"
-"An alternative is the option offered here: Install an \"Edit with Vim\"\n"
+"An alternative is the option offered here: Install an \"Edit with ViAI\"\n"
 "entry in the popup menu for the right mouse button.  This means you can\n"
-"edit any file with Vim.\n"
+"edit any file with ViAI.\n"
 ,
 "\"Open With...\" context menu entry\n"
 "--------------------------------\n"
-"(this choice is only available when gvim.exe is present)\n"
-"This option adds Vim to the \"Open With...\" entry in the popup menu for\n"
+"(this choice is only available when gviai.exe is present)\n"
+"This option adds ViAI to the \"Open With...\" entry in the popup menu for\n"
 "the right mouse button.  This also makes it possible to edit HTML files\n"
 "directly from Internet Explorer.\n"
 ,
-"Add Vim to the Start menu\n"
-"-------------------------\n"
-"In Windows 95 and later, Vim can be added to the Start menu.  This will\n"
-"create a submenu with an entry for vim, gvim, evim, vimdiff, etc..\n"
+"Add ViAI to the Start menu\n"
+"--------------------------\n"
+"In Windows 95 and later, ViAI can be added to the Start menu.  This will\n"
+"create a submenu with an entry for viai, gviai, eviai, viaidiff, etc..\n"
 ,
 "Icons on the desktop\n"
 "--------------------\n"
-"(these choices are only available when installing gvim)\n"
+"(these choices are only available when installing gviai)\n"
 "In Windows 95 and later, shortcuts (icons) can be created on the Desktop.\n"
 ,
 "Create plugin directories\n"
@@ -2735,8 +2732,8 @@ main(int argc, char **argv)
 	exit(0);
     }
 
-    printf("This program sets up the installation of Vim "
-						   VIM_VERSION_MEDIUM "\n\n");
+    printf("This program sets up the installation of ViAI "
+						   VIAI_VERSION_SHORT "\n\n");
 
     // Check if the user unpacked the archives properly.
     check_unpack();

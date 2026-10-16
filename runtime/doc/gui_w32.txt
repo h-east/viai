@@ -168,8 +168,8 @@ you can.
 					    ViAI Shell Extension
    HKEY_LOCAL_MACHINE\Software\ViAI\Gviai
 		path			    {path}\gviai.exe
-   HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\vim 8.2
-		DisplayName		    Vim 8.2: Edit with Vim popup menu entry
+   HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\ViAI 1.0
+		DisplayName		    ViAI 1.0
 		UninstallString		    {path}\uninstall.exe
 
    Replace {path} with the path that leads to the executable.

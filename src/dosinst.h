@@ -79,7 +79,7 @@ char *searchpath(char *name);
 # define UNUSED
 #endif
 
-#define VIM_STARTMENU "Programs\\Vim " VIM_VERSION_SHORT
+#define VIM_STARTMENU "Programs\\ViAI " VIAI_VERSION_SHORT
 
 int	interactive;		// non-zero when running interactively
 
@@ -325,7 +325,7 @@ retry:
  * List of targets.  The first one (index zero) is used for the default path
  * for the batch files.
  */
-#define TARGET_COUNT  9
+#define TARGET_COUNT  6
 
 struct
 {
@@ -334,7 +334,7 @@ struct
     char	*lnkname;	// shortcut file name
     char	*exename;	// exe file name
     char	*exenamearg;	// exe file name when using exearg
-    char	*exearg;	// argument for vim.exe or gvim.exe
+    char	*exearg;	// argument for viai.exe or gviai.exe
     char	*oldbat;	// path to existing xxx.bat or NULL
     char	*oldexe;	// path to existing xxx.exe or NULL
     char	batpath[BUFSIZE];  // path of batch file to create; not
@@ -342,22 +342,16 @@ struct
 } targets[TARGET_COUNT] =
 {
     {"all",	"batch files", NULL, NULL, NULL, NULL, NULL, NULL, ""},
-    {"vim",	"vim.bat",	"Vim.lnk",
-			"vim.exe",    "vim.exe",  "", NULL, NULL, ""},
-    {"gvim",	"gvim.bat",	"gVim.lnk",
-			"gvim.exe",   "gvim.exe", "", NULL, NULL, ""},
-    {"evim",	"evim.bat",	"gVim Easy.lnk",
-			"evim.exe",   "gvim.exe", "-y", NULL, NULL, ""},
-    {"view",	"view.bat",	"Vim Read-only.lnk",
-			"view.exe",   "vim.exe",  "-R", NULL, NULL, ""},
-    {"gview",	"gview.bat",	"gVim Read-only.lnk",
-			"gview.exe",  "gvim.exe", "-R", NULL, NULL, ""},
-    {"vimdiff", "vimdiff.bat",	"Vim Diff.lnk",
-			"vimdiff.exe","vim.exe",  "-d", NULL, NULL, ""},
-    {"gvimdiff","gvimdiff.bat",	"gVim Diff.lnk",
-			"gvimdiff.exe","gvim.exe", "-d", NULL, NULL, ""},
-    {"vimtutor","vimtutor.bat", "Vim tutor.lnk",
-			"vimtutor.bat",  "vimtutor.bat", "", NULL, NULL, ""},
+    {"viai",	"viai.bat",	"ViAI.lnk",
+			"viai.exe",    "viai.exe",  "", NULL, NULL, ""},
+    {"gviai",	"gviai.bat",	"GViAI.lnk",
+			"gviai.exe",   "gviai.exe", "", NULL, NULL, ""},
+    {"eviai",	"eviai.bat",	"GViAI Easy.lnk",
+			"eviai.exe",   "gviai.exe", "-y", NULL, NULL, ""},
+    {"viaidiff", "viaidiff.bat", "ViAI Diff.lnk",
+			"viaidiff.exe", "viai.exe", "-d", NULL, NULL, ""},
+    {"gviaidiff", "gviaidiff.bat", "GViAI Diff.lnk",
+			"gviaidiff.exe", "gviai.exe", "-d", NULL, NULL, ""},
 };
 
 /* Uninstall key for vim.bat, etc. */
@@ -365,13 +359,13 @@ struct
 
 #define ICON_COUNT 3
 char *(icon_names[ICON_COUNT]) =
-	{"gVim " VIM_VERSION_SHORT,
-	 "gVim Easy " VIM_VERSION_SHORT,
-	 "gVim Read only " VIM_VERSION_SHORT};
+	{"GViAI " VIAI_VERSION_SHORT,
+	 "GViAI Easy " VIAI_VERSION_SHORT,
+	 "GViAI Read only " VIAI_VERSION_SHORT};
 char *(icon_link_names[ICON_COUNT]) =
-	{"gVim " VIM_VERSION_SHORT ".lnk",
-	 "gVim Easy " VIM_VERSION_SHORT ".lnk",
-	 "gVim Read only " VIM_VERSION_SHORT ".lnk"};
+	{"GViAI " VIAI_VERSION_SHORT ".lnk",
+	 "GViAI Easy " VIAI_VERSION_SHORT ".lnk",
+	 "GViAI Read only " VIAI_VERSION_SHORT ".lnk"};
 
 /* This is only used for dosinst.c. */
 #if defined(DOSINST)

@@ -8,13 +8,13 @@
  */
 
 /*
- * uninstall.c:	Minimalistic uninstall program for Vim on MS-Windows
+ * uninstall.c:	Minimalistic uninstall program for ViAI on MS-Windows
  *		Removes:
- *		- the "Edit with Vim" popup menu entry
- *		- the Vim "Open With..." popup menu entry
- *		- any Vim Batch files in the path
- *		- icons for Vim on the Desktop
- *		- the Vim entry in the Start Menu
+ *		- the "Edit with ViAI" popup menu entry
+ *		- the ViAI "Open With..." popup menu entry
+ *		- any ViAI Batch files in the path
+ *		- icons for ViAI on the Desktop
+ *		- the ViAI entry in the Start Menu
  */
 
 // Include common code for dosinst.c and uninstall.c.
@@ -57,7 +57,7 @@ reg_delete_key(HKEY hRootKey, const char *key, DWORD flag)
 }
 
 /*
- * Check if the popup menu entry exists and what gvim it refers to.
+ * Check if the popup menu entry exists and what gviai it refers to.
  * Returns non-zero when it's found.
  */
     static int
@@ -83,7 +83,7 @@ popup_gvim_path(char *buf, DWORD bufsize)
 }
 
 /*
- * Check if the "Open With..." menu entry exists and what gvim it refers to.
+ * Check if the "Open With..." menu entry exists and what gviai it refers to.
  * Returns non-zero when it's found.
  */
     static int
@@ -294,10 +294,9 @@ remove_start_menu(void)
 	remove_if_exists(path, targets[i].lnkname);
     remove_if_exists(path, "uninstall.lnk");
     remove_if_exists(path, "Help.lnk");
-    // Win95 uses .pif, WinNT uses .lnk
-    remove_if_exists(path, "Vim tutor.pif");
-    remove_if_exists(path, "Vim tutor.lnk");
-    remove_if_exists(path, "Vim online.url");
+    remove_if_exists(path, "ViAI Read-only.lnk");
+    remove_if_exists(path, "GViAI Read-only.lnk");
+    remove_if_exists(path, "ViAI Online.url");
     if (stat(path, &st) == 0)
     {
 	printf("removing %s\n", path);
@@ -308,7 +307,7 @@ remove_start_menu(void)
     static void
 delete_uninstall_key(void)
 {
-    reg_delete_key(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Vim " VIM_VERSION_SHORT, KEY_WOW64_64KEY);
+    reg_delete_key(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\ViAI " VIAI_VERSION_SHORT, KEY_WOW64_64KEY);
 }
 
     int
@@ -335,7 +334,7 @@ main(int argc, char *argv[])
 
     if (popup_gvim_path(popup_path, sizeof(popup_path)))
     {
-	printf(" - the \"Edit with Vim\" entry in the popup menu\n");
+	printf(" - the \"Edit with ViAI\" entry in the popup menu\n");
 	printf("   which uses \"%s\"\n", popup_path);
 	if (interactive)
 	    printf("\nRemove it (y/n)? ");
@@ -349,7 +348,7 @@ main(int argc, char *argv[])
     }
     else if (openwith_gvim_path(popup_path, sizeof(popup_path)))
     {
-	printf(" - the Vim \"Open With...\" entry in the popup menu\n");
+	printf(" - the ViAI \"Open With...\" entry in the popup menu\n");
 	printf("   which uses \"%s\"\n", popup_path);
 	printf("\nRemove it (y/n)? ");
 	if (confirm())
@@ -409,7 +408,7 @@ main(int argc, char *argv[])
 
     if (interactive)
     {
-	printf("\nYou may now want to delete the Vim executables and runtime files.\n");
+	printf("\nYou may now want to delete the ViAI executables and runtime files.\n");
 	printf("(They are still where you unpacked them.)\n");
     }
 

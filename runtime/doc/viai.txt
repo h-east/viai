@@ -39,7 +39,9 @@ commands with "viairun.exe" instead of "vimrun.exe", see |win32-vimrun|.
 The "Edit with ViAI" entry of the Explorer context menu and the "Open
 With..." entry use their own registry entries, so that they do not replace
 the ones of Vim, see |win32-popup-menu|.  The window class of the GUI is
-"ViAI" instead of "Vim".
+"ViAI" instead of "Vim".  The install program creates "viai.bat",
+"gviai.bat", "eviai.bat", "viaidiff.bat" and "gviaidiff.bat", and names its
+Start menu folder and uninstall entry "ViAI 1.0".
 
 "ex", "view", "gview", "rview", "rgview" and "eview" are not installed.  Use
 "viai -e", "viai -R", etc. instead, see |-e| and |-R|.
