@@ -1,5 +1,5 @@
 # List of distributed Vim files.
-# Used by Makefile.
+# Used by ci/unlisted.make.
 
 # Source files for all source archives.
 SRC_ALL =	\
@@ -499,7 +499,6 @@ SRC_ALL =	\
 SRC_UNIX =	\
 		Makefile \
 		Filelist \
-		README_src.txt \
 		configure \
 		pixmaps/*.xpm \
 		pixmaps/*.png \
@@ -620,7 +619,6 @@ SRC_DOS =	\
 		src/GviaiExt/gviaiext_ming.rc \
 		src/GviaiExt/resource.h \
 		src/GviaiExt/uninst.bat \
-		README_srcdos.txt \
 		src/INSTALLpc.txt \
 		src/Make_cyg.mak \
 		src/Make_cyg_ming.mak \
@@ -700,9 +698,6 @@ SRC_AMI_DOS =	\
 
 # Source files for Amiga (also in the extra archive).
 SRC_AMI =	\
-		README_amisrc.txt \
-		README_amisrc.txt.info \
-		src.info \
 		src/INSTALLami.txt \
 		src/Make_ami.mak \
 		src/os_amiga.c \
@@ -715,7 +710,6 @@ SRC_AMI =	\
 
 # Source files for Haiku (also in the extra archive).
 SRC_HAIKU =	\
-		README_haiku.txt \
 		src/os_haiku.h \
 		src/os_haiku.rdef.in \
 		src/gui_haiku.cc \
@@ -762,7 +756,7 @@ SRC_EXTRA =	\
 		$(SRC_MAC) \
 		$(SRC_QNX) \
 		$(SRC_VMS) \
-		README_os390.txt \
+		src/INSTALL390.txt \
 		src/link.390 \
 		src/os_vms_fix.com \
 		src/toolbar.phi \
@@ -957,7 +951,6 @@ RT_SCRIPTS =	\
 
 # Unix-like runtime.
 RT_UNIX =	\
-		README_unix.txt \
 		runtime/hi16-action-make.png \
 		runtime/hi22-action-make.png \
 		runtime/gviai.desktop \
@@ -988,7 +981,6 @@ RT_AMI_DOS =	\
 
 # MS Windows runtime (also in the extra archive).
 RT_DOS =	\
-		README_dos.txt \
 		runtime/doc/Make_mvc.mak \
 		runtime/indent/Make_mvc.mak \
 		runtime/lang/Make_mvc.mak \
@@ -998,8 +990,6 @@ RT_DOS_BIN =	\
 
 # Amiga runtime (also in the extra archive)
 RT_AMI =	\
-		README_ami.txt \
-		README_ami.txt.info \
 		runtime/doc.info \
 		runtime/doc/*.info \
 		runtime/icons/README.txt \
@@ -1020,92 +1010,24 @@ RT_EXTRA =	\
 		$(RT_AMI_DOS) \
 		$(RT_DOS) \
 		$(RT_DOS_BIN) \
-		README_mac.txt \
-
-# Included in all Amiga archives.
-ROOT_AMI =	\
-		Contents \
-		Contents.info \
-		runtime.info \
-		vimdir.info \
-
-# Root files for the extra archive.
-ROOT_EXTRA =	\
-		$(ROOT_AMI) \
 
 # Files for Amiga small binary (also in extra archive).
 BIN_AMI =	\
-		README_amibin.txt \
-		README_amibin.txt.info \
-		Vim.info \
-		Xxd.info \
 
 # Files for MS Windows binary (also in extra archive).
 BIN_DOS =	\
-		README_bindos.txt \
 		uninstall.txt \
-
-# Files for Win32 OLE binary (also in extra archive).
-BIN_OLE =	\
-		README_ole.txt \
-
-# Files for Win32s binary (also in extra archive).
-BIN_W32S =	\
-		README_w32s.txt \
-
-# Files for VMS binary (also in extra archive).
-BIN_VMS =	\
-		README_vms.txt \
-
-# Files for OS/2 binary (also in extra archive).
-BIN_OS2 =	\
-		README_os2.txt \
 
 # Binary files for extra archive.
 BIN_EXTRA =	\
 		$(BIN_AMI) \
 		$(BIN_DOS) \
-		$(BIN_OLE) \
-		$(BIN_W32S) \
-		$(BIN_VMS) \
-		$(BIN_OS2) \
 
 # All files for extra archive.
 EXTRA =		\
 		$(BIN_EXTRA) \
-		$(ROOT_EXTRA) \
 		$(RT_EXTRA) \
 		$(SRC_EXTRA) \
-		README_extra.txt \
-
-# Files in READMEdir that are included from the top dir.
-IN_README_DIR = \
-		README_ami.txt \
-		README_ami.txt.info \
-		README_amibin.txt \
-		README_amibin.txt.info \
-		README_amisrc.txt \
-		README_amisrc.txt.info \
-		README_bindos.txt \
-		README_dos.txt \
-		README_extra.txt \
-		README_haiku.txt \
-		README_mac.txt \
-		README_ole.txt \
-		README_os2.txt \
-		README_os390.txt \
-		README_src.txt \
-		README_srcdos.txt \
-		README_unix.txt \
-		README_vms.txt \
-		README_w32s.txt \
-		Contents \
-		Contents.info \
-		Vim.info \
-		Xxd.info \
-		runtime.info \
-		src.info \
-		vimdir.info \
 
 # Generic language files.
 LANG_GEN = \

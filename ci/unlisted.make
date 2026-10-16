@@ -21,11 +21,6 @@ $(eval all_patterns := $(shell \
 			p; \
 		}'))
 
-# In Makefile's `prepare` target, all the IN_README_DIR files are moved from
-# READMEdir to the root, so add those files in their Git-tracked location:
-all_patterns := $(all_patterns) \
-	$(foreach readme, $(IN_README_DIR), READMEdir/$(readme))
-
 # The result 'all_patterns' is a list of patterns (globs), which we expand with
 # wildcard to get actual filenames.  Note this means Filelist can list a file
 # that does not exist, and it will be omitted at this step.
