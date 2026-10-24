@@ -168,9 +168,9 @@ one-sentence **problem statement**, not a description of the fix:
     optional longer description of the problem and solution goes here in prose.
     Do not use bullet points.
 
-    fixes:   #NNNN
+    fixes: #NNNN
     related: #NNNN
-    closes:  #NNNN
+    closes: #NNNN
 
     Assisted-by: <AI tool>
     Co-authored-by: Name
@@ -187,9 +187,10 @@ Rules:
 - **Longer prose**, if any, goes after the Problem/Solution header
 - **`fixes:` references the issue** the patch fixes.
   **`closes:` references the PR** that introduces the fix.
-  **`related:` references related issues**, including issues that caused this
-  one.
-  All can appear. Colon, aligned, no trailing period.
+  **`related:` references related issues and pull requests**, including
+  ones that caused the problem.
+  All can appear.  One space after the colon, no trailing period.  Lines
+  taken from a Vim commit in a vim-patch keep their spacing.
 - **`Signed-off-by:` is required** for the Developer Certificate of Origin (DCO).
 - **`Co-Authored-by:` is allowed** and is the accepted way to
   acknowledge human assistance transparently. Human coauthors should usually
