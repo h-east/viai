@@ -1,11 +1,11 @@
 #!/bin/bash
-# Copy lsp.vim, vim9ls and viai.mcp into runtime/pack/dist/opt/.
+# Copy lsp.vim, vim9ls and mcp.viai into runtime/pack/dist/opt/.
 #
 # Usage: tools/sync-plugins.sh [-n | -m {file}] {lsp.vim-repo} {vim9ls-repo}
-#		{viai.mcp-repo}
+#		{mcp.viai-repo}
 #
 # Each argument is a git clone of https://github.com/h-east/lsp.vim,
-# https://github.com/h-east/vim9ls or https://github.com/viai-editor/viai.mcp.
+# https://github.com/h-east/vim9ls or https://github.com/viai-editor/mcp.viai.
 # The files committed at its HEAD replace the package directory, except those
 # only needed to develop the plugin.  Nothing is done when the versions of
 # all plugins are those of their packages.  Nothing is copied unless the
@@ -24,7 +24,7 @@ set -eu
 usage()
 {
     echo "Usage: $0 [-n | -m {file}] {lsp.vim-repo} {vim9ls-repo}" \
-        "{viai.mcp-repo}" >&2
+        "{mcp.viai-repo}" >&2
     exit 1
 }
 
@@ -46,7 +46,7 @@ if [ -n "$msg_file" ]; then
 fi
 
 # The package of each plugin and its script with VERSION.
-packages=(lsp.vim vim9ls viai.mcp)
+packages=(lsp.vim vim9ls mcp.viai)
 scripts=(autoload/lsp.vim autoload/vim9ls.vim autoload/viaimcp.vim)
 repos=()
 for arg in "$@"; do

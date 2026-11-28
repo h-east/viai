@@ -33,8 +33,8 @@ released in 1988, the year in which Bram Moolenaar started writing Vim.
 ## Development policy
 
 * The two plugins above are optional packages, see `:help package-lsp.vim`.\
-  So is [viai.mcp](https://github.com/viai-editor/viai.mcp), a server of the
-  Model Context Protocol, see `:help package-viai.mcp`.
+  So is [mcp.viai](https://github.com/viai-editor/mcp.viai), a server of the
+  Model Context Protocol, see `:help package-mcp.viai`.
 * ViAI adds features of its own, while keeping compatibility with Vim as far
   as possible.
 * The patches of Vim are imported into ViAI as a rule.  The ones that are

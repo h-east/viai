@@ -15,7 +15,7 @@ CONTENTS					*viaimcp-contents*
 ==============================================================================
 1. Introduction					*viaimcp-introduction*
 
-viai.mcp is a server of the Model Context Protocol (MCP) that gives an AI tool
+mcp.viai is a server of the Model Context Protocol (MCP) that gives an AI tool
 the help files of ViAI and a check of Vim script.  It is written in Vim9
 script and runs in a ViAI of its own, which talks MCP on its stdin and stdout
 with the "mcp" channel mode, see |model-context-protocol|.
@@ -33,9 +33,9 @@ not have it.
 ==============================================================================
 3. Setup					*viaimcp-setup*
 
-Put viai.mcp on 'runtimepath' for this help and |viaimcp#Command()|, with a
+Put mcp.viai on 'runtimepath' for this help and |viaimcp#Command()|, with a
 plugin manager, vim-plug for instance: >
-	Plug 'viai-editor/viai.mcp'
+	Plug 'viai-editor/mcp.viai'
 <There is no plugin/ directory in it, so ViAI runs none of it at startup.
 
 The server is started by the MCP client.  The command is in bin/: >
@@ -44,7 +44,7 @@ The server is started by the MCP client.  The command is in bin/: >
 <It runs "viai" from $PATH; $VIAIMCP_VIM names another ViAI.
 
 For Claude Code: >
-	claude mcp add viaimcp -- /path/to/viai.mcp/bin/viaimcp
+	claude mcp add viaimcp -- /path/to/mcp.viai/bin/viaimcp
 <
 						*viaimcp#Command()*
 viaimcp#Command()
@@ -66,7 +66,7 @@ Get the value from your ViAI with your vimrc, for Claude Code on Unix: >
 	claude mcp add viaimcp \
 		-e VIAIMCP_RUNTIMEPATH="$(viai -u ~/.vimrc -i NONE -es \
 		-c 'call writefile([&rtp], "/dev/stdout")' -c 'qa!')" \
-		-- /path/to/viai.mcp/bin/viaimcp
+		-- /path/to/mcp.viai/bin/viaimcp
 <"-es" reads no vimrc, thus "-u" names it.  After changing the plugins, run
 "claude mcp remove viaimcp" and the command again.  On other systems get the
 value with ":echo &rtp" in your ViAI.

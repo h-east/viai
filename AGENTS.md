@@ -278,7 +278,7 @@ Rules:
   installer of viai-win32-installer is built for the newest tag.
 - **An update of a bundled plugin** in `runtime/pack/dist/opt/`, made with
   `tools/sync-plugins.sh`, has the subject `runtime(...): ` with the
-  updated plugins, `lsp.vim`, `vim9ls` or `viai.mcp`, separated by commas,
+  updated plugins, `lsp.vim`, `vim9ls` or `mcp.viai`, separated by commas,
   followed by the problem statement, e.g.
   `runtime(vim9ls): bundled vim9ls is older than 0.1.039`.  The script
   prints the whole commit message.  `.github/workflows/sync-plugins.yml`

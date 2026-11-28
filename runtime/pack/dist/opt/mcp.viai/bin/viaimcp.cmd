@@ -1,5 +1,5 @@
 @echo off
-rem Starts viai.mcp: a ViAI that serves the Model Context Protocol on its
+rem Starts mcp.viai: a ViAI that serves the Model Context Protocol on its
 rem stdin and stdout.  %VIAIMCP_VIM% names the ViAI to use, "viai" from
 rem %PATH% otherwise.
 setlocal

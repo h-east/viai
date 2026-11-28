@@ -1,6 +1,6 @@
 vim9script
 
-# viai.mcp - a Model Context Protocol server for ViAI help and Vim script,
+# mcp.viai - a Model Context Protocol server for ViAI help and Vim script,
 # run by ViAI itself
 # Maintainer: Hirohito Higashi <h.east.727@gmail.com>
 #
@@ -30,7 +30,7 @@ var conn: channel
 
 export def Command(): list<string>
   if !has(PATCH)
-    throw 'viai.mcp: the server needs ViAI 1.0.0050 or later'
+    throw 'mcp.viai: the server needs ViAI 1.0.0050 or later'
   endif
   var vim = v:progpath
   # The server needs no GUI: use the console program next to gviai.exe.
@@ -72,7 +72,7 @@ def Initialize(params: dict<any>): dict<any>
     protocolVersion: index(PROTOCOL_VERSIONS, wanted) >= 0
       ? wanted : PROTOCOL_VERSIONS[0],
     capabilities: {tools: {}},
-    serverInfo: {name: 'viai.mcp', version: VERSION},
+    serverInfo: {name: 'mcp.viai', version: VERSION},
   }
 enddef
 
@@ -120,7 +120,7 @@ enddef
 # still goes to stderr, where the client can show it.
 def Die(msg: string)
   &verbose = 1
-  echoerr 'viai.mcp: ' .. msg
+  echoerr 'mcp.viai: ' .. msg
   cquit
 enddef
 

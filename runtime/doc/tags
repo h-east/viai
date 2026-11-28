@@ -9748,13 +9748,13 @@ package-hlyank	usr_05.txt	/*package-hlyank*
 package-justify	usr_25.txt	/*package-justify*
 package-lsp.vim	usr_05.txt	/*package-lsp.vim*
 package-matchit	usr_05.txt	/*package-matchit*
+package-mcp.viai	usr_05.txt	/*package-mcp.viai*
 package-nohlsearch	usr_05.txt	/*package-nohlsearch*
 package-open	eval.txt	/*package-open*
 package-osc52	usr_05.txt	/*package-osc52*
 package-termdebug	terminal.txt	/*package-termdebug*
 package-translate_example	repeat.txt	/*package-translate_example*
 package-translation	repeat.txt	/*package-translation*
-package-viai.mcp	usr_05.txt	/*package-viai.mcp*
 package-vim9ls	usr_05.txt	/*package-vim9ls*
 packages	repeat.txt	/*packages*
 packload-two-steps	repeat.txt	/*packload-two-steps*

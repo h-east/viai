@@ -270,8 +270,8 @@ ViAI has these features that Vim does not have:
 |package-lsp.vim|
 	The lsp.vim and vim9ls packages.
 
-|package-viai.mcp|
-	The viai.mcp package, a server of the Model Context Protocol.
+|package-mcp.viai|
+	The mcp.viai package, a server of the Model Context Protocol.
 
 |model-context-protocol|
 	The "mcp" channel mode.
